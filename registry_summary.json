@@ -1,17 +1,17 @@
 {
-  "registry_summary_generated_at_utc": "2026-05-28T21:11:31.817586+00:00",
-  "total_voices_committed": 2,
+  "registry_summary_generated_at_utc": "2026-05-28T22:53:05.875275+00:00",
+  "total_voices_committed": 3,
   "verdict_counts": {
-    "fail": 2
+    "fail": 3
   },
   "kind_counts": {
-    "polyphony_within_substrate": 1,
+    "polyphony_within_substrate": 2,
     "coupling_cross_substrate": 1
   },
   "base_rate_failure": 1.0,
   "base_rate_pass": 0.0,
   "pass_count": 0,
-  "fail_count": 2,
+  "fail_count": 3,
   "partial_count": 0,
   "voices": [
     {
@@ -21,6 +21,14 @@
       "rationale": "Observed unsigned cycle_residual 0.0465 exceeds the pre-committed threshold 0.0326. Voice enters the null-voice ledger per \u00a73.4 and stays on record.",
       "sidecar_path": "examples/voices/demand_response_polyphony_v1.sidecar.json",
       "sha256_anchor": "b11d2fa857ab9829faf91a0cc537dfca490b9f2e3dc595fb1cd72626d78c1ec1"
+    },
+    {
+      "voice_name": "noise_robustness_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Max relative drift across trials = 3016.4%, exceeds predicted threshold 50%. The cycle_residual is not robust to 5% noise at the scope tested. Voice enters the null-voice ledger per \u00a73.4.",
+      "sidecar_path": "examples/voices/noise_robustness_v1.sidecar.json",
+      "sha256_anchor": "761e36d874d7c07dbd3152cf7e8338e36a4670106c7e725003fe026129f3aa92"
     },
     {
       "voice_name": "regulatory_grid_coupling_v1",
