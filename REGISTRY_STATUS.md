@@ -1,6 +1,6 @@
 # Registry status — `grid-diamondcutter` voice ledger
 
-Generated: 2026-05-28T21:11:31.817586+00:00
+Generated: 2026-05-28T23:12:07.701738+00:00
 
 This report aggregates the per-voice sidecars committed to the registry under
 the protocol in `PREREGISTRATION.md` §3. The base rate of failures is the
@@ -10,15 +10,15 @@ the successes.
 
 ## Aggregates
 
-- **Total voices committed**: 2
-- **Pass**: 0
+- **Total voices committed**: 4
+- **Pass**: 2
 - **Fail (null-voice ledger)**: 2
 - **Partial**: 0
-- **Base rate of failure**: 100.0%
+- **Base rate of failure**: 50.0%
 
 ### By kind (§3.2)
 
-- polyphony_within_substrate: 1
+- polyphony_within_substrate: 3
 - coupling_cross_substrate: 1
 
 ## Per-voice
@@ -27,6 +27,8 @@ the successes.
 |---|---|---|---|
 | `demand_response_polyphony_v1` | polyphony | **fail** | `examples/voices/demand_response_polyphony_v1.sidecar.json` |
 | `regulatory_grid_coupling_v1` | coupling | **fail** | `examples/voices/regulatory_grid_coupling_v1.sidecar.json` |
+| `renewable_mix_threshold_polyphony_v1` | polyphony | **pass** | `examples/voices/renewable_mix_threshold_polyphony_v1.sidecar.json` |
+| `station_set_dependence_v1` | polyphony | **pass** | `examples/voices/station_set_dependence_v1.sidecar.json` |
 
 ---
 

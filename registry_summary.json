@@ -1,16 +1,17 @@
 {
-  "registry_summary_generated_at_utc": "2026-05-28T21:11:31.817586+00:00",
-  "total_voices_committed": 2,
+  "registry_summary_generated_at_utc": "2026-05-28T23:12:07.701738+00:00",
+  "total_voices_committed": 4,
   "verdict_counts": {
-    "fail": 2
+    "fail": 2,
+    "pass": 2
   },
   "kind_counts": {
-    "polyphony_within_substrate": 1,
+    "polyphony_within_substrate": 3,
     "coupling_cross_substrate": 1
   },
-  "base_rate_failure": 1.0,
-  "base_rate_pass": 0.0,
-  "pass_count": 0,
+  "base_rate_failure": 0.5,
+  "base_rate_pass": 0.5,
+  "pass_count": 2,
   "fail_count": 2,
   "partial_count": 0,
   "voices": [
@@ -29,6 +30,22 @@
       "rationale": "Observed slope 0.0000 is below the predicted floor 0.0050. The link is too weak to support the prediction. Voice enters the null-voice ledger per \u00a73.4.",
       "sidecar_path": "examples/voices/regulatory_grid_coupling_v1.sidecar.json",
       "sha256_anchor": "92361b3e88a9f61736c568f68a5669cd8fd8f5f37718c6807ec5686da7dcec8e"
+    },
+    {
+      "voice_name": "renewable_mix_threshold_polyphony_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Recovered breakpoint 0.500 \u2208 [0.3, 0.6] AND piecewise_rss_ratio 0.0840 \u2264 0.8000. The methodology recovered the synthetic threshold.",
+      "sidecar_path": "examples/voices/renewable_mix_threshold_polyphony_v1.sidecar.json",
+      "sha256_anchor": "aaf40cc36f447135625820d95154cb4c52e1d8eb6a0ecb4e35c7923f446c6e6b"
+    },
+    {
+      "voice_name": "station_set_dependence_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Relative spread across 24 permutations = 13.4%, at or below the predicted 20% threshold. cycle_residual is approximately multiset-invariant at this scope; cross-region interpretation that relies on multiset-invariance is supported by this measurement.",
+      "sidecar_path": "examples/voices/station_set_dependence_v1.sidecar.json",
+      "sha256_anchor": "61242f979bdb237d521f8c23448d20c8a5cfa6af19344089da5d0661ae0eb16f"
     }
   ]
 }

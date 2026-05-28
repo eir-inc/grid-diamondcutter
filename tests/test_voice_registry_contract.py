@@ -121,11 +121,17 @@ def test_coupling_voices_have_directional_fields(voice_path):
 
 @pytest.mark.parametrize("voice_path", VOICE_FILES, ids=[p.stem for p in VOICE_FILES])
 def test_kill_condition_is_well_formed(voice_path):
+    """KILL_CONDITION must name the metric(s) and rule(s). Single-metric voices use
+    'metric' + 'rule' (singular); composite-kill voices use 'metrics' + 'rules' (lists).
+    Either shape is registry-conformant.
+    """
     module = _load_voice(voice_path)
     kc = module.KILL_CONDITION
     assert isinstance(kc, dict), f"{voice_path.name}: KILL_CONDITION must be a dict"
-    assert "metric" in kc, f"{voice_path.name}: KILL_CONDITION missing 'metric'"
-    assert "rule" in kc, f"{voice_path.name}: KILL_CONDITION missing 'rule'"
+    has_metric = ("metric" in kc) or ("metrics" in kc)
+    has_rule = ("rule" in kc) or ("rules" in kc)
+    assert has_metric, f"{voice_path.name}: KILL_CONDITION missing 'metric' or 'metrics'"
+    assert has_rule, f"{voice_path.name}: KILL_CONDITION missing 'rule' or 'rules'"
 
 
 @pytest.mark.parametrize("voice_path", VOICE_FILES, ids=[p.stem for p in VOICE_FILES])
