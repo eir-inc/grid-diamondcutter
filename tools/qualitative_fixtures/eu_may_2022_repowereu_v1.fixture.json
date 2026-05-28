@@ -1,0 +1,27 @@
+{
+  "voice_name": "eu_may_2022_repowereu_v1",
+  "citation": "European Commission, 'REPowerEU Plan', COM(2022) 230 final, 18 May 2022. Public.",
+  "expected_recovery_rules": [
+    {
+      "rule_id": "verdict_pass",
+      "rule_kind": "verdict_equals",
+      "spec": {"value": "pass"},
+      "rationale": "The voice's predicted coupling window is calibrated from REPowerEU plan accelerant magnitudes. Verdict pass confirms mechanical kill condition was not triggered.",
+      "citation_anchor": "REPowerEU Plan — €210B accelerated investment target + 2025/2030 renewable share milestones"
+    },
+    {
+      "rule_id": "positive_regulatory_to_capital_slope",
+      "rule_kind": "slope_within_range",
+      "spec": {"low": 0.30, "high": 0.85},
+      "rationale": "The documented direction is positive (regulatory signal acceleration drove capital reallocation toward renewables). Magnitude window from plan target ranges.",
+      "citation_anchor": "REPowerEU Plan — Section on Funding the REPowerEU objectives"
+    },
+    {
+      "rule_id": "plan_target_scenario_recovers_substantial_reallocation",
+      "rule_kind": "scenario_field_within_range",
+      "spec": {"scenario_index": 5, "field": "capital_reallocation_post_transition_mean", "low": 0.35, "high": 0.75},
+      "rationale": "At the documented plan-target ambition level (signal=1.0), the simulated reallocation should land in the substantial-but-bounded share window consistent with the plan's targets.",
+      "citation_anchor": "REPowerEU Plan — capital deployment shape interpreted against ENTSO-E TYNDP 2022"
+    }
+  ]
+}

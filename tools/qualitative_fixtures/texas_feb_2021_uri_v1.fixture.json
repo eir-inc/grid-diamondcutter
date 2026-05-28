@@ -1,0 +1,27 @@
+{
+  "voice_name": "texas_feb_2021_uri_v1",
+  "citation": "FERC, NERC, and the NRC Regional Entity, 'The February 2021 Cold Weather Outages in Texas and the South Central United States', Final Report (November 2021). Public.",
+  "expected_recovery_rules": [
+    {
+      "rule_id": "verdict_pass",
+      "rule_kind": "verdict_equals",
+      "spec": {"value": "pass"},
+      "rationale": "The voice's predicted coupling window is calibrated from the report's findings. A pass at this rule confirms the voice's mechanical kill condition was not triggered.",
+      "citation_anchor": "FERC/NERC final report — root causes section identifies gas curtailment as a significant contributor to generation forced outages"
+    },
+    {
+      "rule_id": "positive_gas_to_dispatch_slope",
+      "rule_kind": "slope_within_range",
+      "spec": {"low": 0.40, "high": 0.95},
+      "rationale": "The documented direction is positive (gas supply curtailment drove generation loss). Magnitude window inherits the report's range of findings.",
+      "citation_anchor": "FERC/NERC final report — Phase 1 and Phase 2 causal sequence"
+    },
+    {
+      "rule_id": "peak_event_at_documented_window",
+      "rule_kind": "scenario_field_within_range",
+      "spec": {"scenario_index": 5, "field": "dispatch_loss", "low": 0.40, "high": 1.00},
+      "rationale": "The most-severe modeled scenario (-30°C anomaly) should produce a substantial dispatch loss consistent with the documented Feb 15-19 peak event window.",
+      "citation_anchor": "ERCOT EEA3 declarations + ERCOT grid event timeline February 15-19, 2021"
+    }
+  ]
+}

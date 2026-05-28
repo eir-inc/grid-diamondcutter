@@ -1,0 +1,27 @@
+{
+  "voice_name": "japan_march_2011_fukushima_v1",
+  "citation": "IAEA, 'The Fukushima Daiichi Accident', final report (2015); METI Japan Strategic Energy Plan revisions; TEPCO public dispatch data 2010-2012. All public.",
+  "expected_recovery_rules": [
+    {
+      "rule_id": "verdict_pass",
+      "rule_kind": "verdict_equals",
+      "spec": {"value": "pass"},
+      "rationale": "The voice's predicted 3-link chain window is calibrated from the IAEA + METI + TEPCO public sources. Verdict pass confirms mechanical kill condition was not triggered.",
+      "citation_anchor": "IAEA Fukushima Daiichi final report — technical accident sequence + post-event response"
+    },
+    {
+      "rule_id": "positive_end_to_end_chain",
+      "rule_kind": "slope_within_range",
+      "spec": {"low": 0.20, "high": 0.75},
+      "rationale": "Documented end-to-end direction across the substrate-switching chain (nuclear-shutdown → fossil-import → renewable-policy-acceleration) is positive. Magnitude window inherits the substitution + policy gains in the public sources.",
+      "citation_anchor": "METI Japan Strategic Energy Plan 4th + 5th revisions; Energy White Paper 2012 LNG/coal substitution"
+    },
+    {
+      "rule_id": "peak_nuclear_loss_scenario_recovers_substantial_renewable_policy",
+      "rule_kind": "scenario_field_within_range",
+      "spec": {"scenario_index": 5, "field": "renewable_policy_post_transition_mean", "low": 0.30, "high": 0.65},
+      "rationale": "At the documented post-event nuclear-fleet-offline level (~0.85), the simulated renewable-policy acceleration should fall in the substantial-but-bounded window reflecting both the import-pathway response and the direct regulatory acceleration.",
+      "citation_anchor": "TEPCO public dispatch data 2010-2012 + METI 4th SEP renewable-share targets"
+    }
+  ]
+}
