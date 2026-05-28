@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "canonical_sha256": "7c91e059e50291bbef6cb63392af81bbf6c6849da5d9c0a91540db48dc2b54ff",
+      "event": "texas_uri_feb_2021",
+      "fetched_at_utc": "2026-05-28T23:35:59.777247+00:00",
+      "fetched_by": "reference_fetcher_skeleton",
+      "license_note": "NOAA NCEI Daily Summaries are in the public domain; cite NOAA NCEI as the source.",
+      "snapshot_file": "noaa_ncei__texas_uri_feb_2021__v0-skeleton.json",
+      "source": "noaa_ncei",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1",
+      "version": "v0-skeleton"
+    }
+  ],
+  "manifest_version": "1.0",
+  "updated_at_utc": "2026-05-28T23:35:59.777419+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "_TODO": "Replace this synthetic skeleton with a real NOAA NCEI fetch. Endpoint: https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations=USW00012921,USW00013904,...&dataTypes=TMIN,TMAX,PRCP&startDate=2021-02-11&endDate=2021-02-20&format=json",
+  "event": "texas_uri_feb_2021",
+  "fetch_metadata": {
+    "implementation_hint": "use urllib.request.urlopen with json output format; cite station IDs from the NOAA station list for Texas",
+    "real_fetch_pending": true,
+    "skeleton_only": true
+  },
+  "observations": [],
+  "schema_version": "0.0-skeleton",
+  "stations": [
+    {
+      "id": "TODO",
+      "lat": null,
+      "lon": null,
+      "name": "TODO"
+    }
+  ]
+}
