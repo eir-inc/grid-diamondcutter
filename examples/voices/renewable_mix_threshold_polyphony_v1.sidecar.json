@@ -1,0 +1,90 @@
+{
+  "voice_name": "renewable_mix_threshold_polyphony_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "threshold_class_cascade_in_renewable_mix_sweep",
+    "predicted_breakpoint_range": [
+      0.3,
+      0.6
+    ],
+    "predicted_piecewise_improvement_floor": 0.2,
+    "rationale": "PREREGISTRATION \u00a70 names a 'threshold-class cascade' as the phenomenon the simulation is built to test for. This voice injects a known non-linear inflection in the substrate at \u03c1 \u2248 0.40 and asks whether the methodology recovers it. If the methodology cannot recover a deliberately-placed threshold in its own substrate, it cannot be trusted to find a threshold elsewhere."
+  },
+  "kill_condition": {
+    "metric": "threshold_recovery_validity",
+    "rule": "fail if piecewise_rss / linear_rss > 0.80 (no piecewise improvement), fail if recovered_breakpoint < 0.30 or recovered_breakpoint > 0.60 (recovery outside predicted range)",
+    "rationale": "The composite metric `threshold_recovery_validity` is decomposable into two underlying numerical checks, both computable from the run output alone with no post-hoc reinterpretation. The piecewise-improvement ratio tests whether a threshold-class shape fits the sweep better than linear. The breakpoint-range test rejects spurious recoveries outside the predicted window. A voice that passes both has recovered a known threshold; a voice that fails either has not."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/renewable_mix_threshold_polyphony_v1.py",
+    "source_file": "examples/voices/renewable_mix_threshold_polyphony_v1.py",
+    "input_parameters": {
+      "station_set": "default rotating-load-profile (5 stations: peak, off_peak, mixed, spike, peak)",
+      "renewable_fraction_sweep": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "synthetic_threshold_position": 0.4,
+      "synthetic_threshold_strength": 1.5,
+      "random_seed": 137
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "sweep_rhos": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "sweep_cycle_residuals": [
+      -0.0405,
+      -0.0365,
+      -0.0325,
+      -0.0285,
+      -0.024,
+      -0.0205,
+      -0.026,
+      -0.032,
+      -0.0375,
+      -0.0375,
+      -0.0375
+    ],
+    "linear_rss": 0.00042637272727272723,
+    "piecewise_rss": 3.579523809523807e-05,
+    "piecewise_rss_ratio": 0.0839529261737743,
+    "recovered_breakpoint": 0.5
+  },
+  "verdict": {
+    "verdict": "pass",
+    "recovered_breakpoint": 0.5,
+    "piecewise_rss_ratio": 0.0839529261737743,
+    "linear_rss": 0.00042637272727272723,
+    "piecewise_rss": 3.579523809523807e-05,
+    "rationale": "Recovered breakpoint 0.500 \u2208 [0.3, 0.6] AND piecewise_rss_ratio 0.0840 \u2264 0.8000. The methodology recovered the synthetic threshold.",
+    "computed_at_utc": "2026-05-28T23:14:00.860456+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "788b95de6b15c9fe33c373677f5c1c169bdf3cfe94f27e74f55c952652e37c5b"
+}
