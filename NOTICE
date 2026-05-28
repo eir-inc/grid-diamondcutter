@@ -1,0 +1,32 @@
+diamondcutter-grid
+Copyright (c) 2026 Eir, Inc. and contributors
+
+This product includes software developed at Eir, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+the files in this repository except in compliance with the License. You may
+obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+
+"Diamondcutter" and the diamondcutter methodology described in this repository
+are trademarks of Eir, Inc. The Apache License grants you permission to use,
+modify, and distribute the software in this repository; trademark use (in
+product names, marketing, distribution titles) is governed separately. Fair
+descriptive use of the trademark to identify this project and its methodology
+is permitted; commercial use of the name in derivative product titles requires
+prior written agreement.
+
+The diamondcutter methodology references concepts from:
+- Music theory of tuning systems (Pythagorean comma, equal temperament, just
+  intonation, meantone). Historical, public domain.
+- Apoha in classical Indian Buddhist epistemology (Dignaga, Dharmakirti).
+  Historical, public domain.
+
+This repository ships with optional integration points for `eirmath`, a separate
+proprietary package by Eir, Inc. Installing or using `eirmath` is governed by
+that package's separate commercial license terms; nothing in this repository
+requires it. The OSS sim runs measurement and catalogue operations fully
+standalone with `numpy` as the only runtime dependency.
+
+Contributors are listed in CONTRIBUTORS.md (when the project accepts external
+contributions) and in the diamondcutter project's lineage record (a separate
+structured artifact described in CONTRIBUTING.md).

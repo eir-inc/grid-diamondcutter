@@ -1,0 +1,91 @@
+# Copyright 2026 Eir Inc
+# Licensed under the Apache License, Version 2.0
+#
+# Packaging metadata for grid-diamondcutter-oss. Lets a contributor install the
+# repo for editable development with:
+#     pip install -e ".[dev]"
+# and run the test suite + the self-demos from anywhere.
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grid-diamondcutter-oss"
+version = "0.1.0"
+description = "Open-source substrate-plugin + meta-sim for the Diamondcutter Method applied to power grids."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Eir Inc", email = "eugene@eir.inc" },
+]
+keywords = [
+    "power-grid",
+    "simulation",
+    "diamondcutter",
+    "open-core",
+    "substrate-plugin",
+    "energy-independence",
+    "grid-resilience",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+dependencies = [
+    "numpy>=1.20",
+]
+
+[project.optional-dependencies]
+# Optional voices — install one or more to extend the chorus.
+pypower = ["pypower>=5.0"]
+pandapower = ["pandapower>=2.0"]
+# Plotting (optional) — used by examples/plot_ieee_walk.py
+plot = ["matplotlib>=3.0"]
+# Development dependencies — for running tests, building docs.
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+all = [
+    "grid-diamondcutter-oss[pypower,pandapower,plot,dev]",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/eir-inc/grid-diamondcutter-oss"
+"Documentation" = "https://github.com/eir-inc/grid-diamondcutter-oss/blob/main/docs/methodology.md"
+"Contributing" = "https://github.com/eir-inc/grid-diamondcutter-oss/blob/main/CONTRIBUTING.md"
+
+# ---------------------------------------------------------------------------
+# Tool configuration
+# ---------------------------------------------------------------------------
+
+[tool.setuptools]
+py-modules = ["grid_diamondcutter_oss", "power_grid_sim", "power_grid_sim_v2"]
+
+[tool.setuptools.packages.find]
+include = ["meta_sim*"]
+exclude = ["tests*", "examples*", "docs*", "__pycache__*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+]

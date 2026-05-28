@@ -1,0 +1,24 @@
+{
+  "tool": "power_grid_sim.py",
+  "tool_version": "0.1.0",
+  "python_version": "3.x (CPython, recent)",
+  "numpy_required": true,
+  "expected_outputs": {
+    "catalogue_count": 36,
+    "cycle_walk_stations": 5,
+    "cycle_walk_step_distances": [
+      0.065,
+      0.052,
+      0.041,
+      0.028
+    ],
+    "home_step": 0.0,
+    "mean_step": 0.0465,
+    "cycle_residual": -0.0465,
+    "closes": true,
+    "stability_class": "stable-cycle",
+    "avg_recipe_cycle_life": 40.51
+  },
+  "sha256_full_stdout": "4c43fcaee95bde35d9084a24a85bb94243a9570957abcd32b63c39aecba1221c",
+  "note": "These canonical outputs are the reference. If running power_grid_sim.py produces different numbers on a recent CPython + numpy install, please file a security issue per SECURITY.md — reproducibility is the basis for independent verification. The sha256 stamp is computed over the complete stdout of `python power_grid_sim.py` as run on Python 3 + numpy with no other dependencies. Regenerate it after any change to the simulator with: `python power_grid_sim.py | sha256sum`."
+}

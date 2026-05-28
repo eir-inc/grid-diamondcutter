@@ -1,0 +1,26 @@
+# Citation File Format — https://citation-file-format.github.io
+cff-version: 1.2.0
+title: grid-diamondcutter-oss
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "Eir Inc"
+    affiliation: "Eir Inc"
+repository-code: "https://github.com/eir-inc/grid-diamondcutter-oss"
+abstract: >-
+  A single-file, Apache-2.0 power-grid simulator and cycle-walk
+  measurement framework. Implements the substrate-plugin contract +
+  voices pattern + dual-scalar (closure_residual / path_excursion)
+  cycle-walk measurement, with real PYPOWER `runpf` ingest for IEEE
+  test cases (case14 / case30 / case118).
+keywords:
+  - power-grid
+  - simulation
+  - cycle-walk
+  - stability-class
+  - substrate-plugin
+  - open-core
+  - energy-grid
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-05-28"
