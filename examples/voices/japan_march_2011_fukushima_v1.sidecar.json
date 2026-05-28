@@ -1,0 +1,99 @@
+{
+  "voice_name": "japan_march_2011_fukushima_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "nuclear_capacity_loss",
+    "substrate_target": "renewable_policy_acceleration",
+    "named_residual": "chain_coupling_strength_nuclear_loss_to_renewable_policy_via_fossil_import",
+    "predicted_direction": "nuclear_capacity_loss \u2192 fossil_import_intensity \u2192 renewable_policy_acceleration (positive end-to-end)",
+    "predicted_magnitude_range": [
+      0.2,
+      0.75
+    ],
+    "null_direction": "no end-to-end coupling OR reversed sign at any link",
+    "calibration_source": "IAEA Fukushima Daiichi final accident report (2015); METI Japan Strategic Energy Plan revisions; TEPCO public dispatch data 2010-2012. All public."
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_of_renewable_policy_acceleration_vs_nuclear_capacity_loss_endpoints",
+    "predicted_range": [
+      0.2,
+      0.75
+    ],
+    "rule": "fail if slope < 0.20 (chain too weak \u2014 recovery does not transit substrate boundaries), fail if slope > 0.75 (over-prediction beyond IAEA/METI window), fail if slope < 0 (null direction realized at chain endpoints)",
+    "rationale": "The voice claims a positive, bounded chain coupling across three substrate boundaries. End-to-end measurement is the cleanest test of the chain claim and is testable from run output alone. The null direction is named explicitly per \u00a73.2."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/japan_march_2011_fukushima_v1.py",
+    "source_file": "examples/voices/japan_march_2011_fukushima_v1.py",
+    "input_parameters": {
+      "nuclear_capacity_loss_scenarios": [
+        0.0,
+        0.15,
+        0.3,
+        0.5,
+        0.7,
+        0.85
+      ],
+      "scenario_descriptor": "Six nuclear-capacity-loss scenarios spanning pre-event (0.0) to documented post-event shutdown peak (~0.85, reflecting the share of Japan's nuclear fleet offline during 2012). Calibrated from TEPCO + METI.",
+      "n_chain_steps_per_scenario": 36,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "within_predicted_range",
+    "observed_slope": 0.5067985353368315,
+    "observed_intercept": 0.0009819166687313752,
+    "predicted_range": [
+      0.2,
+      0.75
+    ],
+    "scenario_summaries": [
+      {
+        "nuclear_capacity_loss": 0.0,
+        "fossil_import_post_transition_mean": 0.001002676969786315,
+        "renewable_policy_post_transition_mean": 0.002543067435592468,
+        "renewable_policy_peak": 0.014242181940643923
+      },
+      {
+        "nuclear_capacity_loss": 0.15,
+        "fossil_import_post_transition_mean": 0.08736602397747938,
+        "renewable_policy_post_transition_mean": 0.0758683334924091,
+        "renewable_policy_peak": 0.09302055818790196
+      },
+      {
+        "nuclear_capacity_loss": 0.3,
+        "fossil_import_post_transition_mean": 0.177727177851671,
+        "renewable_policy_post_transition_mean": 0.15220976101080907,
+        "renewable_policy_peak": 0.17976634311783848
+      },
+      {
+        "nuclear_capacity_loss": 0.5,
+        "fossil_import_post_transition_mean": 0.2982087163505932,
+        "renewable_policy_post_transition_mean": 0.25405974246876195,
+        "renewable_policy_peak": 0.29969822333572527
+      },
+      {
+        "nuclear_capacity_loss": 0.7,
+        "fossil_import_post_transition_mean": 0.4186902548495152,
+        "renewable_policy_post_transition_mean": 0.35590972392671494,
+        "renewable_policy_peak": 0.4203473867763791
+      },
+      {
+        "nuclear_capacity_loss": 0.85,
+        "fossil_import_post_transition_mean": 0.5090514087237068,
+        "renewable_policy_post_transition_mean": 0.4322972100201795,
+        "renewable_policy_peak": 0.5110236084253146
+      }
+    ],
+    "rationale": "Observed slope 0.5068 is within the pre-committed range [0.2000, 0.7500], calibrated from the IAEA + METI + TEPCO public sources. The methodology's chained-coupling protocol recovers the documented direction and magnitude across three substrate boundaries. Per \u00a71 honesty bounds, this is not a real-economy measurement; the substrate is parameterized from the public reports.",
+    "computed_at_utc": "2026-05-28T23:41:50.994711+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "ba1c304c6baf21d8690b8d9a89af4055dbca9a2208cd6888263e357eab28929c"
+}
