@@ -1,0 +1,106 @@
+{
+  "voice_name": "texas_feb_2021_uri_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "gas_throughput",
+    "substrate_target": "generation_dispatch",
+    "named_residual": "cross_substrate_link_strength_gas_throughput_to_generation_dispatch",
+    "predicted_direction": "gas_throughput_drop \u2192 generation_dispatch_loss (positive)",
+    "predicted_magnitude_range": [
+      0.4,
+      0.95
+    ],
+    "null_direction": "no correlation OR negative correlation",
+    "calibration_source": "FERC/NERC/NRC RE Final Report on the February 2021 Cold Weather Outages in Texas and the South Central United States (November 2021); public."
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_of_dispatch_loss_vs_gas_throughput_drop",
+    "predicted_range": [
+      0.4,
+      0.95
+    ],
+    "rule": "fail if slope < 0.40 (link too weak to recover the documented coupling shape), fail if slope > 0.95 (over-prediction even above the report's upper bound), fail if slope < 0 (null direction realized \u2014 documented direction not recovered)",
+    "rationale": "The voice claims a positive, bounded coupling whose window is taken from the FERC/NERC report's range of findings on gas-curtailment-to-generation-loss. Any of three falsification outcomes is testable from run output alone: slope below the floor, above the ceiling, or wrong sign. The null direction is named explicitly so its realization is a registry-acceptable null per \u00a73.4, not a hidden disconfirmation. This voice's pass does not constitute a real-grid claim; see PREREGISTRATION \u00a71 honesty bound on coupling magnitudes."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/texas_feb_2021_uri_v1.py",
+    "source_file": "examples/voices/texas_feb_2021_uri_v1.py",
+    "input_parameters": {
+      "temperature_anomaly_scenarios_degC": [
+        -5.0,
+        -10.0,
+        -15.0,
+        -20.0,
+        -25.0,
+        -30.0
+      ],
+      "scenario_descriptor": "Six cold-snap scenarios at progressively colder temperature anomalies from the regional norm, spanning from mild cold front to the documented February 15-16, 2021 peak anomaly window.",
+      "n_substrate_steps_per_scenario": 96,
+      "scenario_horizon_hours": 96,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "within_predicted_range",
+    "observed_slope": 0.6334428407977634,
+    "observed_intercept": 0.04448471410629906,
+    "predicted_range": [
+      0.4,
+      0.95
+    ],
+    "scenario_summaries": [
+      {
+        "temperature_anomaly_degC": -5.0,
+        "gas_throughput_drop": 0.02356871420744744,
+        "dispatch_loss": 0.04900082275190365,
+        "gas_min_step": 95,
+        "dispatch_min_step": 37
+      },
+      {
+        "temperature_anomaly_degC": -10.0,
+        "gas_throughput_drop": 0.1901366202963748,
+        "dispatch_loss": 0.1727737763824848,
+        "gas_min_step": 95,
+        "dispatch_min_step": 37
+      },
+      {
+        "temperature_anomaly_degC": -15.0,
+        "gas_throughput_drop": 0.5232724324742319,
+        "dispatch_loss": 0.38426957837639997,
+        "gas_min_step": 95,
+        "dispatch_min_step": 94
+      },
+      {
+        "temperature_anomaly_degC": -20.0,
+        "gas_throughput_drop": 0.9730057789143381,
+        "dispatch_loss": 0.6589093438569311,
+        "gas_min_step": 95,
+        "dispatch_min_step": 94
+      },
+      {
+        "temperature_anomaly_degC": -25.0,
+        "gas_throughput_drop": 0.9730057789143381,
+        "dispatch_loss": 0.6589093438569311,
+        "gas_min_step": 95,
+        "dispatch_min_step": 94
+      },
+      {
+        "temperature_anomaly_degC": -30.0,
+        "gas_throughput_drop": 0.9730057789143381,
+        "dispatch_loss": 0.6589093438569311,
+        "gas_min_step": 95,
+        "dispatch_min_step": 94
+      }
+    ],
+    "rationale": "Observed slope 0.6334 is within the pre-committed range [0.4000, 0.9500], calibrated from the FERC/NERC final-report window. The methodology's coupling protocol recovers a shape consistent with the documented direction and magnitude. Per \u00a71 honesty bounds, this is not a real-grid measurement; the substrate is parameterized from the public report, not the operating grid.",
+    "computed_at_utc": "2026-05-28T23:06:17.360244+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "e26fe3d7691cb1e5b09b51108a668a9fdd2eaf2708dca13cb97f07a7f82e8c5b"
+}
