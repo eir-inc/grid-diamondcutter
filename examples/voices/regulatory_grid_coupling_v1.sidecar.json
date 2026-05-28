@@ -1,0 +1,72 @@
+{
+  "voice_name": "regulatory_grid_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "regulatory_stringency",
+    "substrate_target": "8node_dc_grid",
+    "named_residual": "cross_substrate_link_strength_regulatory_to_grid",
+    "predicted_direction": "regulatory_stringency \u2192 unsigned_cycle_residual (positive)",
+    "predicted_magnitude_range": [
+      0.005,
+      0.03
+    ],
+    "null_direction": "no correlation OR negative correlation"
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_of_cycle_residual_vs_stringency",
+    "predicted_range": [
+      0.005,
+      0.03
+    ],
+    "rule": "fail if slope < 0.005 (no link / weak link), fail if slope > 0.030 (over-prediction), fail if slope < 0 (reversed direction = null direction realized)",
+    "rationale": "The voice claims a positive, bounded coupling. Any of three falsification outcomes are testable from the run output alone: slope below the floor, slope above the ceiling, or slope of the wrong sign. The null direction is named explicitly so its realization is a registry-acceptable null, not a hidden disconfirmation."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/example_coupling_voice.py",
+    "source_file": "examples/voices/example_coupling_voice.py",
+    "input_parameters": {
+      "stringency_levels": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "stations_per_level": "default rotating-load-profile (5 stations)",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "outcome_category": "below_predicted_range",
+    "observed_slope": 0.0,
+    "observed_intercept": 0.0465,
+    "predicted_range": [
+      0.005,
+      0.03
+    ],
+    "stringency_levels": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "observed_residuals": [
+      0.0465,
+      0.0465,
+      0.0465,
+      0.0465,
+      0.0465
+    ],
+    "rationale": "Observed slope 0.0000 is below the predicted floor 0.0050. The link is too weak to support the prediction. Voice enters the null-voice ledger per \u00a73.4.",
+    "computed_at_utc": "2026-05-28T21:00:05.712531+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "92361b3e88a9f61736c568f68a5669cd8fd8f5f37718c6807ec5686da7dcec8e"
+}
