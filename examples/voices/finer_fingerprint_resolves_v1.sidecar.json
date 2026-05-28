@@ -1,0 +1,84 @@
+{
+  "voice_name": "finer_fingerprint_resolves_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "discretization-induced jump sensitivity in cycle_residual measurement, previously documented in noise_robustness_v1 (PR #2) and mix_axis_smoothness_v1 (PR #9). Predict that a finer-binned fingerprint (20 bins instead of 6) reduces the mix-axis max/median jump ratio below 5.0, which would resolve the discretization weakness on that axis.",
+    "default_fingerprint_bins": 6,
+    "fine_fingerprint_bins": 20,
+    "baseline_jump_ratio_default": 2813.89,
+    "predicted_fine_jump_ratio_upper_bound": 5.0
+  },
+  "kill_condition": {
+    "metric": "fine_fingerprint_max_to_median_jump_ratio",
+    "rule": "fail if max(|diff|)/median(|diff|) > 5.0 across 21-sample mix sweep when using the 20-bin fingerprint. Equivalent to the kill condition of mix_axis_smoothness_v1 (PR #9) applied to the alternative fingerprint. A PASS demonstrates that binning resolution alone resolves the discretization weakness; a FAIL indicates the issue is deeper than binning.",
+    "rationale": "The kill condition is identical in form to mix_axis_smoothness_v1's, so a direct PASS/FAIL comparison answers whether finer binning is a real fix. The threshold (5.0) is the same as the prior voice; only the fingerprint resolution differs."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_finer_fingerprint_resolves_v1.py",
+    "source_file": "examples/voices/voice_finer_fingerprint_resolves_v1.py",
+    "input_parameters": {
+      "mix_samples": "linspace(0, 1, 21)",
+      "profile_transitions": [
+        [
+          "peak",
+          "off_peak"
+        ],
+        [
+          "off_peak",
+          "mixed"
+        ],
+        [
+          "mixed",
+          "spike"
+        ],
+        [
+          "spike",
+          "peak"
+        ]
+      ],
+      "fingerprint_bins": 20,
+      "fingerprint_bin_edges": "linspace(0.0, 1.5, 21)",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "max_to_median_ratio_fine_observed": 5.780257416536244,
+    "baseline_max_to_median_ratio": 2813.89,
+    "improvement_factor": 486.81049946841165,
+    "threshold": 5.0,
+    "residuals_fine_fingerprint": [
+      5.660296698283457,
+      5.658744382473957,
+      5.657446823212964,
+      5.659157363338729,
+      5.660866725318682,
+      5.662579739540418,
+      5.66404518347737,
+      5.666019759404884,
+      5.667712225521024,
+      5.665708911131183,
+      5.663211662269504,
+      5.660716026417358,
+      5.658221870996708,
+      5.658228621510509,
+      5.660733615284071,
+      5.663246696328173,
+      5.665757401921207,
+      5.668266196091016,
+      5.670783607733995,
+      5.673294964897325,
+      5.660296698283457
+    ],
+    "rationale": "Fine-fingerprint (20-bin) max/median jump ratio = 5.78, exceeds threshold 5.0. Baseline was 2813.9; improvement factor 486.8\u00d7 is insufficient. The discretization issue is deeper than binning resolution \u2014 likely the categorical max-utilization element or the histogram-projection itself. Voice enters null-voice ledger per \u00a73.4.",
+    "computed_at_utc": "2026-05-28T23:45:33.237502+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "c55cb9bbeed03dd4ebb95251366610a54ebe27a0e3bc4d95c03a63899d676cd4"
+}
