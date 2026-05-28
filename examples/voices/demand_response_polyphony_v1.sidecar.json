@@ -34,7 +34,7 @@
     "observed_value": 0.0465,
     "threshold": 0.0326,
     "rationale": "Observed unsigned cycle_residual 0.0465 exceeds the pre-committed threshold 0.0326. Voice enters the null-voice ledger per \u00a73.4 and stays on record.",
-    "computed_at_utc": "2026-05-28T21:02:21.706657+00:00"
+    "computed_at_utc": "2026-05-28T21:04:09.156512+00:00"
   },
   "sidecar_sha256_pre_verdict": "b11d2fa857ab9829faf91a0cc537dfca490b9f2e3dc595fb1cd72626d78c1ec1"
 }
