@@ -1,0 +1,34 @@
+{
+  "registry_summary_generated_at_utc": "2026-05-28T21:11:31.817586+00:00",
+  "total_voices_committed": 2,
+  "verdict_counts": {
+    "fail": 2
+  },
+  "kind_counts": {
+    "polyphony_within_substrate": 1,
+    "coupling_cross_substrate": 1
+  },
+  "base_rate_failure": 1.0,
+  "base_rate_pass": 0.0,
+  "pass_count": 0,
+  "fail_count": 2,
+  "partial_count": 0,
+  "voices": [
+    {
+      "voice_name": "demand_response_polyphony_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Observed unsigned cycle_residual 0.0465 exceeds the pre-committed threshold 0.0326. Voice enters the null-voice ledger per \u00a73.4 and stays on record.",
+      "sidecar_path": "examples/voices/demand_response_polyphony_v1.sidecar.json",
+      "sha256_anchor": "b11d2fa857ab9829faf91a0cc537dfca490b9f2e3dc595fb1cd72626d78c1ec1"
+    },
+    {
+      "voice_name": "regulatory_grid_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Observed slope 0.0000 is below the predicted floor 0.0050. The link is too weak to support the prediction. Voice enters the null-voice ledger per \u00a73.4.",
+      "sidecar_path": "examples/voices/regulatory_grid_coupling_v1.sidecar.json",
+      "sha256_anchor": "92361b3e88a9f61736c568f68a5669cd8fd8f5f37718c6807ec5686da7dcec8e"
+    }
+  ]
+}

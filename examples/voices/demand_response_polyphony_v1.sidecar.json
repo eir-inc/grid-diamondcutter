@@ -1,0 +1,40 @@
+{
+  "voice_name": "demand_response_polyphony_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "unsigned_cycle_residual_on_rotating_load_profile_station_set",
+    "baseline_value": 0.0465,
+    "predicted_value_upper_bound": 0.0326,
+    "predicted_reduction_floor": 0.3
+  },
+  "kill_condition": {
+    "metric": "unsigned_cycle_residual",
+    "threshold": 0.0326,
+    "rule": "fail if observed metric > threshold",
+    "rationale": "The voice claims to reduce the named residual by at least 30%. Failure to meet that threshold falsifies the prediction. The threshold is computable from the voice's run output alone, with no external reinterpretation required."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/example_polyphony_voice.py",
+    "source_file": "examples/voices/example_polyphony_voice.py",
+    "input_parameters": {
+      "station_set": "default rotating-load-profile (5 stations: peak, off_peak, mixed, spike, peak)",
+      "demand_response_factor": 0.45,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "observed_value": 0.0465,
+    "threshold": 0.0326,
+    "rationale": "Observed unsigned cycle_residual 0.0465 exceeds the pre-committed threshold 0.0326. Voice enters the null-voice ledger per \u00a73.4 and stays on record.",
+    "computed_at_utc": "2026-05-28T21:11:31.758610+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "b11d2fa857ab9829faf91a0cc537dfca490b9f2e3dc595fb1cd72626d78c1ec1"
+}
