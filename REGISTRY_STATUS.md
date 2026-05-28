@@ -1,6 +1,6 @@
 # Registry status — `grid-diamondcutter` voice ledger
 
-Generated: 2026-05-28T21:05:33.091753+00:00
+Generated: 2026-05-28T21:11:31.817586+00:00
 
 This report aggregates the per-voice sidecars committed to the registry under
 the protocol in `PREREGISTRATION.md` §3. The base rate of failures is the

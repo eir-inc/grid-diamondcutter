@@ -66,7 +66,7 @@
       0.0465
     ],
     "rationale": "Observed slope 0.0000 is below the predicted floor 0.0050. The link is too weak to support the prediction. Voice enters the null-voice ledger per \u00a73.4.",
-    "computed_at_utc": "2026-05-28T21:08:23.703474+00:00"
+    "computed_at_utc": "2026-05-28T21:11:31.681102+00:00"
   },
   "sidecar_sha256_pre_verdict": "92361b3e88a9f61736c568f68a5669cd8fd8f5f37718c6807ec5686da7dcec8e"
 }
