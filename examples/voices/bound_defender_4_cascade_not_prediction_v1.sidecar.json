@@ -1,0 +1,142 @@
+{
+  "voice_name": "bound_defender_4_cascade_not_prediction_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_meta",
+    "named_residual": "PREREGISTRATION \u00a71 bound #4 defense \u2014 every 'cascade' mention in the project's public-facing artifacts (PREREGISTRATION.md, README.md) must appear within a local window of at least one conditional-guard phrase ('conditional', 'under stated', 'under modeling assumptions', 'not a prediction', 'not a forecast', 'not a measurement of the real grid'). Otherwise the bound is silently crossable.",
+    "documents_to_scan": [
+      "PREREGISTRATION.md",
+      "README.md"
+    ],
+    "cascade_anchor_terms": [
+      "cascade",
+      "Cascade"
+    ],
+    "guard_phrases_any_of": [
+      "conditional",
+      "under stated",
+      "under modeling assumptions",
+      "modeling assumptions",
+      "not a prediction",
+      "not a forecast",
+      "not a measurement of the real grid",
+      "what the real economy or the real grid will do",
+      "without a registered voice that explicitly tests the forecasting claim",
+      "stated voices",
+      "stated assumptions",
+      "stated substrate parameters"
+    ],
+    "guard_search_radius_chars": 600,
+    "alarm_semantics": "PASS = \u00a71 bound #4 mechanically defended (every cascade mention has \u22651 guard phrase within \u00b1600 chars); FAIL = alarm (\u22651 cascade mention is unguarded in the scanned artifacts)."
+  },
+  "kill_condition": {
+    "metric": "n_unguarded_cascade_mentions",
+    "rule": "FAIL (alarm) if any cascade mention in PREREGISTRATION.md or README.md lacks at least one guard phrase within \u00b1600 chars. PASS iff every cascade mention is guarded.",
+    "rationale": "Bound #4 is a framing bound \u2014 it is the easiest to cross by accident, because any future edit can add the word 'cascade' without the conditional-finding language. Reviewers cannot mentally scan every public artifact at every commit. Mechanizing the scan as a voice means the bound is defended at every commit by inspection of the same artifacts an external reader sees."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_bound_defender_4_cascade_not_prediction_v1.py",
+    "source_file": "examples/voices/voice_bound_defender_4_cascade_not_prediction_v1.py",
+    "input_parameters": {
+      "documents_to_scan": [
+        "PREREGISTRATION.md",
+        "README.md"
+      ],
+      "cascade_anchor_terms_case_sensitive": false,
+      "guard_search_radius_chars": 600
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [],
+      "filesystem_dependency": "PREREGISTRATION.md + README.md at repo root"
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "total_cascade_mentions": 8,
+    "guarded_mentions": 3,
+    "unguarded_mentions": 5,
+    "documents": [
+      {
+        "doc": "PREREGISTRATION.md",
+        "doc_exists": true,
+        "anchor_mentions": [
+          {
+            "char_offset": 1567,
+            "context": "...on is specifically built to test for is a **threshold-class cascade**: a region- and regulator-specific moment at which...",
+            "guard_phrases_found_in_window": [],
+            "guarded": false
+          },
+          {
+            "char_offset": 1785,
+            "context": "...threshold, reallocation washes out. Above it, reallocation cascades. The project's primary test is whether such a thres...",
+            "guard_phrases_found_in_window": [],
+            "guarded": false
+          },
+          {
+            "char_offset": 8707,
+            "context": "...he source of any claim about real-grid coupling. | | That a cascade result produced by the methodology \u2014 the threshold-c...",
+            "guard_phrases_found_in_window": [
+              "conditional",
+              "under stated",
+              "modeling assumptions",
+              "what the real economy or the real grid will do"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 8772,
+            "context": "...de result produced by the methodology \u2014 the threshold-class cascade investigated in \u00a70, the qualitative trajectory recov...",
+            "guard_phrases_found_in_window": [
+              "conditional",
+              "under stated",
+              "modeling assumptions",
+              "what the real economy or the real grid will do",
+              "without a registered voice that explicitly tests the forecasting claim"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 8964,
+            "context": "...iction of what the real economy or the real grid will do. | Cascade results are computed under stated modeling assumptio...",
+            "guard_phrases_found_in_window": [
+              "conditional",
+              "under stated",
+              "modeling assumptions",
+              "what the real economy or the real grid will do",
+              "without a registered voice that explicitly tests the forecasting claim"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 17266,
+            "context": "...minimum coupled chain \u2014 the set of voices that captured the cascade investigated in \u00a70 \u2014 and the larger set of voices th...",
+            "guard_phrases_found_in_window": [],
+            "guarded": false
+          },
+          {
+            "char_offset": 17621,
+            "context": "...did not. Here is the minimum coupled chain that carried the cascade from \u00a70 if such a chain was found, and here is every...",
+            "guard_phrases_found_in_window": [],
+            "guarded": false
+          }
+        ]
+      },
+      {
+        "doc": "README.md",
+        "doc_exists": true,
+        "anchor_mentions": [
+          {
+            "char_offset": 10737,
+            "context": "...ames (e.g. `[\"steady\", \"overload\", \"fault\", \"restoration\", \"cascade\"]`). - A `reach(BridgeParams) -> tuple` function tha...",
+            "guard_phrases_found_in_window": [],
+            "guarded": false
+          }
+        ]
+      }
+    ],
+    "rationale": "\u00a71 bound #4 alarm: 5 of 8 cascade mentions are unguarded (no conditional-finding language within \u00b1600 chars). Reviewer attention required. Examples: ['PREREGISTRATION.md@1567: ...on is specifically built to test for is a **threshold-class cascade**: a region- and regulator-specific moment at which...', \"PREREGISTRATION.md@1785: ...threshold, reallocation washes out. Above it, reallocation cascades. The project's primary test is whether such a thres...\", 'PREREGISTRATION.md@17266: ...minimum coupled chain \u2014 the set of voices that captured the cascade investigated in \u00a70 \u2014 and the larger set of voices th...']",
+    "computed_at_utc": "2026-05-29T02:37:13.338573+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "2484aad21ad106d01e26cdb871979276da29e3de78db146a381c6c463335fae9"
+}
