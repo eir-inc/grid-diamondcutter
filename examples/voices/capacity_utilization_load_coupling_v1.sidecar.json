@@ -1,0 +1,81 @@
+{
+  "voice_name": "capacity_utilization_load_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_a": "load_profile_scale (system-wide load multiplier \u03b1 \u2208 [0.5, 2.0])",
+    "substrate_b": "max_line_utilization observed across cycle-walk stations",
+    "named_residual": "load_alpha_drives_observed_max_utilization",
+    "predicted_direction": "positive: higher \u03b1 \u2192 higher max_line_utilization",
+    "predicted_magnitude_range": [
+      0.1,
+      0.6
+    ],
+    "null_direction": "zero or negative slope (no link / reversed direction)",
+    "rationale": "Physical-direction sanity check on the substrate's dispatch path. If uniform load scale-up does not raise observed maximum line utilization, the substrate's dispatch is not behaving as a grid should. Complement to capacity_scaling_monotonicity_v1 (PR #6), which tests the dual: uniform-capacity-up should reduce cycle_residual. Both should hold under reasonable dispatch."
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_of_max_utilization_vs_load_scale",
+    "predicted_range": [
+      0.1,
+      0.6
+    ],
+    "rule": "fail if slope < 0.10 (no link / weak link below predicted floor), fail if slope > 0.60 (over-prediction or numerical instability), fail if slope < 0 (reversed direction = null direction realized)",
+    "rationale": "All three failure outcomes are testable from the run output alone. Below-floor / above-ceiling / wrong-sign cover the three honest ways the prediction can be wrong; the null direction is named explicitly so its realization is a registry-acceptable null per \u00a73.4."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/capacity_utilization_load_coupling_v1.py",
+    "source_file": "examples/voices/capacity_utilization_load_coupling_v1.py",
+    "input_parameters": {
+      "load_scale_sweep": [
+        0.5,
+        0.75,
+        1.0,
+        1.25,
+        1.5,
+        1.75,
+        2.0
+      ],
+      "station_set": "default rotating-load-profile (5 stations: peak, off_peak, mixed, spike, peak)",
+      "random_seed": 271
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "load_scales": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0
+    ],
+    "max_utilizations": [
+      0.175,
+      0.19375,
+      0.19375,
+      0.19375,
+      0.19375,
+      0.19375,
+      0.19375
+    ],
+    "linear_fit_slope": 0.008035714285714313,
+    "linear_fit_intercept": 0.18102678571428574
+  },
+  "verdict": {
+    "verdict": "fail",
+    "slope": 0.008035714285714313,
+    "predicted_range": [
+      0.1,
+      0.6
+    ],
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 0.0080 < 0.1 \u2014 below predicted floor (weak/no link)",
+    "computed_at_utc": "2026-05-28T23:44:56.263433+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "f9715cfdb95f0d65b38d74a4640459f8a957cb27fcab94f0c64a6eb7e4d8f773"
+}
