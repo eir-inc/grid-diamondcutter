@@ -1,0 +1,205 @@
+{
+  "voice_name": "evasion_spring_classifier_meta_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "merged_registry_FAIL_sidecar_set",
+    "named_residual": "n_evasive_marker_fails_distinct_class_signatures",
+    "predicted_value_lower_bound": 3,
+    "phase_a_to_phase_2_bridge": true,
+    "evasion_class_signatures_known_phase_a": [
+      "substrate-class evasion (substrate cannot spontaneously generate predicted phenomenon)",
+      "data-availability evasion (training data resists yielding required observation conditions)",
+      "substrate-shape evasion (receiver geometry/discretization washes out predicted signal)",
+      "network-magnitude evasion (synthetic substrates resist producing strong cross-region effects)"
+    ]
+  },
+  "kill_condition": {
+    "metric": "n_distinct_evasive_marker_class_signatures_found_in_merged_registry",
+    "rule": "pass if \u2265 3 distinct evasion-class signatures found in the merged registry's FAIL set (each evidenced by \u2265 1 FAIL sidecar); fail otherwise",
+    "rationale": "Eugene's evasion-spring observation requires distinct class signatures, not just FAIL count. The classifier groups FAIL sidecars by outcome_category and verdict-rationale-token patterns documented in phase-A; counts distinct evasion-class signatures present. \u2265 3 = the registry's discipline reliably surfaces evasion-springs as a class, not as one-off nulls."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/evasion_spring_classifier_meta_v1.py",
+    "source_file": "examples/voices/evasion_spring_classifier_meta_v1.py",
+    "input_parameters": {
+      "sidecar_directory": "examples/voices",
+      "evasion_class_signatures": {
+        "substrate_class_evasion": [
+          "no_recognizable",
+          "substrate_inertness",
+          "substrate.*cannot"
+        ],
+        "data_availability_evasion": [
+          "crisis",
+          "contaminat",
+          "fixture.*resist",
+          "training.*lack"
+        ],
+        "substrate_shape_evasion": [
+          "wash",
+          "over_correlat",
+          "receiver.*shape",
+          "fingerprint.*discret"
+        ],
+        "network_magnitude_evasion": [
+          "amplification_below",
+          "magnitude_below_floor",
+          "weak.*coupling"
+        ],
+        "null_direction_evasion": [
+          "null_direction_realized",
+          "direction_reversed"
+        ]
+      },
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "evasion_spring_class_emerges_in_registry",
+    "n_distinct_evasion_classes": 4,
+    "n_total_sidecars": 49,
+    "n_fail_sidecars": 21,
+    "n_evasive_markers": 7,
+    "n_ordinary_nulls": 14,
+    "evasion_classes_present": [
+      "substrate_shape_evasion",
+      "data_availability_evasion",
+      "network_magnitude_evasion",
+      "substrate_class_evasion"
+    ],
+    "by_class": {
+      "substrate_shape_evasion": [
+        "bound_defender_4_cascade_not_prediction_v1",
+        "finer_fingerprint_resolves_v1",
+        "mix_axis_smoothness_v1",
+        "receiver_shape_distinguishability_v1"
+      ],
+      "data_availability_evasion": [
+        "lead_time_prior_crisis_robustness_defender_v1"
+      ],
+      "network_magnitude_evasion": [
+        "network_amplification_adoption_cascade_v1"
+      ],
+      "substrate_class_evasion": [
+        "threshold_cascade_v1"
+      ]
+    },
+    "evasive_markers": [
+      {
+        "voice_name": "bound_defender_4_cascade_not_prediction_v1",
+        "outcome_category": null,
+        "evasion_classes": [
+          "substrate_shape_evasion"
+        ]
+      },
+      {
+        "voice_name": "finer_fingerprint_resolves_v1",
+        "outcome_category": null,
+        "evasion_classes": [
+          "substrate_shape_evasion"
+        ]
+      },
+      {
+        "voice_name": "lead_time_prior_crisis_robustness_defender_v1",
+        "outcome_category": "bound_counter_observation_crisis_contamination",
+        "evasion_classes": [
+          "data_availability_evasion"
+        ]
+      },
+      {
+        "voice_name": "mix_axis_smoothness_v1",
+        "outcome_category": null,
+        "evasion_classes": [
+          "substrate_shape_evasion"
+        ]
+      },
+      {
+        "voice_name": "network_amplification_adoption_cascade_v1",
+        "outcome_category": "direction_recovered_magnitude_below_floor",
+        "evasion_classes": [
+          "network_magnitude_evasion"
+        ]
+      },
+      {
+        "voice_name": "receiver_shape_distinguishability_v1",
+        "outcome_category": null,
+        "evasion_classes": [
+          "substrate_shape_evasion"
+        ]
+      },
+      {
+        "voice_name": "threshold_cascade_v1",
+        "outcome_category": "no_recognizable_threshold_class_signature",
+        "evasion_classes": [
+          "substrate_class_evasion"
+        ]
+      }
+    ],
+    "ordinary_nulls": [
+      {
+        "voice_name": "capacity_utilization_load_coupling_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "cross_lane_chain_loop_greece_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "cross_lane_chain_loop_ireland_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "demand_response_polyphony_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "denmark_germany_renewable_export_coupling_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "germany_neighbor_renewable_coupling_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "japan_post_fukushima_acceleration_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "network_amplification_coupling_v1",
+        "outcome_category": "null_direction_threshold_non_monotone"
+      },
+      {
+        "voice_name": "noise_robustness_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "receiver_geometry_substrate_class_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "regulatory_grid_coupling_v1",
+        "outcome_category": "below_predicted_range"
+      },
+      {
+        "voice_name": "regulatory_shape_apoha_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "smooth_s_curve_emergent_bound_fresh_pairs_v1",
+        "outcome_category": null
+      },
+      {
+        "voice_name": "texas_uri_temperature_collapse_real_v1",
+        "outcome_category": null
+      }
+    ],
+    "rationale": "4 distinct evasion-class signatures present in the merged registry's 21 FAIL sidecars: ['substrate_shape_evasion', 'data_availability_evasion', 'network_magnitude_evasion', 'substrate_class_evasion']. Bound was \u2265 3. Eugene's evasion-spring observation 'once well defined in failures it becomes a small spring we can use' is supported by direct registry inspection. Phase-2 monetary-phase-substrate work can ratchet against these spring geometries.",
+    "computed_at_utc": "2026-05-29T03:31:12.950211+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "f8e45781e02e79b7ea81fd3503a08ee621448a4c4c62d4a76fc50ce7ddbee044"
+}
