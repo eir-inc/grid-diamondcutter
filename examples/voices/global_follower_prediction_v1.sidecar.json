@@ -1,0 +1,113 @@
+{
+  "voice_name": "global_follower_prediction_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "regulatory_lead_time_v2_expanded_cohort_sidecar_plus_leader_loo_cv_v1_plus_non_eu_follower_fixture",
+    "named_residual": "n_non_eu_followers_with_inflection_in_target_decade",
+    "predicted_value_lower_bound": 3,
+    "target_decade_window": [
+      2027,
+      2037
+    ]
+  },
+  "kill_condition": {
+    "metric": "n_non_eu_followers_with_calibration_honest_inflection_in_2027_2037",
+    "rule": "pass if \u2265 3 of 4 non-EU followers have predicted inflection in [2027, 2037] at LOO MAE halfwidth; fail otherwise",
+    "rationale": "Tests whether the global prior (v2 PR #40 PASSed prior generalizes across EU + non-EU leaders) carries forward when applied to non-EU follower predictions. v2 calibrated PR #38 used EU followers; this voice closes the global-application loop."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/global_follower_prediction_v1.py",
+    "source_file": "examples/voices/global_follower_prediction_v1.py",
+    "input_parameters": {
+      "expanded_prior_sidecar": "examples/voices/regulatory_lead_time_v2_expanded_cohort.sidecar.json",
+      "loo_mae_halfwidth_years": 1.47,
+      "loo_max_halfwidth_years": 3.8,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "global_prior_carries_to_non_eu_followers",
+    "prior_used": {
+      "mean_lead_time": 8.916666666666666,
+      "spread": 7,
+      "eu_sub_cohort_mean": 8.833333333333334,
+      "non_eu_sub_cohort_mean": 9.0
+    },
+    "n_followers": 4,
+    "n_followers_in_target_window": 4,
+    "target_decade_window": [
+      2027,
+      2037
+    ],
+    "per_follower_predictions": [
+      {
+        "country": "Mexico",
+        "milestone_year": 2020,
+        "milestone_name": "Energy Reform 2013 RE provisions + 2020 acceleration plan",
+        "public_source_anchor": "IEA EPR: Mexico 2017 + 2023; CFE statistics; SENER renewables outlook",
+        "predicted_inflection_year": 2028.92,
+        "calibration_honest_window": [
+          2027.45,
+          2030.39
+        ],
+        "worst_case_window": [
+          2025.12,
+          2032.72
+        ]
+      },
+      {
+        "country": "Vietnam",
+        "milestone_year": 2020,
+        "milestone_name": "PDP8 draft 2020 + Decision 2068/2015 RE strategy",
+        "public_source_anchor": "IEA EPR: Vietnam 2022; MOIT statistics; EVN annual report",
+        "predicted_inflection_year": 2028.92,
+        "calibration_honest_window": [
+          2027.45,
+          2030.39
+        ],
+        "worst_case_window": [
+          2025.12,
+          2032.72
+        ]
+      },
+      {
+        "country": "South_Africa",
+        "milestone_year": 2020,
+        "milestone_name": "IRP 2019 implementation + REIPPPP rounds 5-6 2020",
+        "public_source_anchor": "IEA EPR: South Africa 2017 + 2023; DMRE IRP 2019",
+        "predicted_inflection_year": 2028.92,
+        "calibration_honest_window": [
+          2027.45,
+          2030.39
+        ],
+        "worst_case_window": [
+          2025.12,
+          2032.72
+        ]
+      },
+      {
+        "country": "Indonesia",
+        "milestone_year": 2021,
+        "milestone_name": "RUPTL 2021-2030 + Energy Resilience Roadmap 2021",
+        "public_source_anchor": "IEA EPR: Indonesia 2022; ESDM statistics; PLN annual report",
+        "predicted_inflection_year": 2029.92,
+        "calibration_honest_window": [
+          2028.45,
+          2031.39
+        ],
+        "worst_case_window": [
+          2026.12,
+          2033.72
+        ]
+      }
+    ],
+    "rationale": "4/4 non-EU followers' calibration-honest windows intersect [2027, 2037]. The global prior (v2 expanded cohort, mean 8.92y, EU-vs-non-EU sub-cohorts 8.83y vs 9.00y) carries forward when applied to non-EU followers. Per \u00a71, these are NOT real-trajectory claims for any named country \u2014 they are methodology prior-conditional point estimates with uncertainty windows.",
+    "computed_at_utc": "2026-05-29T02:17:18.376644+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "6516b96e024258abeed511a09102d92ac9fa0efbf0da145cb01cef5948b24eb2"
+}

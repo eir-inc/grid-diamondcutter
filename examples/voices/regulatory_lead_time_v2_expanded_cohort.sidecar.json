@@ -1,0 +1,170 @@
+{
+  "voice_name": "regulatory_lead_time_v2_expanded_cohort",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "12_leader_countries_6_EU_plus_6_non_EU",
+    "named_residual": "v2_mean_lead_time_drift_from_v1_prior_plus_spread_check",
+    "v1_prior_mean": 8.83,
+    "v1_prior_spread": 5,
+    "predicted_drift_bound": 2.0,
+    "predicted_spread_bound_x_v1": 1.5,
+    "lineage": "v2 of regulatory_lead_time_v1 (PR #30); tests whether EU-only fixture was over-fit to regional archetype"
+  },
+  "kill_condition": {
+    "metric": "drift_from_v1_prior_and_spread_vs_v1",
+    "rule": "pass if abs(v2_mean - 8.83) \u2264 2.0 AND (v2_max - v2_min) \u2264 7.5; fail if either bound crossed",
+    "rationale": "Two simultaneous bounds: stability of the central tendency (mean shouldn't drift far) AND stability of the spread (cohort shouldn't spread much wider). Either failure mode flags region-specific behavior that the methodology should recognize as a v3 per-region voice rather than a single-prior generalization."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/regulatory_lead_time_v2_expanded_cohort.py",
+    "source_file": "examples/voices/regulatory_lead_time_v2_expanded_cohort.py",
+    "input_parameters": {
+      "leader_countries": [
+        "Denmark",
+        "Germany",
+        "Spain",
+        "Portugal",
+        "United_Kingdom",
+        "Italy",
+        "Japan",
+        "China",
+        "United_States",
+        "Australia",
+        "Brazil",
+        "India"
+      ],
+      "data_vintage": "milestones 1992-2014, inflections 2000-2022; public IEA/IRENA/national sources",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "prior_generalizes_globally",
+    "v2_mean_lead_time": 8.916666666666666,
+    "v2_min_lead_time": 5,
+    "v2_max_lead_time": 12,
+    "v2_spread": 7,
+    "drift_from_v1": 0.086666666666666,
+    "drift_bound": 2.0,
+    "spread_bound": 7.5,
+    "eu_sub_cohort_mean": 8.833333333333334,
+    "non_eu_sub_cohort_mean": 9.0,
+    "per_country_analyses": [
+      {
+        "country": "Denmark",
+        "milestone_year": 1992,
+        "milestone_name": "Wind feed-in tariff law (Energy Act amendment 1992)",
+        "inflection_year": 2001,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA EPR: Denmark 2017 + 2023",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "Germany",
+        "milestone_year": 2000,
+        "milestone_name": "EEG 2000 feed-in tariff",
+        "inflection_year": 2009,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA EPR: Germany 2020",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "Spain",
+        "milestone_year": 2007,
+        "milestone_name": "Royal Decree 661/2007 feed-in",
+        "inflection_year": 2014,
+        "lead_time_years": 7,
+        "public_source_anchor": "IEA EPR: Spain 2021",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "Portugal",
+        "milestone_year": 2001,
+        "milestone_name": "Decree-Law 339-C/2001 renewable feed-in",
+        "inflection_year": 2010,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA EPR: Portugal 2021",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "United_Kingdom",
+        "milestone_year": 2002,
+        "milestone_name": "Renewables Obligation 2002",
+        "inflection_year": 2014,
+        "lead_time_years": 12,
+        "public_source_anchor": "IEA EPR: UK 2019",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "Italy",
+        "milestone_year": 2005,
+        "milestone_name": "Conto Energia 2005 PV feed-in",
+        "inflection_year": 2012,
+        "lead_time_years": 7,
+        "public_source_anchor": "IEA EPR: Italy 2023",
+        "region_bucket": "EU"
+      },
+      {
+        "country": "Japan",
+        "milestone_year": 2012,
+        "milestone_name": "Renewable Energy Special Measures Act (FIT) 2012",
+        "inflection_year": 2017,
+        "lead_time_years": 5,
+        "public_source_anchor": "IEA EPR: Japan 2021; METI statistics",
+        "region_bucket": "non_EU"
+      },
+      {
+        "country": "China",
+        "milestone_year": 2005,
+        "milestone_name": "Renewable Energy Law 2005 + 2009 amendment",
+        "inflection_year": 2013,
+        "lead_time_years": 8,
+        "public_source_anchor": "IEA EPR: China 2017 + Clean Energy Investment 2023",
+        "region_bucket": "non_EU"
+      },
+      {
+        "country": "United_States",
+        "milestone_year": 2005,
+        "milestone_name": "EPAct 2005 PTC extension + 2009 ARRA renewable provisions",
+        "inflection_year": 2014,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA EPR: USA 2019; EIA AEO 2020",
+        "region_bucket": "non_EU"
+      },
+      {
+        "country": "Australia",
+        "milestone_year": 2001,
+        "milestone_name": "Renewable Energy (Electricity) Act 2000 MRET 2001",
+        "inflection_year": 2011,
+        "lead_time_years": 10,
+        "public_source_anchor": "IEA EPR: Australia 2018; CER statistics",
+        "region_bucket": "non_EU"
+      },
+      {
+        "country": "Brazil",
+        "milestone_year": 2002,
+        "milestone_name": "PROINFA 2002 + Decree 5.025/2004",
+        "inflection_year": 2013,
+        "lead_time_years": 11,
+        "public_source_anchor": "IEA EPR: Brazil 2013; ANEEL statistics",
+        "region_bucket": "non_EU"
+      },
+      {
+        "country": "India",
+        "milestone_year": 2003,
+        "milestone_name": "Electricity Act 2003 RE provisions + JNNSM 2010",
+        "inflection_year": 2014,
+        "lead_time_years": 11,
+        "public_source_anchor": "IEA EPR: India 2020; CEA statistics",
+        "region_bucket": "non_EU"
+      }
+    ],
+    "rationale": "v2 mean lead time 8.92y (drift 0.09y \u2264 2.0y) and spread 7y (\u2264 7.5y). Prior generalizes globally at the methodology's current characterization. EU sub-cohort mean 8.83y; non-EU sub-cohort mean 9.00y. Per \u00a71 honesty bounds the v1 bound on per-region voice addition remains in force; this pass means the COHORT-AGGREGATE prior is stable, NOT that any single country's trajectory can be predicted without its own voice.",
+    "computed_at_utc": "2026-05-29T02:11:52.655741+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "03e9c710bfa3757d56325cfef51cb5513dda88436316c89649a183c1451733f6"
+}
