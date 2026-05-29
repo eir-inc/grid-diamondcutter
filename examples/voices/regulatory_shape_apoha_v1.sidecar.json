@@ -1,0 +1,152 @@
+{
+  "voice_name": "regulatory_shape_apoha_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrates": [
+      "leader_country_policy_text_excerpts_synthetic_v1",
+      "follower_country_policy_text_excerpts_synthetic_v1"
+    ],
+    "named_residual": "leader_policy_text_shows_lower_hedge_density_than_follower_policy_text",
+    "predicted_direction": "negative",
+    "predicted_magnitude_range": [
+      0.2,
+      0.8
+    ],
+    "null_direction": "ratio_approximately_1_indistinguishable_or_above_1_followers_less_hedged",
+    "rationale": "apoha framing: a leader-policy is defined by ABSENCE of hedge-markers, not by positive carbon-target content. Leaders commit-hard; followers commit-soft with deferrals + exemptions + reviewability. If observable, the ratio leader_hedge_density / follower_hedge_density should be measurably less than 1 (between 0.20 and 0.80). Independent recognition lane to miles PR #30 lead-time temporal-shape measurement."
+  },
+  "kill_condition": {
+    "metric": "leader_to_follower_hedge_density_ratio",
+    "rule": "fail if ratio > 0.80 (apoha-distinction absent or weak); fail if ratio < 0.20 (implausible separation suggests text-selection bias); PASS only if ratio \u2208 [0.20, 0.80] AND both substrates have \u2265 50 tokens to measure",
+    "rationale": "Single composite metric \u2014 the ratio of hedge-marker frequency between the two substrates. Upper bound rejects null. Lower bound rejects over-curation. Token-count floor prevents trivially-small-corpus reads."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/regulatory_shape_apoha_v1.py",
+    "source_file": "examples/voices/regulatory_shape_apoha_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_publicly_cited_policy_title_abstract_excerpts",
+      "leader_countries": [
+        "Denmark",
+        "Germany",
+        "Spain",
+        "Portugal",
+        "UK",
+        "Italy"
+      ],
+      "follower_countries": [
+        "Poland",
+        "Romania",
+        "Bulgaria",
+        "Hungary",
+        "Czechia"
+      ],
+      "hedge_marker_patterns": [
+        "\\bwhere feasible\\b",
+        "\\bsubject to\\b",
+        "\\bif conditions\\b",
+        "\\bas technology matures\\b",
+        "\\bpending feasibility\\b",
+        "\\bby approximately\\b",
+        "\\btarget date\\b",
+        "\\bexempting\\b",
+        "\\bgrandfathered\\b",
+        "\\bphased exception\\b",
+        "\\bsubject to review\\b",
+        "\\bmay be amended\\b",
+        "\\bwhere possible\\b",
+        "\\bto the extent practicable\\b",
+        "\\bbest efforts\\b"
+      ],
+      "random_seed": 530
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "run_output": {
+    "leader": {
+      "per_country": {
+        "Denmark": {
+          "hedge_count": 0,
+          "total_words": 54,
+          "hedge_per_1000_words": 0.0
+        },
+        "Germany": {
+          "hedge_count": 0,
+          "total_words": 57,
+          "hedge_per_1000_words": 0.0
+        },
+        "Spain": {
+          "hedge_count": 0,
+          "total_words": 53,
+          "hedge_per_1000_words": 0.0
+        },
+        "Portugal": {
+          "hedge_count": 0,
+          "total_words": 46,
+          "hedge_per_1000_words": 0.0
+        },
+        "UK": {
+          "hedge_count": 0,
+          "total_words": 47,
+          "hedge_per_1000_words": 0.0
+        },
+        "Italy": {
+          "hedge_count": 0,
+          "total_words": 44,
+          "hedge_per_1000_words": 0.0
+        }
+      },
+      "total_hedges": 0,
+      "total_words": 301,
+      "hedge_per_1000_words": 0.0
+    },
+    "follower": {
+      "per_country": {
+        "Poland": {
+          "hedge_count": 7,
+          "total_words": 58,
+          "hedge_per_1000_words": 120.6896551724138
+        },
+        "Romania": {
+          "hedge_count": 9,
+          "total_words": 58,
+          "hedge_per_1000_words": 155.17241379310346
+        },
+        "Bulgaria": {
+          "hedge_count": 8,
+          "total_words": 50,
+          "hedge_per_1000_words": 160.0
+        },
+        "Hungary": {
+          "hedge_count": 5,
+          "total_words": 50,
+          "hedge_per_1000_words": 100.0
+        },
+        "Czechia": {
+          "hedge_count": 6,
+          "total_words": 48,
+          "hedge_per_1000_words": 125.0
+        }
+      },
+      "total_hedges": 35,
+      "total_words": 264,
+      "hedge_per_1000_words": 132.57575757575756
+    },
+    "leader_hedge_density_per_1000_words": 0.0,
+    "follower_hedge_density_per_1000_words": 132.57575757575756,
+    "leader_to_follower_hedge_density_ratio": 0.0
+  },
+  "verdict": {
+    "verdict": "fail",
+    "leader_to_follower_hedge_density_ratio": 0.0,
+    "leader_hedge_density_per_1000_words": 0.0,
+    "follower_hedge_density_per_1000_words": 132.57575757575756,
+    "leader_words": 301,
+    "follower_words": 264,
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: ratio 0.000 < 0.20 (implausible separation suggests text-selection bias in synthetic excerpts)",
+    "computed_at_utc": "2026-05-29T01:19:55.656329+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "4cffa06f235d2499fb89e87c4af4d23f8caa373a92b8c9ba6f3ed44b13f8e555"
+}
