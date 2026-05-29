@@ -1,0 +1,98 @@
+{
+  "voice_name": "region_transfer_failure_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "texas_substrate_parameters_applied_to_eu_calibration_window",
+    "substrate_target": "eu_capital_reallocation",
+    "named_residual": "false_positive_cross_region_transfer_link_strength",
+    "predicted_direction": "no end-to-end coupling under cross-region transfer (the \u00a71 bound #5)",
+    "predicted_magnitude_range": [
+      -1.0,
+      0.299
+    ],
+    "predicted_magnitude_range_alternate_high": [
+      0.851,
+      5.0
+    ],
+    "null_direction": "slope sits INSIDE [0.30, 0.85] = false-positive transfer = \u00a71 bound counter-observation",
+    "bound_under_test": "PREREGISTRATION \u00a71 row #5 \u2014 'the methodology generalizes across regulatory regions without per-region voice addition'; the project will NOT claim this. This voice's PASS supports the bound."
+  },
+  "kill_condition": {
+    "metric": "transfer_slope_outside_eu_calibrated_window",
+    "predicted_pass_condition": "transfer-slope < 0.30 OR transfer-slope > 0.85",
+    "rule": "pass if transfer-slope is OUTSIDE [0.30, 0.85] (bound supported), fail if transfer-slope is INSIDE [0.30, 0.85] (false-positive transfer; \u00a71 bound counter-observation)",
+    "rationale": "The voice's verdict logic is intentionally inverted relative to the standard coupling voice: a transfer that lands inside the EU-calibrated window would be a \u00a71 bound violation, not a methodological success. The voice's PASS protects the bound. Its FAIL produces evidence that the bound is too strict and may need v2 revision under \u00a71's expansion-permitted-relaxation-not discipline."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/region_transfer_failure_v1.py",
+    "source_file": "examples/voices/region_transfer_failure_v1.py",
+    "input_parameters": {
+      "texas_temperature_anomaly_scenarios_degC": [
+        -5.0,
+        -10.0,
+        -15.0,
+        -20.0,
+        -25.0,
+        -30.0
+      ],
+      "eu_calibrated_predicted_range": [
+        0.3,
+        0.85
+      ],
+      "n_steps_per_scenario": 24,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "transfer_outside_eu_window_but_narrow_margin",
+    "observed_slope": 0.8553831177952058,
+    "observed_intercept": 0.041341431972784504,
+    "eu_calibrated_window": [
+      0.3,
+      0.85
+    ],
+    "scenario_summaries": [
+      {
+        "temperature_anomaly_degC": -5.0,
+        "gas_drop_as_signal_mean": 0.0026551130590737417,
+        "transferred_measurement_mean": 0.002820913070154315
+      },
+      {
+        "temperature_anomaly_degC": -10.0,
+        "gas_drop_as_signal_mean": 0.12396218331246205,
+        "transferred_measurement_mean": 0.16942358404008312
+      },
+      {
+        "temperature_anomaly_degC": -15.0,
+        "gas_drop_as_signal_mean": 0.36657632381923816,
+        "transferred_measurement_mean": 0.4171387325091769
+      },
+      {
+        "temperature_anomaly_degC": -20.0,
+        "gas_drop_as_signal_mean": 0.5849290502753371,
+        "transferred_measurement_mean": 0.5271833876244336
+      },
+      {
+        "temperature_anomaly_degC": -25.0,
+        "gas_drop_as_signal_mean": 0.5849290502753371,
+        "transferred_measurement_mean": 0.5271833876244336
+      },
+      {
+        "temperature_anomaly_degC": -30.0,
+        "gas_drop_as_signal_mean": 0.5849290502753371,
+        "transferred_measurement_mean": 0.5271833876244336
+      }
+    ],
+    "bound_under_test": "PREREGISTRATION \u00a71 row #5 \u2014 'the methodology generalizes across regulatory regions without per-region voice addition'; the project will NOT claim this. This voice's PASS supports the bound.",
+    "rationale": "Transfer slope 0.8554 is OUTSIDE the EU-calibrated window [0.30, 0.85] but with a narrow margin (< 0.05 from a window edge). The bound is supported by this run but the narrow margin is itself a diagnostic: the methodology's substrate family produces similar-shaped responses even across distinct calibration sources, and a small perturbation to the texas substrate parameterization could move the test inside the window. A v2 of this voice should either tighten the substrate isolation or widen the bound's claimed strength.",
+    "computed_at_utc": "2026-05-28T23:58:35.735625+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "8536a31c85852115e1c616b5409bc46123ae6332b3e93baf1820dc4dff8d06ec"
+}
