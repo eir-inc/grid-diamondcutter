@@ -1,0 +1,57 @@
+{
+  "voice_name": "receiver_shape_distinguishability_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "synthetic_cross_region_coupling_meta",
+    "named_residual": "receiver-shape axis discriminability \u2014 claim that smooth-S-curve and step-function receivers produce statistically distinguishable coupling-slope distributions. peer-checks the framing that smooth_receiver_coupling_alarm_v1 (PR #42) + cajal/miles PR #35 / #37 convergence rest on.",
+    "n_smooth_pairs": 12,
+    "n_step_pairs": 12,
+    "minimum_mean_separation": 0.15,
+    "minimum_smooth_above_step_quantile": 0.75,
+    "alarm_semantics": "PASS = receiver-shape axis is mechanically discriminative (mean(smooth_slopes) \u2212 mean(step_slopes) \u2265 0.15 AND \u226575% of smooth slopes exceed the step-class median); FAIL = distributions overlap, framing not supported by the substrate."
+  },
+  "kill_condition": {
+    "metric": "smooth_step_mean_separation_and_quantile_dominance",
+    "rule": "PASS iff mean(smooth_slopes) \u2212 mean(step_slopes) \u2265 0.15 AND \u226575% of smooth pair slopes exceed median(step_slopes); FAIL otherwise. The voice treats the receiver-shape axis as falsified if either criterion does not hold.",
+    "rationale": "If the receiver-shape distinction is real, smooth-S-curve pairs should concentrate at high slope values (over-correlation kill region) while step-function pairs should not. Requiring BOTH a mean separation AND a quantile-level dominance check guards against the distributions having similar means but heavy overlap, or being separated by outliers. If either criterion fails, the receiver-shape framing is a name without mechanical discriminator and the PR #42 alarm is operating on an over-fit axis."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_receiver_shape_distinguishability_v1.py",
+    "source_file": "examples/voices/voice_receiver_shape_distinguishability_v1.py",
+    "input_parameters": {
+      "random_seed": 7723,
+      "n_years": 14,
+      "n_smooth_pairs": 12,
+      "n_step_pairs": 12,
+      "smooth_logistic_steepness": 0.6,
+      "step_function_transition_sharpness": 5.0,
+      "sender_logistic_steepness": 0.55,
+      "lag_years": 1,
+      "additive_noise_sigma": 0.5
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "observed_mean_separation": -0.0551432780299661,
+    "observed_quantile_dominance": 0.25,
+    "rationale": "receiver-shape axis NOT mechanically discriminative; failed: mean_separation -0.0551 < 0.15; smooth_above_step_median_frac 25.00% < 75%. PR #42's framing is over-fit to the small observed-pair set \u2014 the receiver-shape claim needs re-description or the synthetic substrate is missing the distinguishing dynamic.",
+    "smooth_slopes_summary": {
+      "mean": 0.9057243797011586,
+      "min": 0.7514420552950282,
+      "max": 1.012349188831732
+    },
+    "step_slopes_summary": {
+      "mean": 0.9608676577311247,
+      "min": 0.7217461553014903,
+      "max": 1.1970661781716023
+    },
+    "computed_at_utc": "2026-05-29T02:22:56.759267+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "b9d492b7626a6fd7d8bc8fa126e61d1bcc0f3102610e3063e8db2df6397073f9"
+}
