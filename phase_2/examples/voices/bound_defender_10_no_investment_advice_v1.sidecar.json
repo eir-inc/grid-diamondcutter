@@ -1,0 +1,78 @@
+{
+  "voice_name": "bound_defender_10_no_investment_advice_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "phase_2_source_and_sidecar_tree",
+    "named_residual": "n_phase_2_files_with_unguarded_investment_advice_token",
+    "predicted_value_upper_bound": 0,
+    "verdict_inversion": true,
+    "evasion_class_lineage": "substrate_shape_evasion",
+    "bound_under_test": "phase-2 PREREGISTRATION_PHASE_2.md \u00a71 bound #10 \u2014 phase-2 voice verdicts are not investment advice in any jurisdiction"
+  },
+  "kill_condition": {
+    "metric": "n_phase_2_files_with_unguarded_investment_advice_token_in_body_or_sidecar_text",
+    "rule": "pass if 0 phase-2 .py source bodies (non-docstring) AND 0 phase-2 sidecar verdict-text strings contain an unguarded investment-advice token (bound supported); fail if any violation (bound counter-observation requiring \u00a71 flagging-record)",
+    "rationale": "Investment-advice tokens are detectable from source + sidecar text. A guard window (\u00b1400 chars of the \u00a71 bound text or 'NOT advice' language) allows legitimate mentions in the bound text + this defender's own bound description without firing. The defender catches bound-crossing at phase-2-PR-merge time via CI integration on top of this voice."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+    "source_file": "phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+    "input_parameters": {
+      "scan_root": "phase_2",
+      "scan_extensions": [
+        ".py",
+        ".sidecar.json"
+      ],
+      "exclude_directories": [
+        "__pycache__",
+        ".pytest_cache"
+      ],
+      "investment_advice_tokens": [
+        "\\bbuy\\s+(?:signal|recommendation|rating|action|now)\\b",
+        "\\bsell\\s+(?:signal|recommendation|rating|action|now)\\b",
+        "\\bhold\\s+(?:signal|recommendation|rating)\\b",
+        "\\binvest(?:ment)?\\s+(?:advice|recommendation|rating|guidance)\\b",
+        "\\btarget\\s+price\\b",
+        "\\bexpected\\s+return\\b",
+        "\\bportfolio\\s+allocation\\b",
+        "\\b(?:buy|sell|long|short)\\s+the\\s+(?:market|asset|stock|future|trade)\\b"
+      ],
+      "guard_window_chars": 400,
+      "guard_phrases": [
+        "is NOT investment advice",
+        "not investment advice",
+        "are NOT investment advice",
+        "verdicts are not investment advice",
+        "bound #10",
+        "PREREGISTRATION_PHASE_2.md \u00a71 bound #10",
+        "NOT a substitute for",
+        "out of phase-2 scope"
+      ],
+      "self_voice_exclusion": "bound_defender_10_no_investment_advice_v1"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "bound_supported_no_unguarded_investment_advice_token",
+    "n_files_scanned": 1,
+    "n_total_violations": 0,
+    "n_offending_files": 0,
+    "predicted_upper_bound": 0,
+    "per_file_results": [
+      {
+        "path": "phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      }
+    ],
+    "bound_under_test": "phase-2 PREREGISTRATION_PHASE_2.md \u00a71 bound #10 \u2014 phase-2 voice verdicts are not investment advice in any jurisdiction",
+    "rationale": "Inspected 1 phase-2 .py + .sidecar.json file(s). Total unguarded investment-advice token matches: 0. Pre-committed upper bound: 0. Phase-2 \u00a71 bound #10 supported by direct source + sidecar scan. Voice PASSes its inverted kill condition.",
+    "computed_at_utc": "2026-05-29T05:42:30.030431+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "72be381b73b8c40a7b33e6c63ca8907fdd33c682e26c98d220fb626c91a9e22b"
+}
