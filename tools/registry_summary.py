@@ -47,10 +47,29 @@ def collect_sidecars() -> list[dict]:
     return sidecars
 
 
+def _extract_verdict(s: dict) -> str:
+    """Get the verdict label. Tolerates both {verdict: {verdict: 'pass'}} (the
+    template/contract shape) and {verdict: 'pass'} (some early voices used a
+    bare string at the top level)."""
+    v = s.get("verdict")
+    if isinstance(v, dict):
+        return v.get("verdict", "unknown")
+    if isinstance(v, str):
+        return v
+    return "unknown"
+
+
+def _extract_rationale(s: dict) -> str:
+    v = s.get("verdict")
+    if isinstance(v, dict):
+        return v.get("rationale", "")
+    return ""
+
+
 def summarize(sidecars: list[dict]) -> dict:
     """Aggregate sidecars into the registry summary §3.4 calls for."""
     total = len(sidecars)
-    verdicts = Counter(s.get("verdict", {}).get("verdict", "unknown") for s in sidecars)
+    verdicts = Counter(_extract_verdict(s) for s in sidecars)
     kinds = Counter(s.get("prediction", {}).get("kind", "unknown") for s in sidecars)
 
     pass_count = verdicts.get("pass", 0)
@@ -64,8 +83,8 @@ def summarize(sidecars: list[dict]) -> dict:
         per_voice.append({
             "voice_name": s.get("voice_name", "<unknown>"),
             "kind": s.get("prediction", {}).get("kind", "unknown"),
-            "verdict": s.get("verdict", {}).get("verdict", "unknown"),
-            "rationale": s.get("verdict", {}).get("rationale", ""),
+            "verdict": _extract_verdict(s),
+            "rationale": _extract_rationale(s),
             "sidecar_path": s.get("_sidecar_path", ""),
             "sha256_anchor": s.get("sidecar_sha256_pre_verdict", ""),
         })
