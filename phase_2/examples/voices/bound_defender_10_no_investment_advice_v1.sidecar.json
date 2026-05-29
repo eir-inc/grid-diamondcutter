@@ -1,0 +1,119 @@
+{
+  "voice_name": "bound_defender_10_no_investment_advice_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "open_repo_and_phase_2_committed_artifacts_md_py_json",
+    "named_residual": "no_investment_advice_or_trading_recommendation_language_leaks_into_phase_2_artifacts",
+    "inverted_kill_design": true,
+    "predicted_outcome": "zero_unguarded_investment_advice_pattern_matches_at_v1",
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "Defends phase-2 \u00a71 row 10 by source-scan. Pattern set targets typical leak vectors: buy/sell/hold language attached to assets or markets, recommended-allocation language, trading-strategy-specific assertions, alpha / beta / Sharpe-ratio claims tied to specific positions. Same shape as cajal Phase-A #57, miles Phase-2 #106, lighthouse #53, subhuti #54 source-scan defenders. Guard-window exemption permits intentional \u00a71-row-10 quotation."
+  },
+  "kill_condition": {
+    "metric": "unguarded_investment_advice_match_count",
+    "rule": "fail if \u2265 1 source-scan match in committed artifacts that asserts or implies investment advice / trading recommendation language (matches guarded by \u00a71-row-10 citation within \u00b1400 chars are exempted, matching Phase-A #57 / Phase-2 #106 guard-window convention)",
+    "rationale": "Inverted-kill: PASS = bound supported by absence-of-claim. Any match is bound counter-observation. Guard-window exemption permits intentional \u00a71-row-10 quotation (this voice file, PREREGISTRATION_PHASE_2.md row text, future bound-invocation contexts)."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+    "source_file": "phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+    "public_signal_source": {
+      "feed_name": "self_scan_committed_repo_artifacts",
+      "country_or_region": "N/A",
+      "time_window": "commit_HEAD",
+      "citation_anchor": "this_repo_at_run_commit"
+    },
+    "cross_phase_consumption": [],
+    "input_parameters": {
+      "scan_root": ".",
+      "scan_extensions": [
+        ".md",
+        ".py",
+        ".json"
+      ],
+      "exclude_paths": [
+        ".git",
+        "__pycache__",
+        "node_modules",
+        ".pytest_cache",
+        "bound_defender_10_no_investment_advice_v1.py",
+        "bound_defender_10_no_investment_advice_v1.sidecar.json"
+      ],
+      "claim_patterns": [
+        "\\b(?:buy|sell|hold|short|long)\\s+(?:recommendation|signal|advice)\\s+(?:on|for)\\b",
+        "\\brecommend(?:ed)?\\s+(?:position|allocation|exposure)\\s+(?:in|to)\\b",
+        "\\bportfolio\\s+allocation\\s+(?:should|must|recommended)\\b",
+        "\\boptimal\\s+trade\\s+(?:size|timing|entry|exit)\\b",
+        "\\btarget\\s+price\\s+of\\s+\\$",
+        "\\bstop[-\\s]loss\\s+at\\s+\\$",
+        "\\bsharpe\\s+ratio\\s+(?:of|\u2265|>)\\s+\\d",
+        "\\balpha\\s+generation\\s+(?:of|\u2265|>)\\s+\\d",
+        "\\binformation\\s+ratio\\s+(?:of|\u2265|>)\\s+\\d",
+        "\\binvestors?\\s+should\\s+(?:buy|sell|hold|short|long|allocate)\\b",
+        "\\btraders?\\s+should\\s+(?:enter|exit|increase|decrease)\\b"
+      ],
+      "guard_strings": [
+        "\u00a71 row 10",
+        "honesty bound row 10",
+        "bound row 10",
+        "row 10 bound",
+        "\u00a71.10",
+        "\u00a71 bound #10",
+        "\u00a71 bound 10",
+        "investment advice",
+        "bound_defender_10",
+        "is NOT a measurement",
+        "DOES NOT claim",
+        "will NOT claim",
+        "NOT claim",
+        "leak vector"
+      ],
+      "guard_window_chars": 400,
+      "random_seed": 1010
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    },
+    "computational_budget": {
+      "max_runtime_seconds": 30,
+      "max_external_api_calls": 0
+    }
+  },
+  "run_output": {
+    "n_files_scanned": 145,
+    "n_files_with_unguarded_matches": 0,
+    "total_unguarded_matches": 0,
+    "per_file": [],
+    "scan_extensions": [
+      ".md",
+      ".py",
+      ".json"
+    ],
+    "claim_patterns": [
+      "\\b(?:buy|sell|hold|short|long)\\s+(?:recommendation|signal|advice)\\s+(?:on|for)\\b",
+      "\\brecommend(?:ed)?\\s+(?:position|allocation|exposure)\\s+(?:in|to)\\b",
+      "\\bportfolio\\s+allocation\\s+(?:should|must|recommended)\\b",
+      "\\boptimal\\s+trade\\s+(?:size|timing|entry|exit)\\b",
+      "\\btarget\\s+price\\s+of\\s+\\$",
+      "\\bstop[-\\s]loss\\s+at\\s+\\$",
+      "\\bsharpe\\s+ratio\\s+(?:of|\u2265|>)\\s+\\d",
+      "\\balpha\\s+generation\\s+(?:of|\u2265|>)\\s+\\d",
+      "\\binformation\\s+ratio\\s+(?:of|\u2265|>)\\s+\\d",
+      "\\binvestors?\\s+should\\s+(?:buy|sell|hold|short|long|allocate)\\b",
+      "\\btraders?\\s+should\\s+(?:enter|exit|increase|decrease)\\b"
+    ],
+    "guard_window_chars": 400
+  },
+  "verdict": {
+    "verdict": "pass",
+    "n_files_scanned": 145,
+    "n_files_with_unguarded_matches": 0,
+    "total_unguarded_matches": 0,
+    "inverted_kill_design": true,
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "INVERTED-KILL PASS: 0 unguarded investment-advice / trading-recommendation matches across 145 scanned files. Phase-2 \u00a71 honesty bound row 10 mechanically defended at this commit. Apoha-at-bound-level: bound supported by absence-of-claim. Scan is regex-source-only, no eirmath dependency per \u00a76 boundary.",
+    "computed_at_utc": "2026-05-29T05:42:59.219236+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "dec64a2abe50bb8f4e6fc5785068cf6a0737e8f95da2dafaab5189e005ad8411"
+}
