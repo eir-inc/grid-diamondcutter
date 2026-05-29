@@ -1,19 +1,134 @@
 {
-  "registry_summary_generated_at_utc": "2026-05-28T21:11:31.817586+00:00",
-  "total_voices_committed": 2,
+  "registry_summary_generated_at_utc": "2026-05-29T03:21:48.205131+00:00",
+  "total_voices_committed": 48,
   "verdict_counts": {
-    "fail": 2
+    "pass": 25,
+    "fail": 21,
+    "partial": 2
   },
   "kind_counts": {
-    "polyphony_within_substrate": 1,
-    "coupling_cross_substrate": 1
+    "polyphony_within_substrate": 35,
+    "unknown": 1,
+    "coupling_cross_substrate": 12
   },
-  "base_rate_failure": 1.0,
-  "base_rate_pass": 0.0,
-  "pass_count": 0,
-  "fail_count": 2,
-  "partial_count": 0,
+  "base_rate_failure": 0.4375,
+  "base_rate_pass": 0.5208333333333334,
+  "pass_count": 25,
+  "fail_count": 21,
+  "partial_count": 2,
   "voices": [
+    {
+      "voice_name": "bound_defender_1_allocator_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Best-case per-bus energy-balance residual 1.8333 (worst 2.6667) is at or above the predicted floor 0.0500 across all tested profile pairs. The heuristic flow allocator visibly does not enforce the conservation invariant a real DC/AC power-flow solver would. \u00a71 bound #1 supported by direct measurement; voice PASSes its inverted kill condition.",
+      "sidecar_path": "examples/voices/bound_defender_1_allocator_v1.sidecar.json",
+      "sha256_anchor": "e11113123839a07b3b586151c7864ee6ea2463d79524d17e5ec1ab7d3c53d172"
+    },
+    {
+      "voice_name": "bound_defender_2_adapter_stubs_source_inspection_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Inspected 2 adapter stubs. Total real-delegation tokens in stub source bodies (excluding docstrings): 0. The bound's pre-committed upper bound is 0. \u00a71 bound #2 supported by direct source inspection. Voice PASSes its inverted kill condition. Complementary to groove's PR #19 runtime-behavior test.",
+      "sidecar_path": "examples/voices/bound_defender_2_adapter_stubs_source_inspection_v1.sidecar.json",
+      "sha256_anchor": "1cca7f94704450000c1ddda9de0aa9d96806478e29d60bef33f5284cd09247b1"
+    },
+    {
+      "voice_name": "bound_defender_3_coupling_coefficient_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "\u00a71 bound #3 defended at this commit: measured 0.8320 (within \u00b10.05 of 0.832); guard phrases found near anchor: ['between two simulated voices', 'not a measurement of physical grid coupling', 'simulated'].",
+      "sidecar_path": "examples/voices/bound_defender_3_coupling_coefficient_v1.sidecar.json",
+      "sha256_anchor": "4144d7b0c713239bda37bacf5c642d0a1b9f78a7d6cff3d4678eda114b1c98db"
+    },
+    {
+      "voice_name": "bound_defender_4_cascade_not_prediction_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "\u00a71 bound #4 alarm: 5 of 8 cascade mentions are unguarded (no conditional-finding language within \u00b1600 chars). Reviewer attention required. Examples: ['PREREGISTRATION.md@1567: ...on is specifically built to test for is a **threshold-class cascade**: a region- and regulator-specific moment at which...', \"PREREGISTRATION.md@1785: ...threshold, reallocation washes out. Above it, reallocation cascades. The project's primary test is whether such a thres...\", 'PREREGISTRATION.md@17266: ...minimum coupled chain \u2014 the set of voices that captured the cascade investigated in \u00a70 \u2014 and the larger set of voices th...']",
+      "sidecar_path": "examples/voices/bound_defender_4_cascade_not_prediction_v1.sidecar.json",
+      "sha256_anchor": "2484aad21ad106d01e26cdb871979276da29e3de78db146a381c6c463335fae9"
+    },
+    {
+      "voice_name": "bound_defender_4_no_forecast_language_v1",
+      "kind": "unknown",
+      "verdict": "pass",
+      "rationale": "",
+      "sidecar_path": "examples/voices/bound_defender_4_no_forecast_language_v1.sidecar.json",
+      "sha256_anchor": ""
+    },
+    {
+      "voice_name": "bound_defender_6_funding_gap_proxy_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "\u00a71 bound #6 defended at this commit: all 8 funding-anchor mention(s) across the scanned documents have \u22651 proxy/conditional guard phrase within \u00b1400 chars.",
+      "sidecar_path": "examples/voices/bound_defender_6_funding_gap_proxy_v1.sidecar.json",
+      "sha256_anchor": "55dfda309d5dc1ea4f68c7c6ce003dbe0474748632e2b453ebda9226618db5d9"
+    },
+    {
+      "voice_name": "bound_defender_8_eirmath_not_required_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "\u00a71 bound #8 defended at this commit. Structural: 22 .py files scanned, zero eirmath imports. Documentation: 12 eirmath mentions, all boundary-guarded within \u00b1400 chars.",
+      "sidecar_path": "examples/voices/bound_defender_8_eirmath_not_required_v1.sidecar.json",
+      "sha256_anchor": "fc93d5e9a3f69d9382bfebb6f0d9403a9f7b66f649c1e8e790491c38753b224a"
+    },
+    {
+      "voice_name": "capability_by_apoha_set_meta_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "partial",
+      "rationale": "Apoha-set incomplete: 0/4 NOT-clause sidecars and 0/1 POSITIVE-clause sidecars available. Voice cannot fully evaluate the capability predicate. Will re-evaluate once all referenced sidecars merge to main.",
+      "sidecar_path": "examples/voices/capability_by_apoha_set_meta_v1.sidecar.json",
+      "sha256_anchor": "7e27356d1bfb607281a1ffc998b89f574aa6ed40d4510f1fb8afa4b80d6c3be4"
+    },
+    {
+      "voice_name": "capacity_scaling_monotonicity_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Max step-increase across capacity sweep = -0.008000, at or below tolerance 0.0010. cycle_residual is monotonically non-increasing under uniform capacity scale-up across the swept range. The measurement is physically interpretable in the natural direction at this scope.",
+      "sidecar_path": "examples/voices/capacity_scaling_monotonicity_v1.sidecar.json",
+      "sha256_anchor": "823d4647643bff9a4fc6e4bbf90937c886d81350a591ad1a73e05247ae1bebb3"
+    },
+    {
+      "voice_name": "capacity_utilization_load_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 0.0080 < 0.1 \u2014 below predicted floor (weak/no link)",
+      "sidecar_path": "examples/voices/capacity_utilization_load_coupling_v1.sidecar.json",
+      "sha256_anchor": "f9715cfdb95f0d65b38d74a4640459f8a957cb27fcab94f0c64a6eb7e4d8f773"
+    },
+    {
+      "voice_name": "country_apoha_suitability_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Apoha-set evaluation across 10 candidate countries identifies 9 country/ies satisfying all four NOT-blocker checks: ['Denmark', 'Germany', 'Norway', 'Portugal', 'Spain', 'Austria', 'Sweden', 'Finland', 'United Kingdom']. This meets or exceeds the pre-committed lower bound of 3. The methodology's apoha-criteria, applied to public 2022-2023 parameters, identify a viable candidate set. Per \u00a71 honesty bounds this voice does NOT claim real cascade dynamics in any named country \u2014 it claims the methodology's identification capability under the named criteria.",
+      "sidecar_path": "examples/voices/country_apoha_suitability_v1.sidecar.json",
+      "sha256_anchor": "3ac4edfcf9e20ff4f9cc3c0a2757dcf65a241d8ae8f2310ebd3a304be5fe89ef"
+    },
+    {
+      "voice_name": "country_blocker_diagnostics_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Apoha-blocker diagnostic identifies 1 country/ies with exactly one failing NOT-blocker check: ['Iceland/NOT_transmission_constrained']. At the methodology layer, each is a single-intervention candidate whose cost eirmath would price separately. Multi-blocker countries (0): [] \u2014 these need composite interventions or are out-of-scope for the single-flip heuristic. Per \u00a71 honesty bounds this voice does NOT price any intervention and does NOT claim the named intervention would in fact flip the country; it claims the methodology identifies single-blocker structural patterns mechanically.",
+      "sidecar_path": "examples/voices/country_blocker_diagnostics_v1.sidecar.json",
+      "sha256_anchor": "698331bd33a91ee43f2018ba09b32424b3e5e73efe7a0a4c7573dd6bbce02d51"
+    },
+    {
+      "voice_name": "cross_lane_chain_loop_greece_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2013.0 outside miles-prior-calibrated window [2016.36, 2019.3] (chain does not close at Greece). This is informative cross-lane data on where the methodology chain breaks at new-country generalization.",
+      "sidecar_path": "examples/voices/cross_lane_chain_loop_greece_v1.sidecar.json",
+      "sha256_anchor": "6360a566c0ececa27c20051797ed9aeedc22f21f9d636abcdf5b25e399e0b005"
+    },
+    {
+      "voice_name": "cross_lane_chain_loop_ireland_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2020.0 outside miles-prior-calibrated window [2016.36, 2019.3] (chain does not close at Ireland). This is informative cross-lane data on where the methodology chain breaks at new-country generalization.",
+      "sidecar_path": "examples/voices/cross_lane_chain_loop_ireland_v1.sidecar.json",
+      "sha256_anchor": "9fe724fbd4de8de5d5bdcb30e451f604801d57576fc288544cf2ad6e77db60f5"
+    },
     {
       "voice_name": "demand_response_polyphony_v1",
       "kind": "polyphony_within_substrate",
@@ -23,12 +138,268 @@
       "sha256_anchor": "b11d2fa857ab9829faf91a0cc537dfca490b9f2e3dc595fb1cd72626d78c1ec1"
     },
     {
+      "voice_name": "denmark_germany_renewable_export_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 1.1940 > 0.50 ceiling (over-prediction \u2014 implausible synthetic-curation)",
+      "sidecar_path": "examples/voices/denmark_germany_renewable_export_coupling_v1.sidecar.json",
+      "sha256_anchor": "accdb982e823e700b7f54bedbc7cebc2a782995b2a01f822d2cd7adffe5bb0fc"
+    },
+    {
+      "voice_name": "eu_may_2022_repowereu_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "pass",
+      "rationale": "Observed slope 0.4983 is within the pre-committed range [0.3000, 0.8500], calibrated from the REPowerEU plan window. The methodology's coupling protocol recovers a shape consistent with the documented direction and magnitude. Per \u00a71 honesty bounds, this is not a real-economy measurement; the substrate is parameterized from the public plan, not from operating capital flows.",
+      "sidecar_path": "examples/voices/eu_may_2022_repowereu_v1.sidecar.json",
+      "sha256_anchor": "72c885389ffe90e7a9796466fe7cb3610f2f8663384d78523a1b65f5d5e68654"
+    },
+    {
+      "voice_name": "finer_fingerprint_resolves_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Fine-fingerprint (20-bin) max/median jump ratio = 5.78, exceeds threshold 5.0. Baseline was 2813.9; improvement factor 486.8\u00d7 is insufficient. The discretization issue is deeper than binning resolution \u2014 likely the categorical max-utilization element or the histogram-projection itself. Voice enters null-voice ledger per \u00a73.4.",
+      "sidecar_path": "examples/voices/finer_fingerprint_resolves_v1.sidecar.json",
+      "sha256_anchor": "c55cb9bbeed03dd4ebb95251366610a54ebe27a0e3bc4d95c03a63899d676cd4"
+    },
+    {
+      "voice_name": "flow_allocator_is_not_power_flow_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "L2-relative distance 0.4882 \u2265 0.2 \u2014 the heuristic's per-line flows differ measurably from a textbook DC-power-flow approximation on the same grid + injection. \u00a71 row 1 bound (flow allocator NOT a DC-PF solver) is supported by this measurement.",
+      "sidecar_path": "examples/voices/flow_allocator_is_not_power_flow_v1.sidecar.json",
+      "sha256_anchor": "fd11fca55f354e1d47cb91a228dd5771cac3e9039b20405f6ef7b7448fb72358"
+    },
+    {
+      "voice_name": "follower_country_prediction_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "3 of 3 follower countries have predicted inflection windows intersecting the pre-committed target decade [2027, 2037]. The methodology produces non-degenerate forward predictions for the next decade. Per-country predictions: [('Poland', 2028.83), ('Romania', 2028.83), ('Greece', 2029.83)]. Per \u00a71 honesty bounds these are NOT real-trajectory claims; they are the methodology's prior-conditional point estimates with uncertainty windows. Eirmath would $-calibrate each.",
+      "sidecar_path": "examples/voices/follower_country_prediction_v1.sidecar.json",
+      "sha256_anchor": "35de733329e1833a2a5623d105586045a6d7089485cf93a7d85d1b300d477569"
+    },
+    {
+      "voice_name": "follower_country_prediction_v2",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "3/3 followers' calibration-honest windows (\u00b1 1.47y, the LOO-CV MAE) intersect the pre-committed target decade [2027, 2037]. v1's loose \u00b12.5y window did not mask degeneracy \u2014 the predictions are well-calibrated to the leader-cohort's actual retrospective error. Worst-case windows (\u00b1 3.80y, the max LOO abs error) preserved as separate annotation per follower for downstream audit. Per \u00a71 honesty bounds, these remain methodology prior-conditional point estimates, not real-trajectory claims.",
+      "sidecar_path": "examples/voices/follower_country_prediction_v2.sidecar.json",
+      "sha256_anchor": "84fbe859bf222cdc0800f3d4aca3a762f31789f39e0b8898563374aaeb6c4de2"
+    },
+    {
+      "voice_name": "germany_neighbor_renewable_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 0.0757 < 0.1 \u2014 below predicted floor (weak/no link)",
+      "sidecar_path": "examples/voices/germany_neighbor_renewable_coupling_v1.sidecar.json",
+      "sha256_anchor": "c530d17a2e1b189c0b706a6fc3a32e7764029d86f48af71c9768e56aad485a59"
+    },
+    {
+      "voice_name": "global_follower_prediction_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "4/4 non-EU followers' calibration-honest windows intersect [2027, 2037]. The global prior (v2 expanded cohort, mean 8.92y, EU-vs-non-EU sub-cohorts 8.83y vs 9.00y) carries forward when applied to non-EU followers. Per \u00a71, these are NOT real-trajectory claims for any named country \u2014 they are methodology prior-conditional point estimates with uncertainty windows.",
+      "sidecar_path": "examples/voices/global_follower_prediction_v1.sidecar.json",
+      "sha256_anchor": "6516b96e024258abeed511a09102d92ac9fa0efbf0da145cb01cef5948b24eb2"
+    },
+    {
+      "voice_name": "japan_march_2011_fukushima_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "pass",
+      "rationale": "Observed slope 0.5068 is within the pre-committed range [0.2000, 0.7500], calibrated from the IAEA + METI + TEPCO public sources. The methodology's chained-coupling protocol recovers the documented direction and magnitude across three substrate boundaries. Per \u00a71 honesty bounds, this is not a real-economy measurement; the substrate is parameterized from the public reports.",
+      "sidecar_path": "examples/voices/japan_march_2011_fukushima_v1.sidecar.json",
+      "sha256_anchor": "ba1c304c6baf21d8690b8d9a89af4055dbca9a2208cd6888263e357eab28929c"
+    },
+    {
+      "voice_name": "japan_post_fukushima_acceleration_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2017.0 outside predicted window [2011, 2014] (Fukushima\u2192FIT-effectiveness window)",
+      "sidecar_path": "examples/voices/japan_post_fukushima_acceleration_v1.sidecar.json",
+      "sha256_anchor": "6e271eb528d3e175eb8a0f934eaaef1947dc7e60e5cdbec7d999c991806bdb41"
+    },
+    {
+      "voice_name": "lead_time_prior_crisis_robustness_defender_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "5 leader(s) have policy \u2192 deployment windows overlapping documented crisis periods: [('Germany', ['Global Financial Crisis']), ('Spain', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis', 'Oil Price Collapse']), ('Portugal', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis']), ('United_Kingdom', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis', 'Oil Price Collapse']), ('Italy', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis'])]. Crosses the pre-committed upper bound of 0. The v1 prior may be crisis-contaminated; a v2 refit excluding these countries would produce a different mean lead-time + different forward predictions. cajal's chain-loop test would validate the v2.",
+      "sidecar_path": "examples/voices/lead_time_prior_crisis_robustness_defender_v1.sidecar.json",
+      "sha256_anchor": "7500866ecacbc7800bc7db7e3bab09e1e452505a0d8c033f954c0214bb3a6be6"
+    },
+    {
+      "voice_name": "leader_cohort_loo_cv_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Leave-one-out mean absolute error 1.47y across 6 leaders sits at or below the pre-committed upper bound 3.0y. The 8.83y prior is calibration-honest for the 2.5y forward-prediction window. Forward predictions in follower_country_prediction_v1 report their true uncertainty to the methodology's tested resolution. Max absolute error 3.8y is the cohort's worst-case retrospective prediction.",
+      "sidecar_path": "examples/voices/leader_cohort_loo_cv_v1.sidecar.json",
+      "sha256_anchor": "1563bd81f0121ae0f599d098690750f2088852fd567a42e90e6f3d9108bd38d9"
+    },
+    {
+      "voice_name": "low_failure_rate_alarm_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "partial",
+      "rationale": "Alarm not yet armed: 2 voices committed (excluding this voice), minimum sample size for alarm is 5. The registry has not yet accumulated enough voices for a meaningful base-rate read. Voice's verdict is `partial` to indicate the \u00a70.3 check is deferred until the registry reaches 5 voices.",
+      "sidecar_path": "examples/voices/low_failure_rate_alarm_v1.sidecar.json",
+      "sha256_anchor": "403d3d980face18495ed075ee308149c22f281c35c34ea76d6e13fd45da98817"
+    },
+    {
+      "voice_name": "mix_axis_smoothness_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "max/median jump ratio = 2813.89, exceeds threshold 5.0. cycle_residual jumps discontinuously at fingerprint-quantization boundaries; interpretation across mix ranges must account for the discretization. Voice enters the null-voice ledger per \u00a73.4.",
+      "sidecar_path": "examples/voices/mix_axis_smoothness_v1.sidecar.json",
+      "sha256_anchor": "6aca5df2abff870cc8b7421bd4fb9301f7b7bb79e6ed3bc20abe2d2993b4eda6"
+    },
+    {
+      "voice_name": "network_amplification_adoption_cascade_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Slope 0.0322 below predicted floor 0.2000. The substrate DID recover the predicted positive direction (network coupling DOES amplify adoption-cascade \u2014 both regions' final renewable share is monotonically higher under increasing k) but the magnitude is much smaller than pre-committed. Two interpretations: (a) substrate's price-pressure coupling is too weak relative to the baseline drift, requiring stronger coupling in a v2; (b) the pre-committed magnitude window was too aggressive for the chosen substrate. Both are addressable in v2 \u2014 but not by post-hoc adjustment of this v1's pre-registration. Voice enters the \u00a73.4 null-voice ledger with the direction-recovered flag.",
+      "sidecar_path": "examples/voices/network_amplification_adoption_cascade_v1.sidecar.json",
+      "sha256_anchor": "59380fef6e1e213728e770f67505a4aa815c47005c2b8b7261abac0fd31d8d3d"
+    },
+    {
+      "voice_name": "network_amplification_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Threshold sweep is non-monotone in network coefficient: [0.05, 0.05, 0.05, 0.05, 0.05, 0.1]. The substrate as parameterized models network coupling as resilience (higher k raises the min-perturbation threshold for FAILURE cascade) rather than amplification. Substrate-modeling distinction surfaced by the null: Eugene's original question (does network coupling lower the capex threshold for cascading-renewable ADOPTION) requires a different substrate that models neighbor cheap-renewable export as a downward pressure on local capex price, not the failure-resilience model this voice implements. A v2 voice named network_amplification_adoption_cascade_v1 should model adoption-cascade explicitly. This voice's FAIL is registry-acceptable per \u00a73.4 and itself constitutes evidence that failure-cascade and adoption-cascade have opposite signs in the network coefficient.",
+      "sidecar_path": "examples/voices/network_amplification_coupling_v1.sidecar.json",
+      "sha256_anchor": "fc52d4b2c31521969955081ddf20cb6fec84809fe04e417fe2670f23d2ecc27d"
+    },
+    {
+      "voice_name": "noise_robustness_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Max relative drift across trials = 3016.4%, exceeds predicted threshold 50%. The cycle_residual is not robust to 5% noise at the scope tested. Voice enters the null-voice ledger per \u00a73.4.",
+      "sidecar_path": "examples/voices/noise_robustness_v1.sidecar.json",
+      "sha256_anchor": "761e36d874d7c07dbd3152cf7e8338e36a4670106c7e725003fe026129f3aa92"
+    },
+    {
+      "voice_name": "receiver_geometry_substrate_class_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Only 1/3 fresh pairs landed in their pre-committed predicted-verdict bucket (minimum required: 2/3). Substrate-class hypothesis is NOT supported at v1 \u2014 the night's emergent receiver-geometry pattern was pair-specific rather than class-level. This is informative registry data: the pattern from PR #26 #35 #36 may have been coincidence in those specific pairs.",
+      "sidecar_path": "examples/voices/receiver_geometry_substrate_class_v1.sidecar.json",
+      "sha256_anchor": "3be94940db9d253137aab74097a77790bd16cda08ce74097cc0a1e9c524c2c69"
+    },
+    {
+      "voice_name": "receiver_shape_distinguishability_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "receiver-shape axis NOT mechanically discriminative; failed: mean_separation -0.0551 < 0.15; smooth_above_step_median_frac 25.00% < 75%. PR #42's framing is over-fit to the small observed-pair set \u2014 the receiver-shape claim needs re-description or the synthetic substrate is missing the distinguishing dynamic.",
+      "sidecar_path": "examples/voices/receiver_shape_distinguishability_v1.sidecar.json",
+      "sha256_anchor": "b9d492b7626a6fd7d8bc8fa126e61d1bcc0f3102610e3063e8db2df6397073f9"
+    },
+    {
+      "voice_name": "region_transfer_failure_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "pass",
+      "rationale": "Transfer slope 0.8554 is OUTSIDE the EU-calibrated window [0.30, 0.85] but with a narrow margin (< 0.05 from a window edge). The bound is supported by this run but the narrow margin is itself a diagnostic: the methodology's substrate family produces similar-shaped responses even across distinct calibration sources, and a small perturbation to the texas substrate parameterization could move the test inside the window. A v2 of this voice should either tighten the substrate isolation or widen the bound's claimed strength.",
+      "sidecar_path": "examples/voices/region_transfer_failure_v1.sidecar.json",
+      "sha256_anchor": "8536a31c85852115e1c616b5409bc46123ae6332b3e93baf1820dc4dff8d06ec"
+    },
+    {
       "voice_name": "regulatory_grid_coupling_v1",
       "kind": "coupling_cross_substrate",
       "verdict": "fail",
       "rationale": "Observed slope 0.0000 is below the predicted floor 0.0050. The link is too weak to support the prediction. Voice enters the null-voice ledger per \u00a73.4.",
       "sidecar_path": "examples/voices/regulatory_grid_coupling_v1.sidecar.json",
       "sha256_anchor": "92361b3e88a9f61736c568f68a5669cd8fd8f5f37718c6807ec5686da7dcec8e"
+    },
+    {
+      "voice_name": "regulatory_lead_time_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Mean lead time 8.83y across 6 leader countries (range 7-12y) sits inside the pre-committed window [5.0, 12.0]y. The methodology recovers the 'policy precedes deployment' structural lag documented in public IEA + BNEF + IRENA sources. Eirmath can use this as the calibration anchor for forward-prediction from follower-country analog milestones. Per \u00a71 honesty bounds, this voice does NOT claim any specific country's future trajectory; it claims a prior over lead times from the leader-cohort fixture.",
+      "sidecar_path": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+      "sha256_anchor": "b09fa091ff536f8abb8750a41a65c145d6bcb1cec4489e5b7511a7ec5a9394f6"
+    },
+    {
+      "voice_name": "regulatory_lead_time_v2_expanded_cohort",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "v2 mean lead time 8.92y (drift 0.09y \u2264 2.0y) and spread 7y (\u2264 7.5y). Prior generalizes globally at the methodology's current characterization. EU sub-cohort mean 8.83y; non-EU sub-cohort mean 9.00y. Per \u00a71 honesty bounds the v1 bound on per-region voice addition remains in force; this pass means the COHORT-AGGREGATE prior is stable, NOT that any single country's trajectory can be predicted without its own voice.",
+      "sidecar_path": "examples/voices/regulatory_lead_time_v2_expanded_cohort.sidecar.json",
+      "sha256_anchor": "03e9c710bfa3757d56325cfef51cb5513dda88436316c89649a183c1451733f6"
+    },
+    {
+      "voice_name": "regulatory_shape_apoha_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: ratio 0.000 < 0.20 (implausible separation suggests text-selection bias in synthetic excerpts)",
+      "sidecar_path": "examples/voices/regulatory_shape_apoha_v1.sidecar.json",
+      "sha256_anchor": "4cffa06f235d2499fb89e87c4af4d23f8caa373a92b8c9ba6f3ed44b13f8e555"
+    },
+    {
+      "voice_name": "renewable_mix_threshold_polyphony_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Recovered breakpoint 0.500 \u2208 [0.3, 0.6] AND piecewise_rss_ratio 0.0840 \u2264 0.8000. The methodology recovered the synthetic threshold.",
+      "sidecar_path": "examples/voices/renewable_mix_threshold_polyphony_v1.sidecar.json",
+      "sha256_anchor": "788b95de6b15c9fe33c373677f5c1c169bdf3cfe94f27e74f55c952652e37c5b"
+    },
+    {
+      "voice_name": "smooth_receiver_coupling_alarm_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "empirical bound supported: 3/3 smooth-S-curve receiver pairs produced coupling slope above 0.5, reproducing the over-correlation kill observed in PRs #35/#37.",
+      "sidecar_path": "examples/voices/smooth_receiver_coupling_alarm_v1.sidecar.json",
+      "sha256_anchor": "9ca687f4ffd6f98f32812e77bcf38227ed795ddac9979b645ed650a6a4170b2c"
+    },
+    {
+      "voice_name": "smooth_s_curve_emergent_bound_fresh_pairs_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Inverted-kill FAIL: 1/3 fresh smooth-S-curve receiver pairs PASSed the coupling test, counter-observing the emergent registry bound. Bound 'methodology fails to detect coupling on smooth-S-curve receivers' is NOT supported at v1 \u2014 the bound needs revision, or the substrate-class definition needs tightening (e.g., 'smooth-S-curve receivers WITHOUT shared S-curve sender' vs unrestricted).",
+      "sidecar_path": "examples/voices/smooth_s_curve_emergent_bound_fresh_pairs_v1.sidecar.json",
+      "sha256_anchor": "d7473a02ef78e445ad269f22ba64e0846430ecc193dd5bc8703ba5d81298efe6"
+    },
+    {
+      "voice_name": "spain_morocco_renewable_export_coupling_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "pass",
+      "rationale": "normalized lagged regression slope 0.6762 \u2208 [0.10, 0.80]. ES\u2192MA solar-cascade observable at 1y lag in synthetic v1 with step-function receiver geometry. Domino-step 2 supported as a candidate mechanism for asymmetric developed\u2192developing pair. NOT a real-grid claim \u2014 v2-ratchet to real ENTSO-E ES-MA flow + ONEE capacity data required.",
+      "sidecar_path": "examples/voices/spain_morocco_renewable_export_coupling_v1.sidecar.json",
+      "sha256_anchor": "010985fd10dc38def6b88df4119c37989b2b1701edf5bb7bff3f1d8f7cc8e52b"
+    },
+    {
+      "voice_name": "station_set_dependence_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "Relative spread across 24 permutations = 13.4%, at or below the predicted 20% threshold. cycle_residual is approximately multiset-invariant at this scope; cross-region interpretation that relies on multiset-invariance is supported by this measurement.",
+      "sidecar_path": "examples/voices/station_set_dependence_v1.sidecar.json",
+      "sha256_anchor": "61242f979bdb237d521f8c23448d20c8a5cfa6af19344089da5d0661ae0eb16f"
+    },
+    {
+      "voice_name": "texas_feb_2021_uri_v1",
+      "kind": "coupling_cross_substrate",
+      "verdict": "pass",
+      "rationale": "Observed slope 0.6334 is within the pre-committed range [0.4000, 0.9500], calibrated from the FERC/NERC final-report window. The methodology's coupling protocol recovers a shape consistent with the documented direction and magnitude. Per \u00a71 honesty bounds, this is not a real-grid measurement; the substrate is parameterized from the public report, not the operating grid.",
+      "sidecar_path": "examples/voices/texas_feb_2021_uri_v1.sidecar.json",
+      "sha256_anchor": "e26fe3d7691cb1e5b09b51108a668a9fdd2eaf2708dca13cb97f07a7f82e8c5b"
+    },
+    {
+      "voice_name": "texas_uri_temperature_collapse_real_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Voice enters the null-voice ledger per \u00a73.4. Dependency unmet: PR #28 groove/real-noaa-uri-fetcher-v1 not yet merged; v1 snapshot unavailable on main. Voice file is registry-resident and will re-run automatically once dependency lands on main. Last local-test verdict (against groove branch v1 data): FAIL \u2014 0/7 stations met 10\u00b0C-drop threshold (per-station drops ~1.3\u00b0C). Failure-mode hypothesis at local test: NOAA tenths-of-\u00b0C scaling may not be handled in fetcher (raw NOAA daily-summaries TMIN is reported as integer tenths-of-\u00b0C; -189 raw = -18.9\u00b0C actual).",
+      "sidecar_path": "examples/voices/texas_uri_temperature_collapse_real_v1.sidecar.json",
+      "sha256_anchor": "e41d3c01a520718fd33e0767386dd4819dcb946bd91156874bd12614d88416eb"
+    },
+    {
+      "voice_name": "threshold_cascade_v1",
+      "kind": "polyphony_within_substrate",
+      "verdict": "fail",
+      "rationale": "Sharpness ratio 1.000 is below the recognition floor of 5x. The substrate does not display a recognizable threshold-class signature under the pre-committed coupling-regime sweep. Voice enters the \u00a73.4 null-voice ledger. This is the more interesting failure mode per \u00a75 \u2014 the methodology's own substrate cannot produce the predicted shape. The observed sharpness ratio of ~1 indicates the coupling-regime sweep did not transit any regime boundary in this substrate: the amplification is bounded by the dynamics voice's filter constants and saturates. This is itself a finding: the meta-sim as currently parameterized cannot produce the \u00a70 phenomenon under this knob. A v2 voice should sweep a different recognizability axis (e.g., direct dynamics-amplitude scaling) or modify the substrate to admit a real regime boundary.",
+      "sidecar_path": "examples/voices/threshold_cascade_v1.sidecar.json",
+      "sha256_anchor": "375ab9086d08528ac03a937e5a1e3abef7ea279689d6d119e7d5f2995578a3a9"
+    },
+    {
+      "voice_name": "threshold_cascade_v2",
+      "kind": "polyphony_within_substrate",
+      "verdict": "pass",
+      "rationale": "v2 sharpness ratio 8.000 meets or exceeds the v2 pre-committed recognition bound of 5.0x. The substrate-modification clause from v1's rationale is satisfied: with an explicit piecewise-linear regime shift in the dynamics gain, the methodology recovers the \u00a70 phenomenon recognition signature. Per \u00a71 honesty bounds this is not a real-grid finding; it is a finding about the methodology's substrate family at the v1+v2 commit pair.",
+      "sidecar_path": "examples/voices/threshold_cascade_v2.sidecar.json",
+      "sha256_anchor": "8e43b387e384dc987bc674b23fd86709a867e45320405acaeb78e7bb3895b2f1"
     }
   ]
 }
