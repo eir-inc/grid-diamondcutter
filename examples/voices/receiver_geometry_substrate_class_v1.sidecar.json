@@ -1,0 +1,207 @@
+{
+  "voice_name": "receiver_geometry_substrate_class_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "cross_border_solar_coupling_receiver_geometry_class_v1_synthetic",
+    "named_residual": "receiver_geometry_class_predicts_coupling_outcome_at_class_level_not_pair_level",
+    "predicted_pair_outcomes": {
+      "nuclear_insulated_FR_CH": "verdict_fail_null_direction",
+      "smooth_S_curve_AT_DE": "verdict_fail_upper_bound_or_pass_high_in_range",
+      "step_function_policy_PT_CV": "verdict_pass_normalized_slope_in_range"
+    },
+    "minimum_class_consistency": 2,
+    "rationale": "Substrate-class hypothesis: receiver-region renewable-policy-response geometry predicts coupling-test outcome at the CLASS level, not pair-specific. Tested on three FRESH pairs disjoint from PR #26/#35/#36 to avoid circularity. If at least 2 of 3 new pairs land in their predicted verdict bucket, substrate-class hypothesis is supported at v1. If 0 or 1 of 3 match, the night's emergent observation was pair-specific not class-level (which is itself useful registry data per \u00a73.4)."
+  },
+  "kill_condition": {
+    "metric": "class_predicted_outcome_match_count",
+    "rule": "fail if fewer than 2 of 3 fresh pairs land in their pre-committed predicted-verdict bucket (substrate-class hypothesis not supported at v1)",
+    "rationale": "Composite mechanical match-count metric. Each fresh pair runs the standard normalized-coupling test, gets a verdict, and is checked against the pre-committed predicted-verdict for that pair's receiver-geometry class. Threshold of 2/3 is a soft-majority requirement \u2014 0 or 1 match indicates the pattern was pair-specific."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/receiver_geometry_substrate_class_v1.py",
+    "source_file": "examples/voices/receiver_geometry_substrate_class_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_publicly_cited_country_milestones",
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "fr_solar_capacity_gw": [
+        1.0,
+        2.7,
+        4.0,
+        4.7,
+        5.6,
+        6.6,
+        7.1,
+        8.0,
+        8.8,
+        9.4,
+        10.4,
+        13.1,
+        15.7,
+        18.9
+      ],
+      "ch_solar_capacity_gw": [
+        0.1,
+        0.2,
+        0.4,
+        0.7,
+        1.0,
+        1.4,
+        1.7,
+        1.9,
+        2.1,
+        2.5,
+        2.9,
+        3.5,
+        4.1,
+        5.1
+      ],
+      "at_solar_capacity_gw": [
+        0.1,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        0.9,
+        1.1,
+        1.3,
+        1.4,
+        1.7,
+        2.1,
+        2.5,
+        3.5,
+        4.9
+      ],
+      "de_solar_capacity_gw": [
+        17.6,
+        25.4,
+        33.0,
+        36.7,
+        38.2,
+        39.7,
+        41.2,
+        42.4,
+        45.9,
+        49.2,
+        54.0,
+        58.5,
+        66.5,
+        81.7
+      ],
+      "pt_solar_capacity_gw": [
+        0.13,
+        0.18,
+        0.24,
+        0.3,
+        0.42,
+        0.45,
+        0.48,
+        0.57,
+        0.66,
+        0.91,
+        1.05,
+        1.51,
+        2.65,
+        3.95
+      ],
+      "cv_solar_capacity_mw": [
+        0,
+        0,
+        0,
+        5,
+        7,
+        7,
+        7,
+        7,
+        30,
+        30,
+        30,
+        47,
+        47,
+        47
+      ],
+      "lag_years": 1,
+      "random_seed": 7777,
+      "magnitude_range_normalized": [
+        0.1,
+        0.8
+      ]
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "lag_years": 1,
+    "magnitude_range_normalized": [
+      0.1,
+      0.8
+    ],
+    "pair_results": {
+      "nuclear_insulated_FR_CH": {
+        "raw_slope": 0.21019640618470534,
+        "normalized_slope": 0.6305892185541158,
+        "n_lagged_pairs": 12,
+        "verdict_bucket": "verdict_pass_normalized_slope_in_range"
+      },
+      "smooth_S_curve_AT_DE": {
+        "raw_slope": 13.608374384236456,
+        "normalized_slope": 1.2636347642505277,
+        "n_lagged_pairs": 12,
+        "verdict_bucket": "verdict_fail_upper_bound_or_pass_high_in_range"
+      },
+      "step_function_policy_PT_CV": {
+        "raw_slope": -4.519978304104143,
+        "normalized_slope": -0.24958141070488077,
+        "n_lagged_pairs": 12,
+        "verdict_bucket": "verdict_fail_null_direction"
+      }
+    },
+    "predicted_outcomes": {
+      "nuclear_insulated_FR_CH": "verdict_fail_null_direction",
+      "smooth_S_curve_AT_DE": "verdict_fail_upper_bound_or_pass_high_in_range",
+      "step_function_policy_PT_CV": "verdict_pass_normalized_slope_in_range"
+    },
+    "pair_match_with_prediction": {
+      "nuclear_insulated_FR_CH": false,
+      "smooth_S_curve_AT_DE": true,
+      "step_function_policy_PT_CV": false
+    },
+    "class_consistency_match_count": 1
+  },
+  "verdict": {
+    "verdict": "fail",
+    "class_consistency_match_count": 1,
+    "minimum_required": 2,
+    "per_pair_match": {
+      "nuclear_insulated_FR_CH": false,
+      "smooth_S_curve_AT_DE": true,
+      "step_function_policy_PT_CV": false
+    },
+    "per_pair_observed_bucket": {
+      "nuclear_insulated_FR_CH": "verdict_pass_normalized_slope_in_range",
+      "smooth_S_curve_AT_DE": "verdict_fail_upper_bound_or_pass_high_in_range",
+      "step_function_policy_PT_CV": "verdict_fail_null_direction"
+    },
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Only 1/3 fresh pairs landed in their pre-committed predicted-verdict bucket (minimum required: 2/3). Substrate-class hypothesis is NOT supported at v1 \u2014 the night's emergent receiver-geometry pattern was pair-specific rather than class-level. This is informative registry data: the pattern from PR #26 #35 #36 may have been coincidence in those specific pairs.",
+    "computed_at_utc": "2026-05-29T01:31:19.917403+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "3be94940db9d253137aab74097a77790bd16cda08ce74097cc0a1e9c524c2c69"
+}
