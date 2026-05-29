@@ -1,0 +1,210 @@
+{
+  "voice_name": "spain_morocco_renewable_export_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrates": [
+      "spain_solar_pv_capacity_yoy_growth_2010_2023_synthetic",
+      "morocco_solar_capacity_yoy_growth_2010_2023_synthetic"
+    ],
+    "named_residual": "spain_solar_yoy_change_predicts_morocco_solar_yoy_growth_at_1y_lag_via_es_ma_interconnect_mechanism",
+    "predicted_direction": "positive",
+    "predicted_magnitude_range": [
+      0.1,
+      0.8
+    ],
+    "null_direction": "slope_approximately_zero_or_negative_no_cascade_observable",
+    "rationale": "Eugene's domino-step 2 hypothesis. Tests asymmetric developed\u2192developing pair with step-function receiving-region capacity (Noor solar 2016/2018 events) rather than smooth S-curve. Wider magnitude range [0.10, 0.80] because step-function geometry naturally produces higher peak slopes during ramp-years and lower elsewhere. v1 tests whether the cascade-mechanism is detectable specifically when receiver-region has policy-triggered step-function capacity rather than continuous build-out."
+  },
+  "kill_condition": {
+    "metric": "es_to_ma_solar_coupling_lagged_slope",
+    "rule": "fail if slope < 0.10 (cascade-step below detectable threshold); fail if slope > 0.80 (over-prediction / implausible curation); fail if slope < 0 (null direction realized \u2014 coupling reversed)",
+    "rationale": "Composite metric \u2014 lagged linear-regression slope of MA solar YoY growth on ES solar YoY change at 1y lag. Magnitude window widened for step-function receiver-substrate geometry."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/spain_morocco_renewable_export_coupling_v1.py",
+    "source_file": "examples/voices/spain_morocco_renewable_export_coupling_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_publicly_cited_REE_ONEE_IEA_milestones",
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "es_solar_capacity_gw": [
+        3.8,
+        4.2,
+        4.5,
+        4.6,
+        4.7,
+        4.8,
+        4.9,
+        5.0,
+        5.1,
+        8.7,
+        13.7,
+        17.4,
+        22.5,
+        27.8
+      ],
+      "ma_solar_capacity_mw": [
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        200,
+        220,
+        580,
+        600,
+        760,
+        1100,
+        1450,
+        1700
+      ],
+      "lag_years": 1,
+      "random_seed": 1492
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "es_solar_capacity_gw": [
+      3.8,
+      4.2,
+      4.5,
+      4.6,
+      4.7,
+      4.8,
+      4.9,
+      5.0,
+      5.1,
+      8.7,
+      13.7,
+      17.4,
+      22.5,
+      27.8
+    ],
+    "ma_solar_capacity_mw": [
+      20,
+      20,
+      20,
+      20,
+      30,
+      40,
+      200,
+      220,
+      580,
+      600,
+      760,
+      1100,
+      1450,
+      1700
+    ],
+    "es_yoy_change_gw": [
+      0.40000000000000036,
+      0.2999999999999998,
+      0.09999999999999964,
+      0.10000000000000053,
+      0.09999999999999964,
+      0.10000000000000053,
+      0.09999999999999964,
+      0.09999999999999964,
+      3.5999999999999996,
+      5.0,
+      3.6999999999999993,
+      5.100000000000001,
+      5.300000000000001
+    ],
+    "ma_yoy_change_mw": [
+      0,
+      0,
+      0,
+      10,
+      10,
+      160,
+      20,
+      360,
+      20,
+      160,
+      340,
+      350,
+      250
+    ],
+    "es_yoy_normalized": [
+      0.05769230769230782,
+      0.038461538461538484,
+      0.0,
+      1.7080354225002404e-16,
+      0.0,
+      1.7080354225002404e-16,
+      0.0,
+      0.0,
+      0.6730769230769229,
+      0.9423076923076922,
+      0.6923076923076921,
+      0.9615384615384617,
+      1.0
+    ],
+    "ma_yoy_normalized": [
+      0.0,
+      0.0,
+      0.0,
+      0.027777777777777776,
+      0.027777777777777776,
+      0.4444444444444444,
+      0.05555555555555555,
+      1.0,
+      0.05555555555555555,
+      0.4444444444444444,
+      0.9444444444444444,
+      0.9722222222222222,
+      0.6944444444444444
+    ],
+    "lag_years": 1,
+    "n_lagged_pairs": 12,
+    "lagged_slope_normalized": 0.6762351736496285,
+    "lagged_intercept_normalized": 0.1992396014070218
+  },
+  "verdict": {
+    "verdict": "pass",
+    "lagged_slope_normalized": 0.6762351736496285,
+    "lagged_intercept_normalized": 0.1992396014070218,
+    "n_lagged_pairs": 12,
+    "lag_years": 1,
+    "rationale": "normalized lagged regression slope 0.6762 \u2208 [0.10, 0.80]. ES\u2192MA solar-cascade observable at 1y lag in synthetic v1 with step-function receiver geometry. Domino-step 2 supported as a candidate mechanism for asymmetric developed\u2192developing pair. NOT a real-grid claim \u2014 v2-ratchet to real ENTSO-E ES-MA flow + ONEE capacity data required.",
+    "computed_at_utc": "2026-05-29T01:27:45.939232+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "010985fd10dc38def6b88df4119c37989b2b1701edf5bb7bff3f1d8f7cc8e52b"
+}
