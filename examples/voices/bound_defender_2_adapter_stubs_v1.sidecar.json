@@ -1,0 +1,42 @@
+{
+  "honesty_bound_defended": "\u00a71 bound #2: PYPOWER and PandaPower adapter functions are stubs; they do not call runpf or runpp. They return heuristic + small deterministic perturbation.",
+  "kill_condition_rule": "fail if any stub's max_abs_activation_delta > documented bound, OR stub's cost_ratio is outside documented tight bracket, OR stub returns None when its optional dep IS importable",
+  "observed_metrics": {
+    "pandapower": {
+      "cost_ratio_max": 0.0,
+      "cost_ratio_min": 0.0,
+      "cost_within_bound": false,
+      "delta_within_bound": true,
+      "expected_cost_ratio_range": [
+        1.005,
+        1.015
+      ],
+      "expected_max_abs_activation_delta": 0.05,
+      "max_abs_activation_delta": 0.0,
+      "n_None_returns": 80,
+      "n_evaluated": 0,
+      "n_samples": 80,
+      "stub_name": "pandapower_adapter_stub"
+    },
+    "pypower": {
+      "cost_ratio_max": 1.02,
+      "cost_ratio_min": 1.02,
+      "cost_within_bound": true,
+      "delta_within_bound": true,
+      "expected_cost_ratio_range": [
+        1.015,
+        1.025
+      ],
+      "expected_max_abs_activation_delta": 0.06,
+      "max_abs_activation_delta": 0.029681,
+      "n_None_returns": 0,
+      "n_evaluated": 80,
+      "n_samples": 80,
+      "stub_name": "pypower_adapter_stub"
+    }
+  },
+  "run_sha256": "2a567373eda8224d61a7a95b8de066d4891cffac43d979c7bb8f65e8fef80b19",
+  "run_timestamp_utc": "2026-05-29T00:09:47.634261+00:00",
+  "verdict": "partial",
+  "voice_name": "bound_defender_2_adapter_stubs_v1"
+}
