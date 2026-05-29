@@ -1,0 +1,43 @@
+{
+  "voice_name": "low_failure_rate_alarm_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_meta",
+    "named_residual": "low-failure-rate fishing signal per \u00a70.3. Once the registry has \u22655 voices committed (sufficient sample for a base-rate read), the failure rate should remain above 20% to indicate kill conditions are tight enough and that voices are not being selected after observing outcomes.",
+    "minimum_voices_for_alarm_armed": 5,
+    "predicted_minimum_failure_rate": 0.2,
+    "alarm_semantics": "PASS = \u00a70.3 bound supported (failure rate \u2265 20%); FAIL = alarm fired (failure rate < 20%, fishing signal)"
+  },
+  "kill_condition": {
+    "metric": "registry_failure_rate",
+    "rule": "with \u22655 voices committed: fail (alarm) if failure rate < 0.20. With <5 voices: skip with `partial` verdict (alarm not yet armed, sample too small). The kill condition's PASS direction defends the \u00a70.3 commitment; FAIL is the alarm firing and surfaces a potential fishing signal for reviewer attention.",
+    "rationale": "\u00a70.3 names a low failure rate as a project-level failure mode (kill conditions too loose, or voices selected after observing). Making the \u00a70.3 check mechanical and committed-as-a-voice means the alarm appears in the registry's own audit trail at every commit. Reviewers do not have to remember to check \u00a70.3 manually; this voice's verdict on each run is the \u00a70.3 status."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_low_failure_rate_alarm_v1.py",
+    "source_file": "examples/voices/voice_low_failure_rate_alarm_v1.py",
+    "input_parameters": {
+      "registry_summary_tool": "tools/registry_summary.py",
+      "minimum_voices_for_alarm_armed": 5,
+      "alarm_threshold_failure_rate": 0.2,
+      "random_seed": "n/a (registry read is deterministic)"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "partial",
+    "registry_failure_rate_observed": 1.0,
+    "registry_pass_rate_observed": 0.0,
+    "total_voices_excluding_this_voice": 2,
+    "alarm_threshold_failure_rate": 0.2,
+    "minimum_voices_for_alarm_armed": 5,
+    "rationale": "Alarm not yet armed: 2 voices committed (excluding this voice), minimum sample size for alarm is 5. The registry has not yet accumulated enough voices for a meaningful base-rate read. Voice's verdict is `partial` to indicate the \u00a70.3 check is deferred until the registry reaches 5 voices.",
+    "computed_at_utc": "2026-05-29T00:05:42.986826+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "403d3d980face18495ed075ee308149c22f281c35c34ea76d6e13fd45da98817"
+}
