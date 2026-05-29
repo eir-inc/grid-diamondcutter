@@ -1,0 +1,106 @@
+{
+  "voice_name": "regulatory_lead_time_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "6_leader_countries_regulatory_milestone_to_inflection_pairs",
+    "named_residual": "mean_lead_time_years_from_named_milestone_to_renewable_share_inflection",
+    "predicted_value_range": [
+      5.0,
+      12.0
+    ],
+    "calibration_source": "IEA Energy Policy Reviews 2018-2023; BloombergNEF Power Sector Outlook 2019-2023; Eurostat + IRENA national renewable-share time series. All public."
+  },
+  "kill_condition": {
+    "metric": "mean_lead_time_years_across_leader_countries",
+    "predicted_range": [
+      5.0,
+      12.0
+    ],
+    "rule": "pass if 5.0 \u2264 mean_lead_time \u2264 12.0; fail if outside the window",
+    "rationale": "The 'policy precedes deployment' lag is documented in public IEA + BNEF + IRENA sources as the structural window between a regulatory anchor (feed-in tariff law / national renewable target) and observed share-inflection (the year the share trajectory begins its steep growth phase). A methodology-layer prior recovering this window supports eirmath's use of the prior to forward-predict from a follower country's recently-passed analog milestone."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/regulatory_lead_time_v1.py",
+    "source_file": "examples/voices/regulatory_lead_time_v1.py",
+    "input_parameters": {
+      "leader_countries": [
+        "Denmark",
+        "Germany",
+        "Spain",
+        "Portugal",
+        "United_Kingdom",
+        "Italy"
+      ],
+      "data_vintage": "milestones 1992-2014, inflections 2000-2022",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "lead_time_window_recovered",
+    "mean_lead_time_years": 8.833333333333334,
+    "min_lead_time_years": 7,
+    "max_lead_time_years": 12,
+    "predicted_range": [
+      5.0,
+      12.0
+    ],
+    "per_country_analyses": [
+      {
+        "country": "Denmark",
+        "milestone_year": 1992,
+        "milestone_name": "Wind feed-in tariff law (Energy Act amendment 1992)",
+        "inflection_year": 2001,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA Energy Policy Review: Denmark 2017 + 2023; Energistyrelsen historical statistics"
+      },
+      {
+        "country": "Germany",
+        "milestone_year": 2000,
+        "milestone_name": "EEG (Erneuerbare-Energien-Gesetz) 2000 feed-in tariff",
+        "inflection_year": 2009,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA Energy Policy Review: Germany 2020; BMWi Renewable Energy historical data"
+      },
+      {
+        "country": "Spain",
+        "milestone_year": 2007,
+        "milestone_name": "Royal Decree 661/2007 feed-in tariff for renewables",
+        "inflection_year": 2014,
+        "lead_time_years": 7,
+        "public_source_anchor": "IEA Energy Policy Review: Spain 2021; REE bilan electrique historical"
+      },
+      {
+        "country": "Portugal",
+        "milestone_year": 2001,
+        "milestone_name": "Decree-Law 339-C/2001 renewable feed-in",
+        "inflection_year": 2010,
+        "lead_time_years": 9,
+        "public_source_anchor": "IEA Energy Policy Review: Portugal 2021; DGEG renewable statistics"
+      },
+      {
+        "country": "United_Kingdom",
+        "milestone_year": 2002,
+        "milestone_name": "Renewables Obligation (RO) order 2002",
+        "inflection_year": 2014,
+        "lead_time_years": 12,
+        "public_source_anchor": "IEA Energy Policy Review: United Kingdom 2019; BEIS Renewable Statistics"
+      },
+      {
+        "country": "Italy",
+        "milestone_year": 2005,
+        "milestone_name": "Legislative Decree 387/2003 + Conto Energia 2005 PV feed-in",
+        "inflection_year": 2012,
+        "lead_time_years": 7,
+        "public_source_anchor": "IEA Energy Policy Review: Italy 2023; Terna renewable historical"
+      }
+    ],
+    "rationale": "Mean lead time 8.83y across 6 leader countries (range 7-12y) sits inside the pre-committed window [5.0, 12.0]y. The methodology recovers the 'policy precedes deployment' structural lag documented in public IEA + BNEF + IRENA sources. Eirmath can use this as the calibration anchor for forward-prediction from follower-country analog milestones. Per \u00a71 honesty bounds, this voice does NOT claim any specific country's future trajectory; it claims a prior over lead times from the leader-cohort fixture.",
+    "computed_at_utc": "2026-05-29T01:07:32.025373+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "b09fa091ff536f8abb8750a41a65c145d6bcb1cec4489e5b7511a7ec5a9394f6"
+}
