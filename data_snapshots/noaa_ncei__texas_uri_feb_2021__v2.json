@@ -1,0 +1,444 @@
+{
+  "data_types": [
+    "TMIN",
+    "TMAX",
+    "PRCP"
+  ],
+  "data_window": {
+    "end_date": "2021-02-20",
+    "start_date": "2021-02-11"
+  },
+  "event": "texas_uri_feb_2021",
+  "observations_by_station": {
+    "USW00012917": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 37.3,
+          "TMAX_C": 18.9,
+          "TMIN_C": 5.0
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.3,
+          "TMAX_C": 5.0,
+          "TMIN_C": 2.2
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 6.7,
+          "TMIN_C": 1.1
+        },
+        "2021-02-14": {
+          "PRCP_mm": 3.8,
+          "TMAX_C": 3.9,
+          "TMIN_C": -1.6
+        },
+        "2021-02-15": {
+          "PRCP_mm": 9.7,
+          "TMAX_C": -1.6,
+          "TMIN_C": -8.8
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 0.0,
+          "TMIN_C": -9.9
+        },
+        "2021-02-17": {
+          "PRCP_mm": 21.6,
+          "TMAX_C": 2.8,
+          "TMIN_C": -0.5
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 6.7,
+          "TMIN_C": -0.5
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 11.1,
+          "TMIN_C": -3.2
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 13.9,
+          "TMIN_C": -1.6
+        }
+      },
+      "station_id": "USW00012917",
+      "station_name": "Corpus Christi Intl AP"
+    },
+    "USW00012921": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 21.8,
+          "TMAX_C": 4.4,
+          "TMIN_C": 0.6
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 2.2,
+          "TMIN_C": -0.5
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.3,
+          "TMAX_C": 0.0,
+          "TMIN_C": -1.6
+        },
+        "2021-02-14": {
+          "PRCP_mm": 1.8,
+          "TMAX_C": -1.0,
+          "TMIN_C": -10.5
+        },
+        "2021-02-15": {
+          "PRCP_mm": 2.0,
+          "TMAX_C": -2.1,
+          "TMIN_C": -12.7
+        },
+        "2021-02-16": {
+          "PRCP_mm": 1.8,
+          "TMAX_C": -3.2,
+          "TMIN_C": -11.0
+        },
+        "2021-02-17": {
+          "PRCP_mm": 3.3,
+          "TMAX_C": 7.2,
+          "TMIN_C": -4.3
+        },
+        "2021-02-18": {
+          "PRCP_mm": 1.8,
+          "TMAX_C": 0.0,
+          "TMIN_C": -2.1
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 7.8,
+          "TMIN_C": -7.1
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 15.6,
+          "TMIN_C": -3.2
+        }
+      },
+      "station_id": "USW00012921",
+      "station_name": "San Antonio Intl AP"
+    },
+    "USW00012960": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 12.7,
+          "TMAX_C": 7.2,
+          "TMIN_C": 3.3
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.3,
+          "TMAX_C": 3.9,
+          "TMIN_C": 1.7
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 6.1,
+          "TMIN_C": 1.1
+        },
+        "2021-02-14": {
+          "PRCP_mm": 5.8,
+          "TMAX_C": 2.8,
+          "TMIN_C": -3.2
+        },
+        "2021-02-15": {
+          "PRCP_mm": 2.3,
+          "TMAX_C": -3.8,
+          "TMIN_C": -8.8
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 1.7,
+          "TMIN_C": -10.5
+        },
+        "2021-02-17": {
+          "PRCP_mm": 13.7,
+          "TMAX_C": 2.8,
+          "TMIN_C": 0.0
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 4.4,
+          "TMIN_C": -1.6
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 10.6,
+          "TMIN_C": -3.2
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 15.6,
+          "TMIN_C": -2.1
+        }
+      },
+      "station_id": "USW00012960",
+      "station_name": "Houston Hobby AP"
+    },
+    "USW00013904": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 12.2,
+          "TMAX_C": 3.3,
+          "TMIN_C": 0.0
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 1.1,
+          "TMIN_C": -1.0
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 0.0,
+          "TMIN_C": -2.1
+        },
+        "2021-02-14": {
+          "PRCP_mm": 2.8,
+          "TMAX_C": -0.5,
+          "TMIN_C": -9.9
+        },
+        "2021-02-15": {
+          "PRCP_mm": 8.6,
+          "TMAX_C": -4.9,
+          "TMIN_C": -12.7
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.3,
+          "TMAX_C": -2.7,
+          "TMIN_C": -14.3
+        },
+        "2021-02-17": {
+          "PRCP_mm": 18.8,
+          "TMAX_C": 0.0,
+          "TMIN_C": -4.9
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 0.0,
+          "TMIN_C": -2.7
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 7.2,
+          "TMIN_C": -6.6
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 17.2,
+          "TMIN_C": -6.0
+        }
+      },
+      "station_id": "USW00013904",
+      "station_name": "Austin Camp Mabry"
+    },
+    "USW00013959": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 8.1,
+          "TMAX_C": -0.5,
+          "TMIN_C": -2.1
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": -1.6,
+          "TMIN_C": -3.2
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": -0.5,
+          "TMIN_C": -4.9
+        },
+        "2021-02-14": {
+          "PRCP_mm": 2.5,
+          "TMAX_C": -2.1,
+          "TMIN_C": -11.0
+        },
+        "2021-02-15": {
+          "PRCP_mm": 3.3,
+          "TMAX_C": -6.6,
+          "TMIN_C": -14.9
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.5,
+          "TMAX_C": -4.9,
+          "TMIN_C": -18.2
+        },
+        "2021-02-17": {
+          "PRCP_mm": 1.0,
+          "TMAX_C": -2.1,
+          "TMIN_C": -5.5
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": -0.5,
+          "TMIN_C": -4.9
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 5.0,
+          "TMIN_C": -9.3
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 12.8,
+          "TMIN_C": -4.9
+        }
+      },
+      "station_id": "USW00013959",
+      "station_name": "Austin Bergstrom AP"
+    },
+    "USW00013960": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 0.5,
+          "TMAX_C": -1.0,
+          "TMIN_C": -3.8
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": -1.6,
+          "TMIN_C": -4.9
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 2.2,
+          "TMIN_C": -6.0
+        },
+        "2021-02-14": {
+          "PRCP_mm": 3.3,
+          "TMAX_C": -4.3,
+          "TMIN_C": -11.6
+        },
+        "2021-02-15": {
+          "PRCP_mm": 1.8,
+          "TMAX_C": -9.9,
+          "TMIN_C": -14.3
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.3,
+          "TMAX_C": -6.0,
+          "TMIN_C": -16.6
+        },
+        "2021-02-17": {
+          "PRCP_mm": 3.3,
+          "TMAX_C": -1.6,
+          "TMIN_C": -6.6
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 0.0,
+          "TMIN_C": -6.0
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 5.6,
+          "TMIN_C": -9.9
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 13.9,
+          "TMIN_C": -2.1
+        }
+      },
+      "station_id": "USW00013960",
+      "station_name": "Dallas Love Field"
+    },
+    "USW00023044": {
+      "observations": {
+        "2021-02-11": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 21.1,
+          "TMIN_C": 3.9
+        },
+        "2021-02-12": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 21.1,
+          "TMIN_C": 6.1
+        },
+        "2021-02-13": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 18.3,
+          "TMIN_C": 3.9
+        },
+        "2021-02-14": {
+          "PRCP_mm": 9.7,
+          "TMAX_C": 4.4,
+          "TMIN_C": -9.9
+        },
+        "2021-02-15": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 1.1,
+          "TMIN_C": -9.9
+        },
+        "2021-02-16": {
+          "PRCP_mm": 0.5,
+          "TMAX_C": 9.4,
+          "TMIN_C": -4.3
+        },
+        "2021-02-17": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 13.3,
+          "TMIN_C": 0.0
+        },
+        "2021-02-18": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 10.0,
+          "TMIN_C": 0.0
+        },
+        "2021-02-19": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 15.0,
+          "TMIN_C": -2.1
+        },
+        "2021-02-20": {
+          "PRCP_mm": 0.0,
+          "TMAX_C": 22.8,
+          "TMIN_C": 0.6
+        }
+      },
+      "station_id": "USW00023044",
+      "station_name": "El Paso Intl AP"
+    }
+  },
+  "schema_version": "1.0",
+  "source_metadata": {
+    "citation": "NOAA National Centers for Environmental Information, Climate Data Online \u2014 Daily Summaries",
+    "dataset": "daily-summaries",
+    "endpoint": "https://www.ncei.noaa.gov/access/services/data/v1",
+    "license": "public domain (NOAA NCEI Daily Summaries)"
+  },
+  "stations": [
+    {
+      "id": "USW00012921",
+      "name": "San Antonio Intl AP"
+    },
+    {
+      "id": "USW00013904",
+      "name": "Austin Camp Mabry"
+    },
+    {
+      "id": "USW00012960",
+      "name": "Houston Hobby AP"
+    },
+    {
+      "id": "USW00013960",
+      "name": "Dallas Love Field"
+    },
+    {
+      "id": "USW00013959",
+      "name": "Austin Bergstrom AP"
+    },
+    {
+      "id": "USW00012917",
+      "name": "Corpus Christi Intl AP"
+    },
+    {
+      "id": "USW00023044",
+      "name": "El Paso Intl AP"
+    }
+  ],
+  "units_note": "TMIN_C / TMAX_C in degrees Celsius; PRCP_mm in millimeters"
+}

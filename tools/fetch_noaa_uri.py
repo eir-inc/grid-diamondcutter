@@ -103,15 +103,21 @@ def fetch_noaa_uri_real() -> dict:
             by_station[station]["observations"][date] = {}
         for dt in DATA_TYPES:
             if dt in record:
-                # NCEI returns metric: temperature in 0.1 degC, precip in 0.1 mm
+                # V2 UNIT-HANDLING CORRECTION (per PREREGISTRATION §5.1 analyst-error
+                # protocol). v1 stored raw_val / 10.0 here, assuming NOAA NCEI returns
+                # raw GHCN-Daily tenths (0.1°C / 0.1mm). That is true when units=standard,
+                # but the API call uses units=metric — values are ALREADY in degC / mm.
+                # v1 stored values at 1/10 their true magnitude. Bug surfaced by two
+                # independent voices: groove PR #39 (cold_extremity) and cajal PR #41
+                # (temperature_collapse). v2 stores values as-returned.
                 try:
                     raw_val = float(record[dt])
                 except (ValueError, TypeError):
                     continue
                 if dt in ("TMIN", "TMAX"):
-                    by_station[station]["observations"][date][f"{dt}_C"] = raw_val / 10.0
+                    by_station[station]["observations"][date][f"{dt}_C"] = raw_val
                 elif dt == "PRCP":
-                    by_station[station]["observations"][date][f"{dt}_mm"] = raw_val / 10.0
+                    by_station[station]["observations"][date][f"{dt}_mm"] = raw_val
 
     return {
         "event": "texas_uri_feb_2021",
@@ -154,10 +160,10 @@ def main():
     entry = freeze_snapshot(
         source="noaa_ncei",
         event="texas_uri_feb_2021",
-        version="v1",
+        version="v2",
         content=content,
         source_url=NCEI_ENDPOINT,
-        fetched_by="tools/fetch_noaa_uri.py (groove)",
+        fetched_by="tools/fetch_noaa_uri.py (groove, v2 — unit-handling fix per §5.1)",
         license_note="NOAA NCEI Daily Summaries — public domain. Cite NOAA NCEI Climate Data Online.",
     )
     print(f"\nfrozen as: {entry.source}__{entry.event}__{entry.version}")

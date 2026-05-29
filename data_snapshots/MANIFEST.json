@@ -21,8 +21,19 @@
       "source": "noaa_ncei",
       "source_url": "https://www.ncei.noaa.gov/access/services/data/v1",
       "version": "v1"
+    },
+    {
+      "canonical_sha256": "aa8771d802d07b964bb295f09352d3ef8d9b158c1f94f99215fa51811cd97b57",
+      "event": "texas_uri_feb_2021",
+      "fetched_at_utc": "2026-05-29T02:25:56.997289+00:00",
+      "fetched_by": "tools/fetch_noaa_uri.py (groove, v2 \u2014 unit-handling fix per \u00a75.1)",
+      "license_note": "NOAA NCEI Daily Summaries \u2014 public domain. Cite NOAA NCEI Climate Data Online.",
+      "snapshot_file": "noaa_ncei__texas_uri_feb_2021__v2.json",
+      "source": "noaa_ncei",
+      "source_url": "https://www.ncei.noaa.gov/access/services/data/v1",
+      "version": "v2"
     }
   ],
   "manifest_version": "1.0",
-  "updated_at_utc": "2026-05-29T00:56:46.218186+00:00"
+  "updated_at_utc": "2026-05-29T02:25:56.997620+00:00"
 }
