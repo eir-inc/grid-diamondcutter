@@ -1,0 +1,62 @@
+{
+  "voice_name": "bound_defender_11_no_eirmath_in_phase_2_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "phase_2_source_tree",
+    "named_residual": "n_phase_2_files_with_eirmath_dependency_or_token",
+    "predicted_value_upper_bound": 0,
+    "verdict_inversion": true,
+    "evasion_class_lineage": "cross_lane_prior_generalization_evasion",
+    "bound_under_test": "phase-2 PREREGISTRATION_PHASE_2.md \u00a71 bound #11 \u2014 phase-2 recognition criterion does not equal or imply the eirmath $-calibration covered by docs/eirmath_bridge.md use case 1"
+  },
+  "kill_condition": {
+    "metric": "n_phase_2_files_with_eirmath_import_or_unguarded_token",
+    "rule": "pass if 0 phase-2 .py files contain 'import eirmath' (any form) AND 0 phase-2 voice source bodies contain an unguarded 'eirmath' token outside docstrings (bound supported); fail if any violation (bound counter-observation requiring \u00a71 flagging-record)",
+    "rationale": "The bound is mechanically testable by source-inspection alone. Cross-phase consumption declarations per \u00a73.5 require explicit upstream sidecar references; silently embedding eirmath would bypass the \u00a73.5 contract. The defender catches that bypass at phase-2-PR-merge time via CI integration on top of this voice."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/bound_defender_11_no_eirmath_in_phase_2_v1.py",
+    "source_file": "phase_2/examples/voices/bound_defender_11_no_eirmath_in_phase_2_v1.py",
+    "input_parameters": {
+      "scan_root": "phase_2",
+      "scan_extensions": [
+        ".py"
+      ],
+      "exclude_directories": [
+        "__pycache__",
+        ".pytest_cache"
+      ],
+      "import_patterns": [
+        "^\\s*import\\s+eirmath\\b",
+        "^\\s*from\\s+eirmath(\\.|\\s)"
+      ],
+      "token_pattern": "\\beirmath\\b",
+      "docstring_pattern": "(\"\"\"|\\'\\'\\')",
+      "self_voice_exclusion": "bound_defender_11_no_eirmath_in_phase_2_v1"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "bound_supported_no_eirmath_dependency_or_token",
+    "n_files_scanned": 1,
+    "n_total_violations": 0,
+    "n_offending_files": 0,
+    "predicted_upper_bound": 0,
+    "per_file_results": [
+      {
+        "path": "phase_2/examples/voices/bound_defender_11_no_eirmath_in_phase_2_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      }
+    ],
+    "bound_under_test": "phase-2 PREREGISTRATION_PHASE_2.md \u00a71 bound #11 \u2014 phase-2 recognition criterion does not equal or imply the eirmath $-calibration covered by docs/eirmath_bridge.md use case 1",
+    "rationale": "Inspected 1 phase-2 .py file(s). Total eirmath-import-or-token violations: 0. Pre-committed upper bound: 0. Phase-2 bound #11 supported by direct source inspection. Voice PASSes its inverted kill condition.",
+    "computed_at_utc": "2026-05-29T04:16:38.565121+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "db79df14616bcdd92af002ab8116a4968b687f2fe0cfe39fb92915f55f9db6e2"
+}
