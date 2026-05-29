@@ -1,0 +1,102 @@
+{
+  "voice_name": "network_amplification_adoption_cascade_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "network_transmission_coefficient_k",
+    "substrate_target": "secondary_region_renewable_adoption_after_horizon",
+    "named_residual": "adoption_cascade_response_slope_on_k",
+    "predicted_direction": "k_up \u2192 secondary_adoption_up (positive)",
+    "predicted_magnitude_range": [
+      0.2,
+      0.9
+    ],
+    "null_direction": "no response OR negative response",
+    "lineage": "iterates from network_amplification_coupling_v1's failure-cascade substrate; substrate now models adoption-cascade explicitly"
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_secondary_adoption_vs_network_coefficient",
+    "predicted_range": [
+      0.2,
+      0.9
+    ],
+    "rule": "pass if slope \u2208 [0.20, 0.90], fail if slope < 0 (null direction realized), fail if 0 \u2264 slope < 0.20 (response too weak)",
+    "rationale": "The voice claims network coupling amplifies adoption-cascade in region B given an initial deployment shock in region A. Slope on the k sweep is the cleanest single-scalar test. Inversion from failure-resilience to adoption-amplification is in the substrate's price-pressure direction: neighbor surplus drives DOWN local capex price (competing with new fossil), which DRIVES UP local renewable installation. This is the substrate the original Eugene-question implied."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/network_amplification_adoption_cascade_v1.py",
+    "source_file": "examples/voices/network_amplification_adoption_cascade_v1.py",
+    "input_parameters": {
+      "network_coefficient_sweep": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ],
+      "n_substrate_steps": 24,
+      "initial_renewable_shock_region_a": 0.25,
+      "baseline_local_renewable_share": 0.1,
+      "installation_gain": 0.008,
+      "price_pressure_gain": 0.06,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "outcome_category": "direction_recovered_magnitude_below_floor",
+    "observed_slope": 0.032160644822095075,
+    "observed_intercept": 0.18859397870337133,
+    "predicted_range": [
+      0.2,
+      0.9
+    ],
+    "sweep_results": [
+      {
+        "network_coefficient": 0.0,
+        "final_share_region_a": 0.5444055092399906,
+        "final_share_region_b": 0.28950524167730846,
+        "secondary_adoption_response": 0.18950524167730845
+      },
+      {
+        "network_coefficient": 0.2,
+        "final_share_region_a": 0.5455180569093123,
+        "final_share_region_b": 0.2948931531448323,
+        "secondary_adoption_response": 0.19489315314483227
+      },
+      {
+        "network_coefficient": 0.4,
+        "final_share_region_a": 0.5466858651459455,
+        "final_share_region_b": 0.3007329253589005,
+        "secondary_adoption_response": 0.2007329253589005
+      },
+      {
+        "network_coefficient": 0.6,
+        "final_share_region_a": 0.5479145251822031,
+        "final_share_region_b": 0.3070946652518377,
+        "secondary_adoption_response": 0.2070946652518377
+      },
+      {
+        "network_coefficient": 0.8,
+        "final_share_region_a": 0.5492105466464061,
+        "final_share_region_b": 0.314065332292702,
+        "secondary_adoption_response": 0.214065332292702
+      },
+      {
+        "network_coefficient": 1.0,
+        "final_share_region_a": 0.5505815775726668,
+        "final_share_region_b": 0.3217544889609323,
+        "secondary_adoption_response": 0.22175448896093228
+      }
+    ],
+    "rationale": "Slope 0.0322 below predicted floor 0.2000. The substrate DID recover the predicted positive direction (network coupling DOES amplify adoption-cascade \u2014 both regions' final renewable share is monotonically higher under increasing k) but the magnitude is much smaller than pre-committed. Two interpretations: (a) substrate's price-pressure coupling is too weak relative to the baseline drift, requiring stronger coupling in a v2; (b) the pre-committed magnitude window was too aggressive for the chosen substrate. Both are addressable in v2 \u2014 but not by post-hoc adjustment of this v1's pre-registration. Voice enters the \u00a73.4 null-voice ledger with the direction-recovered flag.",
+    "computed_at_utc": "2026-05-29T00:51:47.360845+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "59380fef6e1e213728e770f67505a4aa815c47005c2b8b7261abac0fd31d8d3d"
+}
