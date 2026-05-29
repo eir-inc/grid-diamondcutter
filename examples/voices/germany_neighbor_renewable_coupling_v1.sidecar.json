@@ -1,0 +1,146 @@
+{
+  "voice_name": "germany_neighbor_renewable_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_a": "germany_renewable_share_trajectory_2010_2023_synthetic",
+    "substrate_b": "france_renewable_share_trajectory_2010_2023_synthetic",
+    "named_residual": "lagged_correlation_germany_renewable_growth_drives_france_renewable_growth",
+    "predicted_direction": "positive: Germany RES-share rate leads France RES-share rate at +1y lag",
+    "predicted_magnitude_range": [
+      0.1,
+      0.5
+    ],
+    "predicted_lag_years": 1,
+    "null_direction": "zero or negative slope (no link / reversed direction)",
+    "rationale": "Network-effect hypothesis Eugene named: neighboring-region renewable export undermines local fossil capex pricing, triggering downstream renewable buildout. If observable at the trajectory level, Germany's renewable surge should precede France's growth with a positive bounded lagged coupling. Synthetic v1 calibration from publicly-cited rollout milestones (named in docstring); v2-ratchet to real ENTSO-E data."
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_france_renewable_rate_vs_germany_renewable_rate_lagged_1year",
+    "predicted_range": [
+      0.1,
+      0.5
+    ],
+    "rule": "fail if slope < 0.10 (below floor / weak link), fail if slope > 0.50 (above ceiling / over-prediction), fail if slope < 0 (null direction realized / reversed)",
+    "rationale": "Linear-fit slope of France's RES-share rate vs Germany's RES-share rate lagged by 1 year. Computable from synthetic trajectories alone. Three honest failure outcomes named per \u00a73.2 coupling discipline; null direction explicit so its realization is registry-acceptable null."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/germany_neighbor_renewable_coupling_v1.py",
+    "source_file": "examples/voices/germany_neighbor_renewable_coupling_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_publicly_cited_milestones",
+      "germany_milestones": {
+        "2010": 0.17,
+        "2015": 0.3,
+        "2020": 0.45,
+        "2023": 0.52
+      },
+      "france_milestones": {
+        "2010": 0.16,
+        "2015": 0.17,
+        "2020": 0.22,
+        "2023": 0.27
+      },
+      "lag_years": 1,
+      "interpolation": "piecewise_linear_between_milestones",
+      "random_seed": 1979
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "germany_renewable_share": [
+      0.17,
+      0.196,
+      0.222,
+      0.248,
+      0.274,
+      0.3,
+      0.33,
+      0.36,
+      0.39,
+      0.42000000000000004,
+      0.45,
+      0.47333333333333333,
+      0.4966666666666667,
+      0.52
+    ],
+    "france_renewable_share": [
+      0.16,
+      0.162,
+      0.164,
+      0.166,
+      0.168,
+      0.17,
+      0.18000000000000002,
+      0.19,
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23666666666666666,
+      0.25333333333333335,
+      0.27
+    ],
+    "germany_yoy_rates_aligned": [
+      0.025999999999999995,
+      0.025999999999999995,
+      0.025999999999999995,
+      0.026000000000000023,
+      0.025999999999999968,
+      0.030000000000000027,
+      0.02999999999999997,
+      0.030000000000000027,
+      0.030000000000000027,
+      0.02999999999999997,
+      0.023333333333333317,
+      0.023333333333333373
+    ],
+    "france_yoy_rates_aligned": [
+      0.0020000000000000018,
+      0.0020000000000000018,
+      0.0020000000000000018,
+      0.0020000000000000018,
+      0.010000000000000009,
+      0.009999999999999981,
+      0.010000000000000009,
+      0.010000000000000009,
+      0.009999999999999981,
+      0.016666666666666663,
+      0.01666666666666669,
+      0.016666666666666663
+    ],
+    "linear_fit_slope_france_rate_vs_germany_rate_lagged": 0.07572815533980344,
+    "linear_fit_intercept": 0.006938511326860909
+  },
+  "verdict": {
+    "verdict": "fail",
+    "slope": 0.07572815533980344,
+    "predicted_range": [
+      0.1,
+      0.5
+    ],
+    "lag_years": 1,
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 0.0757 < 0.1 \u2014 below predicted floor (weak/no link)",
+    "computed_at_utc": "2026-05-29T00:52:11.376035+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "c530d17a2e1b189c0b706a6fc3a32e7764029d86f48af71c9768e56aad485a59"
+}
