@@ -146,9 +146,11 @@ def freeze_snapshot(source: str, event: str, version: str,
     SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
     snapshot_filename = f"{source}__{event}__{version}.json"
     snapshot_path = SNAPSHOTS_DIR / snapshot_filename
+    # Always write canonical JSON so SHA-256 is stable
     canonical = json.dumps(content, sort_keys=True, indent=2)
     with open(snapshot_path, "w") as f:
         f.write(canonical)
+    # Re-read + hash the on-disk file so the manifest hash matches what the loader sees
     with open(snapshot_path) as f:
         sha = canonical_sha256(json.load(f))
     entry = SnapshotManifestEntry(
@@ -163,6 +165,7 @@ def freeze_snapshot(source: str, event: str, version: str,
         license_note=license_note,
     )
     entries = _load_manifest()
+    # remove any existing entry with the same (source, event, version) — overwrite semantics
     entries = [e for e in entries
                if not (e["source"] == source and e["event"] == event and e["version"] == version)]
     entries.append(asdict(entry))
@@ -202,6 +205,7 @@ def fetch_noaa_texas_feb_2021_skeleton() -> dict:
             {"id": "TODO", "name": "TODO", "lat": None, "lon": None},
         ],
         "observations": [
+            # Each observation: {"station": ..., "date": "YYYY-MM-DD", "TMIN_C": ..., "TMAX_C": ..., "PRCP_mm": ...}
         ],
         "fetch_metadata": {
             "skeleton_only": True,
@@ -212,7 +216,7 @@ def fetch_noaa_texas_feb_2021_skeleton() -> dict:
 
 
 # ---------------------------------------------------------------------------
-# CLI
+# CLI: freeze-skeleton subcommand for the reference fetcher
 # ---------------------------------------------------------------------------
 
 def main(argv: list) -> int:
@@ -229,9 +233,9 @@ def main(argv: list) -> int:
         if not entries:
             print("(manifest is empty — no snapshots frozen yet)")
             return 0
-        print(f"{'source':22s}  {'event':24s}  {'version':12s}  sha256[:16]")
+        print(f"{'source':22s}  {'event':24s}  {'version':8s}  sha256[:16]")
         for e in entries:
-            print(f"{e['source']:22s}  {e['event']:24s}  {e['version']:12s}  {e['canonical_sha256'][:16]}")
+            print(f"{e['source']:22s}  {e['event']:24s}  {e['version']:8s}  {e['canonical_sha256'][:16]}")
         return 0
     elif cmd == "freeze-skeleton":
         content = fetch_noaa_texas_feb_2021_skeleton()
