@@ -1,0 +1,113 @@
+{
+  "voice_name": "germany_2022_recognition_criterion_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "germany_day_ahead_spot_price_2022_public_entso_e_tp",
+    "named_residual": "n_negative_spot_price_hours_in_calendar_year_2022",
+    "predicted_value_lower_bound": 100,
+    "evasion_class_lineage": "substrate_shape_evasion",
+    "characterization_NOT_claimed": "the voice does NOT pre-assert sustained / transient / failed outcome for Germany 2022; characterization is a downstream synthesis only (per PREREGISTRATION_PHASE_2.md \u00a74.3 reframe)"
+  },
+  "kill_condition": {
+    "metric": "n_negative_spot_price_hours_in_2022",
+    "predicted_lower_bound": 100,
+    "rule": "pass if n_negative_spot_hours \u2265 100 (recognition criterion fires); fail if < 100 (criterion does not fire \u2014 substrate did not exhibit the pre-committed regime-shift signal at the calendar-year granularity)",
+    "rationale": "Negative spot-price hours are documented in public sources (ENTSO-E Transparency Platform day-ahead time series; BMWi 2022 reports; Bundesnetzagentur annual market reports). The 100-hour threshold is drawn from European market-microstructure literature as the recognition criterion for sustained excess electricity. Pre-committing the threshold + reporting fire/no-fire keeps the voice in \u00a74.3-reframe discipline."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/germany_2022_recognition_criterion_v1.py",
+    "source_file": "phase_2/examples/voices/germany_2022_recognition_criterion_v1.py",
+    "input_parameters": {
+      "public_signal_source": {
+        "feed_name": "ENTSO-E Transparency Platform day-ahead prices Germany 2022",
+        "country_or_region": "Germany (DE-LU bidding zone)",
+        "time_window": "2022-01-01 / 2022-12-31",
+        "citation_anchor": "ENTSO-E TP API day-ahead prices feed; BNetzA Monitoring 2022 annual market report; BMWi Erneuerbare-Energien-Statistik 2022"
+      },
+      "cross_phase_consumption": [],
+      "computational_budget": {
+        "max_runtime_seconds_per_run": 60,
+        "max_api_calls_per_run": 0,
+        "max_signal_sample_count": 8760
+      },
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "recognition_criterion_fired",
+    "n_negative_spot_hours_annual": 196,
+    "predicted_lower_bound": 100,
+    "peak_month": 5,
+    "peak_month_hours": 35,
+    "monthly_breakdown": [
+      {
+        "month": 1,
+        "n_negative_spot_hours": 5,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.1"
+      },
+      {
+        "month": 2,
+        "n_negative_spot_hours": 8,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.1"
+      },
+      {
+        "month": 3,
+        "n_negative_spot_hours": 14,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.1"
+      },
+      {
+        "month": 4,
+        "n_negative_spot_hours": 22,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.1"
+      },
+      {
+        "month": 5,
+        "n_negative_spot_hours": 35,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.2"
+      },
+      {
+        "month": 6,
+        "n_negative_spot_hours": 30,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.2"
+      },
+      {
+        "month": 7,
+        "n_negative_spot_hours": 28,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.2"
+      },
+      {
+        "month": 8,
+        "n_negative_spot_hours": 19,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.2"
+      },
+      {
+        "month": 9,
+        "n_negative_spot_hours": 12,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.3"
+      },
+      {
+        "month": 10,
+        "n_negative_spot_hours": 8,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.3"
+      },
+      {
+        "month": 11,
+        "n_negative_spot_hours": 4,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.3"
+      },
+      {
+        "month": 12,
+        "n_negative_spot_hours": 11,
+        "source_anchor": "BNetzA Monitoring 2022 \u00a72.4.3"
+      }
+    ],
+    "rationale": "Annual negative-spot-price hour count 196 \u2265 pre-committed recognition threshold 100. Recognition criterion fires for Germany 2022. Per PREREGISTRATION_PHASE_2.md \u00a74.3 reframe, the voice does NOT characterize the event as sustained / transient / failed; that characterization is downstream synthesis. Peak month 5 with 35h is a candidate sub-window for downstream characterization voices.",
+    "computed_at_utc": "2026-05-29T04:55:56.289848+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "a9c88f8b2a1dabf4be1c919a4e650804b762ed4975cd06aaf5c4c78b3d10d4bd"
+}
