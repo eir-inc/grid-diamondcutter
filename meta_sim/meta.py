@@ -22,6 +22,15 @@ KEY EMPIRICAL RESULT (2026-05-28):
   random load-profile perturbations. This is the polyphonic substrate's signature
   that no single-layer sim captures.
 
+  HONESTY-BOUND GUARD (PREREGISTRATION §1 bound #3, mechanically defended by
+  voice_bound_defender_3_coupling_coefficient_v1):
+  The +0.832 figure is the correlation between two simulated voices the project
+  authored. It is not a measurement of physical grid coupling and does not
+  generalize to any real grid. The figure demonstrates that the polyphony pattern
+  detects coupling when coupling exists in a substrate the project constructed;
+  any claim about real-grid coupling magnitudes must come from a per-voice
+  predict / kill-condition / run / verdict unit operating against real-grid data.
+
 DROP-IN VOICE SWAPPING:
   Each voice has a `step_fn` callable. Swap it for MATPOWER (load_flow), OpenDSS
   (dynamics), GridLAB-D (control), or your own physics — same MetaSim assembles.
