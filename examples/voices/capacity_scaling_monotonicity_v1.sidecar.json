@@ -1,0 +1,76 @@
+{
+  "voice_name": "capacity_scaling_monotonicity_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "monotonic non-increase of unsigned cycle_residual under uniform line capacity scaling. Predict: as capacity multiplier sweeps over [0.5, 0.75, 1.0, 1.5, 2.0, 4.0], the unsigned cycle_residual is monotonically non-increasing (no scale-up step increases the residual).",
+    "capacity_multipliers_swept": [
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      4.0
+    ],
+    "predicted_monotonicity_direction": "non-increasing",
+    "predicted_max_step_increase_tolerance": 0.001
+  },
+  "kill_condition": {
+    "metric": "max_step_increase_in_cycle_residual_across_capacity_sweep",
+    "rule": "fail if any consecutive scale-up step in the capacity sweep increases the unsigned cycle_residual by more than 0.001 (absolute). Strict non-decrease tolerance is 0 with a numerical-stability margin of 0.001 to absorb floating-point and binning rounding.",
+    "rationale": "If scaling capacity up ever increases the cycle_residual, the measurement is not monotonically interpretable in the natural physical direction. Such a finding would mean the histogram-binning fingerprint introduces non-monotonic regions in the measurement's response to a one-axis parameter sweep, which constrains interpretation."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_capacity_scaling_monotonicity_v1.py",
+    "source_file": "examples/voices/voice_capacity_scaling_monotonicity_v1.py",
+    "input_parameters": {
+      "capacity_multipliers": [
+        0.5,
+        0.75,
+        1.0,
+        1.5,
+        2.0,
+        4.0
+      ],
+      "station_set": "default rotating-load-profile",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "multipliers": [
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      4.0
+    ],
+    "residuals_per_multiplier": [
+      5.692412771282714,
+      5.6666989549745725,
+      0.0465,
+      0.0315,
+      0.0235,
+      0.012
+    ],
+    "step_diffs": [
+      -0.025713816308141624,
+      -5.620198954974573,
+      -0.015,
+      -0.008,
+      -0.0115
+    ],
+    "max_step_increase_observed": -0.008,
+    "tolerance": 0.001,
+    "rationale": "Max step-increase across capacity sweep = -0.008000, at or below tolerance 0.0010. cycle_residual is monotonically non-increasing under uniform capacity scale-up across the swept range. The measurement is physically interpretable in the natural direction at this scope.",
+    "computed_at_utc": "2026-05-28T23:29:47.130156+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "823d4647643bff9a4fc6e4bbf90937c886d81350a591ad1a73e05247ae1bebb3"
+}
