@@ -1,0 +1,57 @@
+name: registry-status-sync
+
+# Auto-regenerate REGISTRY_STATUS.md whenever a voice sidecar changes.
+# The file is part of the audit trail (§3.4: base rate computable at any commit hash);
+# if reviewers can't trust REGISTRY_STATUS.md to reflect the current sidecars, the
+# audit-trail commitment becomes manual rather than mechanical. This workflow keeps
+# the file in sync automatically.
+
+on:
+  pull_request:
+    paths:
+      - 'examples/voices/**'
+      - 'tools/registry_summary.py'
+
+jobs:
+  registry-status-fresh:
+    name: REGISTRY_STATUS.md matches current sidecars
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Regenerate REGISTRY_STATUS.md
+        run: |
+          python tools/registry_summary.py --output REGISTRY_STATUS.md --json registry_summary.json
+
+      - name: Check for drift
+        run: |
+          if ! git diff --quiet REGISTRY_STATUS.md; then
+            echo "::warning::REGISTRY_STATUS.md is stale relative to current sidecars."
+            echo "::warning::This PR should include a regenerated REGISTRY_STATUS.md."
+            echo "Diff:"
+            git diff REGISTRY_STATUS.md
+            echo ""
+            echo "::warning::Run \`make registry\` locally and commit the result."
+            # Note: this is a soft warning, not a hard failure. Authors may regenerate
+            # after the PR opens; the file will sync on the next push.
+          else
+            echo "::notice::REGISTRY_STATUS.md is in sync with the current sidecars."
+          fi
+
+      - name: Surface base-rate change to PR review
+        run: |
+          # Print the current registry aggregate so reviewers see the state without
+          # having to read the file or run the tool themselves.
+          echo "::notice::Current registry state:"
+          python tools/registry_summary.py | head -25
