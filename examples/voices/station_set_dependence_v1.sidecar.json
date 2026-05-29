@@ -1,0 +1,62 @@
+{
+  "voice_name": "station_set_dependence_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "order-dependence of cycle_residual under permutations of a fixed station multiset. The methodology is interpretable as multiset-invariant only if the unsigned cycle_residual varies by less than 20% relative to its mean across all 4! = 24 permutations of a 4-station closure (with a fixed return-to-start convention).",
+    "baseline_station_set_unsigned_cycle_residual": 0.0465,
+    "predicted_max_relative_spread": 0.2,
+    "n_permutations_tested": 24
+  },
+  "kill_condition": {
+    "metric": "max_unsigned_relative_spread_across_permutations",
+    "rule": "fail if (max_residual - min_residual) / mean_residual > 0.20 across the 24 permutations of the 4 distinct profile-transitions in the canonical station set",
+    "rationale": "Cross-region interpretation of cycle_residual assumes the measurement is order-independent at the multiset level: two regions with the same set of load-profile transitions, in different orders, should report comparable cycle_residuals. If order matters more than 20% relative, any cross-region comparison must control for ordering, and the methodology's interpretation tightens."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_station_set_dependence_v1.py",
+    "source_file": "examples/voices/voice_station_set_dependence_v1.py",
+    "input_parameters": {
+      "random_seed": 42,
+      "profile_transitions": [
+        [
+          "peak",
+          "off_peak"
+        ],
+        [
+          "off_peak",
+          "mixed"
+        ],
+        [
+          "mixed",
+          "spike"
+        ],
+        [
+          "spike",
+          "peak"
+        ]
+      ],
+      "mix": 0.3,
+      "close_at": "first_transition"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "relative_spread_observed": 0.13356164383561656,
+    "min_residual": 0.0465,
+    "max_residual": 0.053000000000000005,
+    "mean_residual": 0.04866666666666667,
+    "std_residual": 0.0030641293851417085,
+    "threshold": 0.2,
+    "n_permutations": 24,
+    "rationale": "Relative spread across 24 permutations = 13.4%, at or below the predicted 20% threshold. cycle_residual is approximately multiset-invariant at this scope; cross-region interpretation that relies on multiset-invariance is supported by this measurement.",
+    "computed_at_utc": "2026-05-28T23:12:07.334533+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "61242f979bdb237d521f8c23448d20c8a5cfa6af19344089da5d0661ae0eb16f"
+}
