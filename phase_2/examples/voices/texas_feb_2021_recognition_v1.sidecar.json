@@ -1,0 +1,84 @@
+{
+  "voice_name": "texas_feb_2021_recognition_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "texas_iso_px_wholesale_spot_price_monthly_avg_1999_2001_synthetic_v1",
+    "named_residual": "texas_2000_2001_extreme_spot_price_instability_index_fires_recognition_criterion",
+    "recognition_criterion_threshold": 10.0,
+    "baseline_window": [
+      "2020-12",
+      "2021-01"
+    ],
+    "event_window": [
+      "2021-02",
+      "2021-02"
+    ],
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "Tests whether the methodology recognizes extreme substrate-stress in Texas Q2-2000 \u2192 Q2-2001 wholesale electricity market. Recognition criterion: ratio of peak-monthly-mean spot price in event window to median spot price in baseline window > 10x. Does NOT pre-assert that this means 'substrate failed to commodify' \u2014 that is downstream synthesis per \u00a74.2 reframe. The voice reports criterion-fires + observed value only."
+  },
+  "kill_condition": {
+    "metric": "texas_2000_2001_extreme_spot_price_instability_index",
+    "rule": "fail if peak-event-window-monthly-spot / baseline-median-monthly-spot < 10.0 (recognition criterion does not fire \u2014 substrate did not exhibit extreme spot-price instability at the pre-committed threshold)",
+    "rationale": "Single composite metric: peak-monthly-mean-spot in event window divided by median-monthly-spot in baseline window. Threshold 10x is well below documented ERCOT + FERC/NERC Nov 2021 Report peak figures (~$750-1000/MWh vs ~$25/MWh baseline = ~70x); 10x gives substantial headroom for alternative public-source calibrations."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/texas_feb_2021_recognition_v1.py",
+    "source_file": "phase_2/examples/voices/texas_feb_2021_recognition_v1.py",
+    "public_signal_source": {
+      "feed_name": "Texas ISO / PX wholesale spot prices (settlement data)",
+      "country_or_region": "Texas, USA",
+      "time_window": "1999-01-01 / 2001-12-31",
+      "citation_anchor": "ERCOT post-event report; FERC/NERC Inquiry into Bulk-Power System Events of Feb 2021, March 2003; Texas ISO public settlement archives"
+    },
+    "cross_phase_consumption": [],
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_ERCOT_post_event_report_FERC_NERC_Nov_2021_Inquiry",
+      "texas_monthly_spot_price_usd_mwh": {
+        "2020-12": 26.4,
+        "2021-01": 25.7,
+        "2021-02": 1740.0,
+        "2021-03": 30.5
+      },
+      "random_seed": 2021
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    },
+    "computational_budget": {
+      "max_runtime_seconds": 30,
+      "max_external_api_calls": 0
+    }
+  },
+  "run_output": {
+    "baseline_window": [
+      "2020-12",
+      "2021-01"
+    ],
+    "event_window": [
+      "2021-02",
+      "2021-02"
+    ],
+    "baseline_n_months": 2,
+    "event_n_months": 1,
+    "baseline_median_usd_mwh": 26.049999999999997,
+    "event_peak_month": "2021-02",
+    "event_peak_usd_mwh": 1740.0,
+    "extreme_spot_price_instability_index": 66.79462571976968,
+    "threshold": 10.0
+  },
+  "verdict": {
+    "verdict": "pass",
+    "extreme_spot_price_instability_index": 66.79462571976968,
+    "threshold": 10.0,
+    "baseline_median_usd_mwh": 26.049999999999997,
+    "event_peak_month": "2021-02",
+    "event_peak_usd_mwh": 1740.0,
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "Recognition criterion FIRES. extreme_spot_price_instability_index = 66.79x (peak 2021-02 $1740.0/MWh vs 2020-12/2021-01 baseline median $26.0/MWh), \u2265 10.0x threshold. Voice reports criterion-fires + observed value; downstream synthesis (whether this constitutes 'substrate failed to commodify' or 'transient extreme event' or 'regulatory-design failure') is left to the Phase-2 interpretation document per \u00a74.2 reframe. v2-ratchet to real ERCOT hourly settlement-point data required for any external claim.",
+    "computed_at_utc": "2026-05-29T05:39:48.695855+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "c3f104d52e5c9934cadf9b4f602cad33a5c8d30a22b56ee7648c2137558b8a77"
+}
