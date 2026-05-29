@@ -1,0 +1,49 @@
+{
+  "kill_condition_rule": "fail if min_TMIN > -10.0\u00b0C across all 7 stations \u00d7 4 peak-window days",
+  "named_event": "Texas / February 2021 / Uri winter storm \u2014 peak cold window",
+  "observed": {
+    "overall_min_TMIN_C": -1.8199999999999998,
+    "overall_min_observed_at": [
+      "USW00013959",
+      "Austin Bergstrom AP",
+      "2021-02-16"
+    ],
+    "per_station_window_tmin": {
+      "USW00012917": {
+        "station_name": "Corpus Christi Intl AP",
+        "window_min_TMIN_C": -0.99
+      },
+      "USW00012921": {
+        "station_name": "San Antonio Intl AP",
+        "window_min_TMIN_C": -1.27
+      },
+      "USW00012960": {
+        "station_name": "Houston Hobby AP",
+        "window_min_TMIN_C": -1.05
+      },
+      "USW00013904": {
+        "station_name": "Austin Camp Mabry",
+        "window_min_TMIN_C": -1.4300000000000002
+      },
+      "USW00013959": {
+        "station_name": "Austin Bergstrom AP",
+        "window_min_TMIN_C": -1.8199999999999998
+      },
+      "USW00013960": {
+        "station_name": "Dallas Love Field",
+        "window_min_TMIN_C": -1.6600000000000001
+      },
+      "USW00023044": {
+        "station_name": "El Paso Intl AP",
+        "window_min_TMIN_C": -0.99
+      }
+    },
+    "snapshot_fetched_at_utc": "2026-05-29T00:56:46.217809+00:00",
+    "snapshot_sha256": "ed2d470b416b529cfbf49f2e1b6455b2aa726ca67e108afda55616b271039ff0"
+  },
+  "predicted_observation": "at least one of the 7 Texas stations records TMIN \u2264 -10\u00b0C on at least one day in the Feb 14-17 2021 window (documented peak of Uri)",
+  "run_sha256": "82aec892d0f48645e6dfcd3c2193a28e53926946d50602aef137c13c93e6b7a8",
+  "run_timestamp_utc": "2026-05-29T02:07:18.117492+00:00",
+  "verdict": "fail",
+  "voice_name": "historical_uri_cold_extremity_v1"
+}
