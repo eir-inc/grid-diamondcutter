@@ -1,0 +1,83 @@
+{
+  "voice_name": "smooth_receiver_coupling_alarm_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "synthetic_cross_region_coupling_meta",
+    "named_residual": "smooth-S-curve receivers wash out cross-region coupling via the upper-bound over-correlation kill. emergent registry bound from three independent run-time observations (DK\u2192DE coupling FAIL, AT\u2192DE coupling FAIL, FR\u2192CH coupling FAIL). this voice mechanizes the bound so any future run claiming positive coupling on a smooth-S-curve receiver triggers an alarm rather than silently entering the registry.",
+    "smooth_receiver_pair_count": 3,
+    "magnitude_upper_bound_per_pair": 0.5,
+    "minimum_pairs_above_bound_to_support_empirical_finding": 2,
+    "alarm_semantics": "PASS = empirical bound supported (\u22652 of 3 smooth-S-curve receiver pairs produce coupling slope above 0.50, reproducing the over-correlation kill); FAIL = alarm fired (the empirical bound did not reproduce; reviewer attention required)."
+  },
+  "kill_condition": {
+    "metric": "n_pairs_above_upper_bound",
+    "rule": "FAIL (alarm) if fewer than 2 of 3 synthetic smooth-S-curve receiver pairs produce a coupling slope > 0.50. PASS if \u22652 of 3 reproduce the over-correlation kill, supporting the empirical bound.",
+    "rationale": "The empirical bound was surfaced by three independent run-time observations of the over-correlation kill firing on smooth-S-curve receivers. The bound is the registry's emergent capability claim (defined by negation \u2014 capability = set of substrate shapes where coupling DOES NOT generalize). Mechanizing the claim as an inverted-kill voice makes the bound part of the registry's audit trail; if the bound stops holding in a future run, the alarm surfaces it for reviewer examination rather than letting a contradicting result enter the registry silently."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_smooth_receiver_coupling_alarm_v1.py",
+    "source_file": "examples/voices/voice_smooth_receiver_coupling_alarm_v1.py",
+    "input_parameters": {
+      "random_seed": 4291,
+      "n_years": 14,
+      "smooth_receiver_logistic_steepness": 0.6,
+      "sender_logistic_steepness": 0.55,
+      "lag_years": 1,
+      "pair_sender_midpoints": [
+        3.0,
+        5.0,
+        7.0
+      ],
+      "pair_receiver_midpoints": [
+        9.0,
+        10.0,
+        11.0
+      ],
+      "pair_receiver_ceiling": [
+        80.0,
+        75.0,
+        70.0
+      ],
+      "additive_noise_sigma": 0.5
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "observed_value": 3,
+    "rationale": "empirical bound supported: 3/3 smooth-S-curve receiver pairs produced coupling slope above 0.5, reproducing the over-correlation kill observed in PRs #35/#37.",
+    "pair_results": [
+      {
+        "pair_index": 0,
+        "sender_midpoint_year": 3.0,
+        "receiver_midpoint_year": 9.0,
+        "receiver_ceiling_pct": 80.0,
+        "coupling_slope": 0.8821497265258501,
+        "above_upper_bound": true
+      },
+      {
+        "pair_index": 1,
+        "sender_midpoint_year": 5.0,
+        "receiver_midpoint_year": 10.0,
+        "receiver_ceiling_pct": 75.0,
+        "coupling_slope": 0.8471783044682737,
+        "above_upper_bound": true
+      },
+      {
+        "pair_index": 2,
+        "sender_midpoint_year": 7.0,
+        "receiver_midpoint_year": 11.0,
+        "receiver_ceiling_pct": 70.0,
+        "coupling_slope": 0.8558159513208677,
+        "above_upper_bound": true
+      }
+    ],
+    "computed_at_utc": "2026-05-29T02:15:45.662681+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "9ca687f4ffd6f98f32812e77bcf38227ed795ddac9979b645ed650a6a4170b2c"
+}
