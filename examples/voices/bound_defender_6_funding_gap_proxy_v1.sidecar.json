@@ -1,0 +1,216 @@
+{
+  "voice_name": "bound_defender_6_funding_gap_proxy_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_meta",
+    "named_residual": "PREREGISTRATION \u00a71 bound #6 defense \u2014 every public-artifact mention of funding-gap, funding-flow, capex, or financing-pipeline must be paired with the proxy-or-conditional language that distinguishes a proxy-based estimate from a private-data measurement. Closes the \u00a71 defender lattice.",
+    "documents_to_scan": [
+      "PREREGISTRATION.md",
+      "README.md"
+    ],
+    "funding_anchor_terms": [
+      "funding-gap",
+      "funding gap",
+      "funding-flow",
+      "funding flow",
+      "funding pipeline",
+      "financing pipeline",
+      "financing round",
+      "term sheets",
+      "private financing"
+    ],
+    "proxy_or_conditional_guard_phrases_any_of": [
+      "public bibliometric",
+      "bibliometric and grant-record proxies",
+      "grant-record proxies",
+      "proxies used",
+      "public record",
+      "outside of public record",
+      "no visibility into private",
+      "does not have visibility",
+      "specific company",
+      "not direct funding-flow measurements",
+      "not a measurement of any specific company",
+      "conditional on the proxies",
+      "proxy-based estimate"
+    ],
+    "guard_search_radius_chars": 400,
+    "alarm_semantics": "PASS = \u00a71 bound #6 mechanically defended (every funding-anchor mention has \u22651 proxy/conditional guard phrase within \u00b1400 chars); FAIL = alarm (at least one funding-anchor mention is unguarded)."
+  },
+  "kill_condition": {
+    "metric": "n_unguarded_funding_mentions",
+    "rule": "FAIL (alarm) if any funding-anchor mention (funding-gap/funding gap/funding-flow/funding flow/funding pipeline/financing pipeline/financing round/term sheets/private financing) in PREREGISTRATION.md or README.md lacks \u22651 proxy/conditional guard phrase within \u00b1400 chars.",
+    "rationale": "Bound #6 is the easiest of all \u00a71 bounds to cross by accident, because any future paragraph adding 'funding-gap closure' or 'capex pipeline' without the proxy guard-language silently turns a proxy-based estimate into an apparent measurement claim. Mechanizing the scan defends the boundary at every commit."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_bound_defender_6_funding_gap_proxy_v1.py",
+    "source_file": "examples/voices/voice_bound_defender_6_funding_gap_proxy_v1.py",
+    "input_parameters": {
+      "documents_to_scan": [
+        "PREREGISTRATION.md",
+        "README.md"
+      ],
+      "guard_search_radius_chars": 400
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "total_funding_mentions": 8,
+    "guarded_mentions": 8,
+    "unguarded_mentions": 0,
+    "documents": [
+      {
+        "doc": "PREREGISTRATION.md",
+        "doc_exists": true,
+        "anchor_mentions": [
+          {
+            "char_offset": 9758,
+            "matched_term": "funding-gap",
+            "context": "...are out of scope for this publication window. | | That the funding-gap closure for earlier-stage alternative-energy app...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 9885,
+            "matched_term": "funding pipeline",
+            "context": "..., modeled in \u00a70, is a measurement of any specific company's funding pipeline. | Funding-gap modeling in this repository...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 9905,
+            "matched_term": "funding-gap",
+            "context": "...a measurement of any specific company's funding pipeline. | Funding-gap modeling in this repository operates against pub...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 10041,
+            "matched_term": "private financing",
+            "context": "...and grant-record proxies. It does not have visibility into private financing rounds, term sheets, or commitments outsid...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 10049,
+            "matched_term": "financing round",
+            "context": "...nt-record proxies. It does not have visibility into private financing rounds, term sheets, or commitments outside of pub...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 10067,
+            "matched_term": "term sheets",
+            "context": "...It does not have visibility into private financing rounds, term sheets, or commitments outside of public record. Result...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 10184,
+            "matched_term": "funding-flow",
+            "context": "...ults are conditional on the proxies used and are not direct funding-flow measurements. | | That a low voice-failure rate...",
+            "guard_phrases_found": [
+              "public bibliometric",
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used",
+              "public record",
+              "outside of public record",
+              "does not have visibility",
+              "specific company",
+              "not direct funding-flow measurements",
+              "conditional on the proxies"
+            ],
+            "guarded": true
+          },
+          {
+            "char_offset": 37378,
+            "matched_term": "term sheets",
+            "context": "...ct does not have \u2014 private financial pipelines, undisclosed term sheets, confidential operator dispatch logs, or non-pub...",
+            "guard_phrases_found": [
+              "bibliometric and grant-record proxies",
+              "grant-record proxies",
+              "proxies used"
+            ],
+            "guarded": true
+          }
+        ]
+      },
+      {
+        "doc": "README.md",
+        "doc_exists": true,
+        "anchor_mentions": []
+      }
+    ],
+    "rationale": "\u00a71 bound #6 defended at this commit: all 8 funding-anchor mention(s) across the scanned documents have \u22651 proxy/conditional guard phrase within \u00b1400 chars.",
+    "computed_at_utc": "2026-05-29T02:48:21.357193+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "55dfda309d5dc1ea4f68c7c6ce003dbe0474748632e2b453ebda9226618db5d9"
+}
