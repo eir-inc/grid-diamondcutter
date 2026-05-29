@@ -1,0 +1,77 @@
+{
+  "voice_name": "flow_allocator_is_not_power_flow_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "heuristic_vs_textbook_dc_power_flow_distance",
+    "bound_defended": "\u00a71 row 1: flow allocator is NOT a DC/AC power-flow solver",
+    "predicted_distance_floor": 0.2,
+    "rationale": "If the heuristic's per-line flows on a benchmark load injection are indistinguishable (within 20% L2-relative distance) from a textbook DC-power-flow approximation on the same grid, the \u00a71 bound is questionable: the project would be claiming a separation that is not observable. This voice tests whether the bound is in fact supported by measurement \u2014 an inverted kill condition: PASS = bound supported (heuristic measurably differs), FAIL = bound counter-observed."
+  },
+  "kill_condition": {
+    "metric": "l2_relative_distance_between_heuristic_and_dc_pf_flows",
+    "predicted_range": [
+      0.2,
+      5.0
+    ],
+    "rule": "INVERTED: pass if distance \u2265 0.20 (bound supported \u2014 measurably different), fail if distance < 0.20 (bound counter-observed \u2014 too similar to DC-PF)",
+    "rationale": "Bound-defender pattern: a \u00a71 honesty bound is itself a project claim that should be testable. If the heuristic's flows match a textbook DC-PF within 20% L2-relative distance, the project's \u00a71 row 1 claim is not supported by measurement and the bound itself must be revised. The 5.0 upper bound rejects degenerate / non-finite distances (e.g., divide-by-zero on a load injection that produces no flow)."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/flow_allocator_is_not_power_flow_v1.py",
+    "source_file": "examples/voices/flow_allocator_is_not_power_flow_v1.py",
+    "input_parameters": {
+      "benchmark_profile": "mixed",
+      "comparison_method": "textbook_dc_power_flow_with_slack_bus_0",
+      "distance_metric": "l2_relative",
+      "random_seed": 211
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "benchmark_profile": "mixed",
+    "heuristic_flows": [
+      0.125,
+      0.125,
+      0.125,
+      0.125,
+      0.125,
+      0.125,
+      0.15,
+      0.15,
+      0.05,
+      0.05,
+      0.05,
+      0.05
+    ],
+    "textbook_dc_pf_flows": [
+      0.208125,
+      0.14187500000000003,
+      0.240625,
+      0.259375,
+      0.259375,
+      0.240625,
+      0.35187499999999994,
+      0.24812499999999996,
+      0.06625,
+      0.08500000000000005,
+      0.10375000000000002,
+      0.08499999999999998
+    ],
+    "l2_relative_distance": 0.48820373568439396
+  },
+  "verdict": {
+    "verdict": "pass",
+    "distance": 0.48820373568439396,
+    "predicted_floor": 0.2,
+    "bound_defended_status": "supported",
+    "rationale": "L2-relative distance 0.4882 \u2265 0.2 \u2014 the heuristic's per-line flows differ measurably from a textbook DC-power-flow approximation on the same grid + injection. \u00a71 row 1 bound (flow allocator NOT a DC-PF solver) is supported by this measurement.",
+    "computed_at_utc": "2026-05-29T00:08:20.662561+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "fd11fca55f354e1d47cb91a228dd5771cac3e9039b20405f6ef7b7448fb72358"
+}
