@@ -1,0 +1,117 @@
+{
+  "voice_name": "texas_feb_2021_recognition_criterion_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "ercot_day_ahead_spot_price_2021",
+    "named_residual": "n_negative_spot_price_hours_in_2021",
+    "predicted_value_lower_bound": 100,
+    "evasion_class_lineage": "substrate_shape_evasion",
+    "shared_recognition_criterion_with": [
+      "germany_2022_recognition_criterion_v1",
+      "california_2000_2001_recognition_criterion_v1"
+    ],
+    "characterization_NOT_claimed": "the voice does NOT pre-assert failed / transient / sustained outcome for Texas Feb 2021 (Uri); characterization is downstream synthesis only (per PREREGISTRATION_PHASE_2.md \u00a74.3 reframe)"
+  },
+  "kill_condition": {
+    "metric": "n_negative_spot_price_hours_in_2021_calendar_year",
+    "predicted_lower_bound": 100,
+    "rule": "pass if n_negative_spot_hours in 2021 \u2265 100 (recognition criterion fires); fail if < 100 (criterion does not fire \u2014 substrate did not exhibit the pre-committed regime-shift signal at the calendar-year granularity)",
+    "rationale": "ERCOT day-ahead spot-prices are public via ERCOT MIS feed; FERC/NERC Final Report (November 2021) documents the February event window. Same \u2265100-hour threshold as Germany 2022 + California 2000-2001 completes the \u00a74 multi-event recognition bracket."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/texas_feb_2021_recognition_criterion_v1.py",
+    "source_file": "phase_2/examples/voices/texas_feb_2021_recognition_criterion_v1.py",
+    "input_parameters": {
+      "public_signal_source": {
+        "feed_name": "ERCOT day-ahead spot-price 2021 (MIS feed)",
+        "country_or_region": "Texas (ERCOT region)",
+        "time_window": "2021-01-01 / 2021-12-31",
+        "citation_anchor": "ERCOT Market Information System (MIS) day-ahead market results 2021; FERC/NERC Final Report on the February 2021 Cold Weather Outages in Texas and the South Central United States (November 2021)"
+      },
+      "cross_phase_consumption": [],
+      "computational_budget": {
+        "max_runtime_seconds_per_run": 60,
+        "max_api_calls_per_run": 0,
+        "max_signal_sample_count": 8760
+      },
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "outcome_category": "recognition_criterion_did_not_fire",
+    "n_negative_spot_hours_annual": 25,
+    "predicted_lower_bound": 100,
+    "peak_month": 4,
+    "peak_month_hours": 7,
+    "monthly_breakdown": [
+      {
+        "month": 1,
+        "n_negative_spot_hours": 0,
+        "source_anchor": "ERCOT MIS day-ahead 2021 + FERC/NERC Final Report (Nov 2021)"
+      },
+      {
+        "month": 2,
+        "n_negative_spot_hours": 0,
+        "source_anchor": "ERCOT MIS day-ahead 2021 + FERC/NERC Final Report \u00a7III (Uri event window)"
+      },
+      {
+        "month": 3,
+        "n_negative_spot_hours": 4,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 4,
+        "n_negative_spot_hours": 7,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 5,
+        "n_negative_spot_hours": 6,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 6,
+        "n_negative_spot_hours": 1,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 7,
+        "n_negative_spot_hours": 0,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 8,
+        "n_negative_spot_hours": 0,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 9,
+        "n_negative_spot_hours": 1,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 10,
+        "n_negative_spot_hours": 3,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 11,
+        "n_negative_spot_hours": 2,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      },
+      {
+        "month": 12,
+        "n_negative_spot_hours": 1,
+        "source_anchor": "ERCOT MIS day-ahead 2021"
+      }
+    ],
+    "rationale": "Annual count 25 < threshold 100. Recognition criterion does NOT fire at the calendar-year granularity. Per \u00a74.3 reframe the voice does NOT pre-assert characterization; downstream synthesis describes what no-fire means against the documented event context. Honest read: ERCOT's market design + Uri scarcity pricing + 2021 winterization gaps produced extreme HIGH price behavior (Feb spike to $9000/MWh cap), not sustained negative prices \u2014 the recognition criterion looking for sustained excess-electricity correctly does not detect that opposite-direction substrate behavior.",
+    "computed_at_utc": "2026-05-29T05:39:58.116451+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "ef28891e5d9631852aeac59684312725f1d6ce4cab6e704f9241152b6c0aad02"
+}
