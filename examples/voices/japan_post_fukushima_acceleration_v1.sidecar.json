@@ -1,0 +1,125 @@
+{
+  "voice_name": "japan_post_fukushima_acceleration_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "japan_renewable_share_trajectory_2010_2023_synthetic",
+    "named_residual": "post_fukushima_acceleration_breakpoint_in_japan_renewable_share_rate",
+    "predicted_breakpoint_range": [
+      2011,
+      2014
+    ],
+    "predicted_piecewise_improvement_floor": 0.2,
+    "rationale": "Fukushima (March 2011) triggered Japan's FIT policy (enacted 2011, effective 2012). If \u00a70's cascade-mechanism is observable in this case, the renewable-share rate should show a piecewise-linear inflection with breakpoint in [2011, 2014]. Forward-mechanism test on a real historical case complement to \u00a74.2 Japan voice (PR #11) which tested qualitative-trajectory recovery of the cascade event itself."
+  },
+  "kill_condition": {
+    "metric": "post_fukushima_acceleration_validity",
+    "rule": "fail if piecewise_rss / linear_rss > 0.80 (no piecewise improvement), fail if recovered_breakpoint_year < 2011 or > 2014 (recovery outside predicted window \u2014 would suggest acceleration predates Fukushima or lags FIT effectiveness by too much)",
+    "rationale": "Composite metric decomposable into two underlying numerical checks, both computable from the publicly-cited synthetic trajectory alone. Piecewise-improvement ratio tests threshold-class shape. Breakpoint-window test rejects spurious recoveries outside the exogenous-event-to-policy-effectiveness window."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/japan_post_fukushima_acceleration_v1.py",
+    "source_file": "examples/voices/japan_post_fukushima_acceleration_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_publicly_cited_METI_IEA_milestones",
+      "japan_re_share_milestones": {
+        "2010": 0.1,
+        "2012": 0.11,
+        "2014": 0.13,
+        "2017": 0.17,
+        "2020": 0.22,
+        "2023": 0.26
+      },
+      "fukushima_event_year": 2011,
+      "fit_policy_effective_year": 2012,
+      "predicted_breakpoint_range": [
+        2011,
+        2014
+      ],
+      "random_seed": 311
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "japan_renewable_share": [
+      0.1,
+      0.10500000000000001,
+      0.11,
+      0.12,
+      0.13,
+      0.14333333333333334,
+      0.15666666666666668,
+      0.17,
+      0.18666666666666668,
+      0.20333333333333334,
+      0.22,
+      0.23333333333333334,
+      0.24666666666666667,
+      0.26
+    ],
+    "rate_years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "yoy_rates": [
+      0.0050000000000000044,
+      0.0049999999999999906,
+      0.009999999999999995,
+      0.010000000000000009,
+      0.013333333333333336,
+      0.013333333333333336,
+      0.013333333333333336,
+      0.016666666666666663,
+      0.016666666666666663,
+      0.016666666666666663,
+      0.013333333333333336,
+      0.013333333333333336,
+      0.013333333333333336
+    ],
+    "linear_rss": 8.063186813186778e-05,
+    "piecewise_rss": 1.4854497354495885e-05,
+    "piecewise_rss_ratio": 0.18422613414093786,
+    "recovered_breakpoint_year": 2017.0
+  },
+  "verdict": {
+    "verdict": "fail",
+    "recovered_breakpoint_year": 2017.0,
+    "piecewise_rss_ratio": 0.18422613414093786,
+    "linear_rss": 8.063186813186778e-05,
+    "piecewise_rss": 1.4854497354495885e-05,
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2017.0 outside predicted window [2011, 2014] (Fukushima\u2192FIT-effectiveness window)",
+    "computed_at_utc": "2026-05-29T01:11:23.780350+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "6e271eb528d3e175eb8a0f934eaaef1947dc7e60e5cdbec7d999c991806bdb41"
+}
