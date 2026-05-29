@@ -1,0 +1,100 @@
+{
+  "voice_name": "network_amplification_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "network_transmission_coefficient",
+    "substrate_target": "min_perturbation_to_trigger_cascade_in_either_region",
+    "named_residual": "network_amplification_relative_threshold_reduction",
+    "predicted_direction": "network_coefficient_up \u2192 cascade_threshold_down (negative)",
+    "predicted_magnitude_range_relative_reduction": [
+      0.3,
+      0.95
+    ],
+    "null_direction": "threshold flat or increasing as network coefficient grows"
+  },
+  "kill_condition": {
+    "metric": "relative_threshold_reduction_at_k1_vs_k0_with_monotonicity_check",
+    "predicted_range_for_reduction": [
+      0.3,
+      0.95
+    ],
+    "rule": "pass if threshold sweep is monotonically non-increasing in k AND relative reduction (k=0 to k=1) is in [0.30, 0.95]; fail if non-monotone OR increasing (null direction realized); fail if reduction < 0.30 (network amplification weaker than predicted); fail if reduction > 0.95 (over-prediction)",
+    "rationale": "Eugene's network-effect refinement (2026-05-29) named the methodology's isolated-region limitation: \u00a74.2 voices model regions standalone, but real renewable cascades amplify across neighbor transmission. This voice tests whether the methodology recovers the predicted amplification direction + magnitude when two regional substrates are coupled across a tunable network coefficient. Eirmath's $-calibration of the methodology is materially different under network amplification (lower capex threshold) than under the isolated-region model. A pass supports wiring eirmath against the network-coupled methodology; a fail supports the isolated-region model as sufficient at the methodology level."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/network_amplification_coupling_v1.py",
+    "source_file": "examples/voices/network_amplification_coupling_v1.py",
+    "input_parameters": {
+      "network_coefficient_sweep": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ],
+      "perturbation_magnitude_search_range": [
+        0.05,
+        1.0
+      ],
+      "perturbation_search_step": 0.05,
+      "n_substrate_steps": 32,
+      "cascade_trigger_threshold_normalized": 0.5,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "outcome_category": "null_direction_threshold_non_monotone",
+    "thresholds_per_k": [
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.1
+    ],
+    "k0_threshold": 0.05,
+    "k1_threshold": 0.1,
+    "relative_reduction": -1.0,
+    "predicted_range_for_reduction": [
+      0.3,
+      0.95
+    ],
+    "sweep_results": [
+      {
+        "network_coefficient": 0.0,
+        "min_perturbation_threshold": 0.05
+      },
+      {
+        "network_coefficient": 0.2,
+        "min_perturbation_threshold": 0.05
+      },
+      {
+        "network_coefficient": 0.4,
+        "min_perturbation_threshold": 0.05
+      },
+      {
+        "network_coefficient": 0.6,
+        "min_perturbation_threshold": 0.05
+      },
+      {
+        "network_coefficient": 0.8,
+        "min_perturbation_threshold": 0.05
+      },
+      {
+        "network_coefficient": 1.0,
+        "min_perturbation_threshold": 0.1
+      }
+    ],
+    "rationale": "Threshold sweep is non-monotone in network coefficient: [0.05, 0.05, 0.05, 0.05, 0.05, 0.1]. The substrate as parameterized models network coupling as resilience (higher k raises the min-perturbation threshold for FAILURE cascade) rather than amplification. Substrate-modeling distinction surfaced by the null: Eugene's original question (does network coupling lower the capex threshold for cascading-renewable ADOPTION) requires a different substrate that models neighbor cheap-renewable export as a downward pressure on local capex price, not the failure-resilience model this voice implements. A v2 voice named network_amplification_adoption_cascade_v1 should model adoption-cascade explicitly. This voice's FAIL is registry-acceptable per \u00a73.4 and itself constitutes evidence that failure-cascade and adoption-cascade have opposite signs in the network coefficient.",
+    "computed_at_utc": "2026-05-29T00:44:25.125108+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "fc52d4b2c31521969955081ddf20cb6fec84809fe04e417fe2670f23d2ecc27d"
+}
