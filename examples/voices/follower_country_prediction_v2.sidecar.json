@@ -1,0 +1,97 @@
+{
+  "voice_name": "follower_country_prediction_v2",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "regulatory_lead_time_v1_prior_plus_leader_cohort_loo_cv_v1_mae_plus_follower_fixture",
+    "named_residual": "n_followers_with_calibration_honest_inflection_in_target_decade",
+    "predicted_value_lower_bound": 2,
+    "target_decade_window": [
+      2027,
+      2037
+    ],
+    "lineage": "v2 of follower_country_prediction_v1 \u2014 uncertainty halfwidth tightened from leader-cohort-range/2 (loose) to LOO-CV MAE (calibration-honest)"
+  },
+  "kill_condition": {
+    "metric": "n_followers_with_inflection_in_target_window_at_loo_mae_halfwidth",
+    "rule": "pass if \u2265 2 of 3 followers have predicted inflection in [2027, 2037] at the LOO-MAE halfwidth (calibration-honest uncertainty); fail otherwise",
+    "rationale": "v1 used leader-cohort-range/2 = 2.5y halfwidth which was a loose upper bound on uncertainty. v2 uses the empirically measured prior prediction error (MAE 1.47y from leader_cohort_loo_cv_v1.sidecar) \u2014 calibration-honest. Same prior, same fixture, tighter uncertainty. If the kill condition is still met at the tighter window, the methodology's forward predictions are well-calibrated; if not, v1 was masking degeneracy with its loose window."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/follower_country_prediction_v2.py",
+    "source_file": "examples/voices/follower_country_prediction_v2.py",
+    "input_parameters": {
+      "leader_prior_sidecar": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+      "loo_cv_sidecar": "examples/voices/leader_cohort_loo_cv_v1.sidecar.json",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "calibration_honest_predictions_in_target_decade",
+    "calibration_inputs": {
+      "mean_lead_time": 8.833333333333334,
+      "loo_mae": 1.4666666666666668,
+      "loo_max_abs": 3.8
+    },
+    "n_followers": 3,
+    "n_followers_in_target_window": 3,
+    "target_decade_window": [
+      2027,
+      2037
+    ],
+    "per_follower_predictions": [
+      {
+        "country": "Poland",
+        "milestone_year": 2020,
+        "milestone_name": "Offshore Wind Act 2020 + RES Act 2018 amendments",
+        "public_source_anchor": "IEA Energy Policy Review: Poland 2022; URE/PSE statistics",
+        "predicted_inflection_year": 2028.83,
+        "calibration_honest_window": [
+          2027.37,
+          2030.3
+        ],
+        "worst_case_window": [
+          2025.03,
+          2032.63
+        ]
+      },
+      {
+        "country": "Romania",
+        "milestone_year": 2020,
+        "milestone_name": "PNIESC National Energy and Climate Plan 2020",
+        "public_source_anchor": "IEA Energy Policy Review: Romania 2023; ANRE statistics",
+        "predicted_inflection_year": 2028.83,
+        "calibration_honest_window": [
+          2027.37,
+          2030.3
+        ],
+        "worst_case_window": [
+          2025.03,
+          2032.63
+        ]
+      },
+      {
+        "country": "Greece",
+        "milestone_year": 2021,
+        "milestone_name": "Law 4843/2021 RES grid acceleration",
+        "public_source_anchor": "IEA Energy Policy Review: Greece 2023; IPTO renewable statistics",
+        "predicted_inflection_year": 2029.83,
+        "calibration_honest_window": [
+          2028.37,
+          2031.3
+        ],
+        "worst_case_window": [
+          2026.03,
+          2033.63
+        ]
+      }
+    ],
+    "rationale": "3/3 followers' calibration-honest windows (\u00b1 1.47y, the LOO-CV MAE) intersect the pre-committed target decade [2027, 2037]. v1's loose \u00b12.5y window did not mask degeneracy \u2014 the predictions are well-calibrated to the leader-cohort's actual retrospective error. Worst-case windows (\u00b1 3.80y, the max LOO abs error) preserved as separate annotation per follower for downstream audit. Per \u00a71 honesty bounds, these remain methodology prior-conditional point estimates, not real-trajectory claims.",
+    "computed_at_utc": "2026-05-29T02:06:33.692776+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "84fbe859bf222cdc0800f3d4aca3a762f31789f39e0b8898563374aaeb6c4de2"
+}
