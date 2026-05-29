@@ -1,0 +1,207 @@
+{
+  "voice_name": "bound_defender_8_eirmath_not_required_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_meta",
+    "named_residual": "PREREGISTRATION \u00a71 bound #8 defense \u2014 the open repository must NOT depend on the proprietary `eirmath` package operationally (no `import eirmath` anywhere in *.py), AND every public mention of `eirmath` must be paired with boundary-guard language within a local window. The bound is uniquely load-bearing for Eugene's phase-A directive (max-out without eirmath, post results via PR/merge); phase-A is precisely the open-repo-only path #8 protects.",
+    "documents_to_scan": [
+      "PREREGISTRATION.md",
+      "README.md"
+    ],
+    "eirmath_anchor_terms": [
+      "eirmath"
+    ],
+    "boundary_guard_phrases_any_of": [
+      "not required",
+      "proprietary",
+      "closed components",
+      "closed component",
+      "not part of this pre-registration's claims",
+      "not part of this pre-registration",
+      "kept private",
+      "evaluable from the open repository alone",
+      "open repository is sufficient",
+      "separate proprietary package",
+      "separate from this repository",
+      "commercial wrapper"
+    ],
+    "guard_search_radius_chars": 400,
+    "structural_check_python_extensions": [
+      ".py"
+    ],
+    "structural_check_excluded_paths": [
+      ".venv",
+      "venv",
+      "__pycache__",
+      ".git",
+      "build",
+      "dist"
+    ],
+    "alarm_semantics": "PASS = \u00a71 bound #8 mechanically defended on both prongs (no open-repo eirmath imports AND every eirmath doc mention is boundary-guarded); FAIL = alarm (either prong drifts \u2014 operational dependency leaked OR documentation guard removed)."
+  },
+  "kill_condition": {
+    "metric": "structural_and_documentation_eirmath_guard_both_hold",
+    "rule": "FAIL (alarm) if (a) any open-repo .py file contains `import eirmath` or `from eirmath`, OR (b) any 'eirmath' mention in scanned docs lacks \u22651 boundary-guard phrase within \u00b1400 chars. PASS iff both hold.",
+    "rationale": "Bound #8 is the single most load-bearing bound for phase-A (Eugene's directive to max-out without eirmath and post via PR/merge). A future edit that adds an `import eirmath` to any open-repo .py would silently break the bound. Mechanizing both the structural and documentation prongs means a CI run at any commit can audit the boundary by inspection of the same artifacts external readers and reviewers see."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_bound_defender_8_eirmath_not_required_v1.py",
+    "source_file": "examples/voices/voice_bound_defender_8_eirmath_not_required_v1.py",
+    "input_parameters": {
+      "documents_to_scan": [
+        "PREREGISTRATION.md",
+        "README.md"
+      ],
+      "guard_search_radius_chars": 400,
+      "structural_scan_root": "/Users/eugenestuckless/grid-diamondcutter-pub"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "structural": {
+      "n_python_files_scanned": 22,
+      "n_eirmath_imports_found": 0,
+      "findings": [],
+      "structural_clean": true
+    },
+    "documentation": {
+      "documents": [
+        {
+          "doc": "PREREGISTRATION.md",
+          "doc_exists": true,
+          "anchor_mentions": [
+            {
+              "char_offset": 10747,
+              "context": "...he closed components of the project's analytical pipeline (`eirmath`, per \u00a76) are required to evaluate any claim made in...",
+              "guard_phrases_found": [
+                "proprietary",
+                "closed components",
+                "closed component",
+                "evaluable from the open repository alone"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 32659,
+              "context": "...ology. Eir, Inc. maintains a separate proprietary package, `eirmath`, that supplies the closed components of the project...",
+              "guard_phrases_found": [
+                "proprietary",
+                "closed components",
+                "closed component",
+                "open repository is sufficient",
+                "separate proprietary package"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 33258,
+              "context": "...ms. The interface boundary between the open repository and `eirmath` is documented in the source code at the points wher...",
+              "guard_phrases_found": [
+                "not required",
+                "proprietary",
+                "closed components",
+                "closed component",
+                "not part of this pre-registration's claims",
+                "not part of this pre-registration",
+                "open repository is sufficient"
+              ],
+              "guarded": true
+            }
+          ]
+        },
+        {
+          "doc": "README.md",
+          "doc_exists": true,
+          "anchor_mentions": [
+            {
+              "char_offset": 8827,
+              "context": "..., documentation, and reproducibility artifacts.  **Closed (`eirmath`, separate Eir, Inc. package):** - The conducting po...",
+              "guard_phrases_found": [
+                "proprietary"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 9750,
+              "context": "...signing layer is worth the commercial terms.  ## Optional `eirmath` extension  The OSS sim defines a small set of abstr...",
+              "guard_phrases_found": [
+                "proprietary"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 9844,
+              "context": "...fines a small set of abstract methods that the proprietary `eirmath` package can plug into:  - `optimize(catalogue)` \u2014 c...",
+              "guard_phrases_found": [
+                "proprietary"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 10087,
+              "context": "...\u2014 HMAC signing service for measurement artifacts.  Without `eirmath` installed, these methods return clear \"install eirm...",
+              "guard_phrases_found": [
+                "not required",
+                "proprietary"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 10143,
+              "context": "...ut `eirmath` installed, these methods return clear \"install eirmath to enable\" stubs. The OSS sim continues to run the m...",
+              "guard_phrases_found": [
+                "not required",
+                "proprietary"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 10260,
+              "context": "...e measurement, catalogue, and cycle-walk standalone.  With `eirmath` installed (`pip install eirmath`, separate commerci...",
+              "guard_phrases_found": [
+                "not required"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 10293,
+              "context": "...le-walk standalone.  With `eirmath` installed (`pip install eirmath`, separate commercial license terms apply), the meth...",
+              "guard_phrases_found": [
+                "not required"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 10398,
+              "context": "...pply), the methods route to closed-source implementations. `eirmath` is not required for any of the OSS sim's measuremen...",
+              "guard_phrases_found": [
+                "not required"
+              ],
+              "guarded": true
+            },
+            {
+              "char_offset": 11477,
+              "context": "...in `CONTRIBUTING.md`. The commercial wrapper (Eir, Inc.'s `eirmath` package, separate from this repository) describes t...",
+              "guard_phrases_found": [
+                "separate from this repository",
+                "commercial wrapper"
+              ],
+              "guarded": true
+            }
+          ]
+        }
+      ],
+      "total_eirmath_mentions": 12,
+      "guarded_mentions": 12,
+      "unguarded_mentions": 0,
+      "documentation_clean": true
+    },
+    "rationale": "\u00a71 bound #8 defended at this commit. Structural: 22 .py files scanned, zero eirmath imports. Documentation: 12 eirmath mentions, all boundary-guarded within \u00b1400 chars.",
+    "computed_at_utc": "2026-05-29T02:44:06.277024+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "fc93d5e9a3f69d9382bfebb6f0d9403a9f7b66f649c1e8e790491c38753b224a"
+}
