@@ -1,0 +1,99 @@
+{
+  "voice_name": "eu_may_2022_repowereu_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrate_source": "regulatory_signal",
+    "substrate_target": "capital_reallocation",
+    "named_residual": "cross_substrate_link_strength_regulatory_signal_to_capital_reallocation",
+    "predicted_direction": "regulatory_signal_strength \u2192 capital_reallocation_share (positive)",
+    "predicted_magnitude_range": [
+      0.3,
+      0.85
+    ],
+    "null_direction": "no correlation OR negative correlation",
+    "calibration_source": "European Commission, REPowerEU Plan, COM(2022) 230 final, 18 May 2022; public. Supporting: ENTSO-E TYNDP 2022, Eurostat energy supply 2021-2023."
+  },
+  "kill_condition": {
+    "metric": "linear_fit_slope_of_capital_reallocation_vs_regulatory_signal",
+    "predicted_range": [
+      0.3,
+      0.85
+    ],
+    "rule": "fail if slope < 0.30 (link weaker than report's lower-bound), fail if slope > 0.85 (over-prediction beyond plan's upper-bound), fail if slope < 0 (null direction realized \u2014 documented direction not recovered)",
+    "rationale": "The voice claims a positive, bounded coupling whose window is taken from the REPowerEU plan's range of accelerant magnitudes interpreted against pre-announcement allocation patterns. Three falsification outcomes are testable from run output alone: slope below the floor, slope above the ceiling, or wrong sign. The null direction is named explicitly so its realization is a registry-acceptable null per \u00a73.4."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/eu_may_2022_repowereu_v1.py",
+    "source_file": "examples/voices/eu_may_2022_repowereu_v1.py",
+    "input_parameters": {
+      "regulatory_signal_scenarios": [
+        0.0,
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "scenario_descriptor": "Six regulatory-signal scenarios from pre-announcement baseline (0.0) to documented plan-target ambition (1.0) interpolated against ENTSO-E TYNDP 2022 reference parameters.",
+      "n_capital_steps_per_scenario": 24,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "within_predicted_range",
+    "observed_slope": 0.49830197860141817,
+    "observed_intercept": 0.0621283084726639,
+    "predicted_range": [
+      0.3,
+      0.85
+    ],
+    "scenario_summaries": [
+      {
+        "regulatory_signal_strength": 0.0,
+        "signal_post_transition_mean": 0.0010350844217738352,
+        "capital_reallocation_post_transition_mean": 0.06212830847266393,
+        "reallocation_peak": 0.08322320782145337
+      },
+      {
+        "regulatory_signal_strength": 0.1,
+        "signal_post_transition_mean": 0.10103508442177385,
+        "capital_reallocation_post_transition_mean": 0.11195850633280574,
+        "reallocation_peak": 0.1376901061959217
+      },
+      {
+        "regulatory_signal_strength": 0.25,
+        "signal_post_transition_mean": 0.25103508442177386,
+        "capital_reallocation_post_transition_mean": 0.18670380312301846,
+        "reallocation_peak": 0.21939045375762414
+      },
+      {
+        "regulatory_signal_strength": 0.5,
+        "signal_post_transition_mean": 0.5010350844217738,
+        "capital_reallocation_post_transition_mean": 0.311279297773373,
+        "reallocation_peak": 0.3555576996937949
+      },
+      {
+        "regulatory_signal_strength": 0.75,
+        "signal_post_transition_mean": 0.7510350844217738,
+        "capital_reallocation_post_transition_mean": 0.43585479242372754,
+        "reallocation_peak": 0.49172494562996566
+      },
+      {
+        "regulatory_signal_strength": 1.0,
+        "signal_post_transition_mean": 1.0010350844217737,
+        "capital_reallocation_post_transition_mean": 0.5604302870740822,
+        "reallocation_peak": 0.6278921915661367
+      }
+    ],
+    "rationale": "Observed slope 0.4983 is within the pre-committed range [0.3000, 0.8500], calibrated from the REPowerEU plan window. The methodology's coupling protocol recovers a shape consistent with the documented direction and magnitude. Per \u00a71 honesty bounds, this is not a real-economy measurement; the substrate is parameterized from the public plan, not from operating capital flows.",
+    "computed_at_utc": "2026-05-28T23:34:12.978486+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "72c885389ffe90e7a9796466fe7cb3610f2f8663384d78523a1b65f5d5e68654"
+}
