@@ -1,0 +1,64 @@
+{
+  "voice_name": "bound_defender_1_allocator_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "default_8_node_grid_with_heuristic_flow_allocator",
+    "named_residual": "per_bus_energy_balance_residual",
+    "predicted_value_lower_bound": 0.05,
+    "verdict_inversion": true,
+    "bound_under_test": "PREREGISTRATION \u00a71 row #1 \u2014 the project will NOT claim the heuristic flow allocator is a DC/AC/EMT/transient-stability/protection solver."
+  },
+  "kill_condition": {
+    "metric": "max_per_bus_energy_balance_residual_normalized",
+    "rule": "pass if residual >= 0.05 (heuristic visibly does not enforce conservation; bound #1 supported by direct measurement), fail if residual < 0.05 (heuristic accidentally satisfies conservation; bound counter-observation requiring flagging-record entry per \u00a71 bound-crossing protocol)",
+    "rationale": "Energy conservation is the defining numerical property of any real power-flow solver. If the heuristic allocator does not enforce it, the \u00a71 bound #1 is supported by direct mechanical observation, not by rhetorical assertion. The verdict logic is inverted relative to standard polyphony voices: pass protects the bound, fail produces evidence that the bound text may be too strict and a v2 bound revision would be in scope under \u00a71 expansion-permitted discipline."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/bound_defender_1_allocator_v1.py",
+    "source_file": "examples/voices/bound_defender_1_allocator_v1.py",
+    "input_parameters": {
+      "test_profile_names": [
+        "peak",
+        "off_peak",
+        "mixed",
+        "spike"
+      ],
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "bound_supported_residual_above_floor_across_all_scenarios",
+    "worst_residual": 2.6666666666666665,
+    "best_residual": 1.8333333333333333,
+    "predicted_lower_bound": 0.05,
+    "scenario_summaries": [
+      {
+        "profile_pair": "peak/peak",
+        "max_residual": 1.8333333333333333
+      },
+      {
+        "profile_pair": "off_peak/off_peak",
+        "max_residual": 2.6666666666666665
+      },
+      {
+        "profile_pair": "mixed/mixed",
+        "max_residual": 2.4
+      },
+      {
+        "profile_pair": "spike/spike",
+        "max_residual": 2.09375
+      }
+    ],
+    "bound_under_test": "PREREGISTRATION \u00a71 row #1 \u2014 the project will NOT claim the heuristic flow allocator is a DC/AC/EMT/transient-stability/protection solver.",
+    "rationale": "Best-case per-bus energy-balance residual 1.8333 (worst 2.6667) is at or above the predicted floor 0.0500 across all tested profile pairs. The heuristic flow allocator visibly does not enforce the conservation invariant a real DC/AC power-flow solver would. \u00a71 bound #1 supported by direct measurement; voice PASSes its inverted kill condition.",
+    "computed_at_utc": "2026-05-29T00:05:51.742612+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "e11113123839a07b3b586151c7864ee6ea2463d79524d17e5ec1ab7d3c53d172"
+}
