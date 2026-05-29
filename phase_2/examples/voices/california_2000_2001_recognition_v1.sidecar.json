@@ -1,0 +1,116 @@
+{
+  "voice_name": "california_2000_2001_recognition_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "california_iso_px_wholesale_spot_price_monthly_avg_1999_2001_synthetic_v1",
+    "named_residual": "california_2000_2001_extreme_spot_price_instability_index_fires_recognition_criterion",
+    "recognition_criterion_threshold": 10.0,
+    "baseline_window": [
+      "1999-01",
+      "1999-12"
+    ],
+    "event_window": [
+      "2000-06",
+      "2001-06"
+    ],
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "Tests whether the methodology recognizes extreme substrate-stress in California Q2-2000 \u2192 Q2-2001 wholesale electricity market. Recognition criterion: ratio of peak-monthly-mean spot price in event window to median spot price in baseline window > 10x. Does NOT pre-assert that this means 'substrate failed to commodify' \u2014 that is downstream synthesis per \u00a74.1 reframe. The voice reports criterion-fires + observed value only."
+  },
+  "kill_condition": {
+    "metric": "california_2000_2001_extreme_spot_price_instability_index",
+    "rule": "fail if peak-event-window-monthly-spot / baseline-median-monthly-spot < 10.0 (recognition criterion does not fire \u2014 substrate did not exhibit extreme spot-price instability at the pre-committed threshold)",
+    "rationale": "Single composite metric: peak-monthly-mean-spot in event window divided by median-monthly-spot in baseline window. Threshold 10x is well below documented FERC Final Report 2003 peak figures (~$750-1000/MWh vs ~$30/MWh baseline = ~25-33x); 10x gives substantial headroom for alternative public-source calibrations."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/california_2000_2001_recognition_v1.py",
+    "source_file": "phase_2/examples/voices/california_2000_2001_recognition_v1.py",
+    "public_signal_source": {
+      "feed_name": "California ISO / PX wholesale spot prices (settlement data)",
+      "country_or_region": "California, USA",
+      "time_window": "1999-01-01 / 2001-12-31",
+      "citation_anchor": "FERC Final Report on California Electricity Crisis, March 2003; California ISO public settlement archives"
+    },
+    "cross_phase_consumption": [],
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_FERC_2003_final_report_summary_tables",
+      "california_monthly_spot_price_usd_mwh": {
+        "1999-01": 24.5,
+        "1999-02": 25.1,
+        "1999-03": 27.3,
+        "1999-04": 28.2,
+        "1999-05": 29.0,
+        "1999-06": 31.5,
+        "1999-07": 35.2,
+        "1999-08": 36.4,
+        "1999-09": 33.1,
+        "1999-10": 30.5,
+        "1999-11": 28.7,
+        "1999-12": 30.8,
+        "2000-01": 31.5,
+        "2000-02": 33.2,
+        "2000-03": 35.1,
+        "2000-04": 38.7,
+        "2000-05": 47.6,
+        "2000-06": 132.4,
+        "2000-07": 115.3,
+        "2000-08": 174.1,
+        "2000-09": 119.6,
+        "2000-10": 103.4,
+        "2000-11": 179.4,
+        "2000-12": 377.2,
+        "2001-01": 318.6,
+        "2001-02": 363.0,
+        "2001-03": 313.8,
+        "2001-04": 370.5,
+        "2001-05": 274.5,
+        "2001-06": 134.5,
+        "2001-07": 79.0,
+        "2001-08": 65.0,
+        "2001-09": 52.8,
+        "2001-10": 41.3,
+        "2001-11": 36.7,
+        "2001-12": 31.9
+      },
+      "random_seed": 2000
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    },
+    "computational_budget": {
+      "max_runtime_seconds": 30,
+      "max_external_api_calls": 0
+    }
+  },
+  "run_output": {
+    "baseline_window": [
+      "1999-01",
+      "1999-12"
+    ],
+    "event_window": [
+      "2000-06",
+      "2001-06"
+    ],
+    "baseline_n_months": 12,
+    "event_n_months": 13,
+    "baseline_median_usd_mwh": 29.75,
+    "event_peak_month": "2000-12",
+    "event_peak_usd_mwh": 377.2,
+    "extreme_spot_price_instability_index": 12.678991596638655,
+    "threshold": 10.0
+  },
+  "verdict": {
+    "verdict": "pass",
+    "extreme_spot_price_instability_index": 12.678991596638655,
+    "threshold": 10.0,
+    "baseline_median_usd_mwh": 29.75,
+    "event_peak_month": "2000-12",
+    "event_peak_usd_mwh": 377.2,
+    "evasion_class_lineage": "data_availability_evasion",
+    "rationale": "Recognition criterion FIRES. extreme_spot_price_instability_index = 12.68x (peak 2000-12 $377.2/MWh vs 1999 baseline median $29.8/MWh), \u2265 10.0x threshold. Voice reports criterion-fires + observed value; downstream synthesis (whether this constitutes 'substrate failed to commodify' or 'transient extreme event' or 'regulatory-design failure') is left to the Phase-2 interpretation document per \u00a74.1 reframe. v2-ratchet to real ISO/PX hourly settlement data required for any external claim.",
+    "computed_at_utc": "2026-05-29T05:36:08.561071+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "cb2bad32d5a53dc621238a6d89984d77aea249b3114d51f12918b00e2fdddfe5"
+}
