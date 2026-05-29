@@ -5,6 +5,9 @@ on:
     paths:
       - 'examples/voices/**'
       - 'tests/test_voice_registry_contract.py'
+      - 'tests/test_qualitative_comparison.py'
+      - 'tools/qualitative_comparison.py'
+      - 'tools/qualitative_fixtures/**'
       - 'meta_sim/**'
       - 'power_grid_sim*.py'
   push:
@@ -12,6 +15,9 @@ on:
     paths:
       - 'examples/voices/**'
       - 'tests/test_voice_registry_contract.py'
+      - 'tests/test_qualitative_comparison.py'
+      - 'tools/qualitative_comparison.py'
+      - 'tools/qualitative_fixtures/**'
       - 'meta_sim/**'
       - 'power_grid_sim*.py'
 
@@ -68,3 +74,38 @@ jobs:
             fi
             python "$voice" > /dev/null 2>&1 || echo "::warning::voice $voice failed to run"
           done
+
+      - name: §4.3 qualitative-trajectory recovery fixture check
+        if: hashFiles('tools/qualitative_comparison.py') != '' && hashFiles('tools/qualitative_fixtures/*.fixture.json') != ''
+        run: |
+          # For each §4.3 fixture in tools/qualitative_fixtures/, locate the
+          # matching voice sidecar and run the harness. A fixture exists per
+          # §4.2 historical-event voice; the harness adjudicates whether the
+          # voice's run output is consistent with the documented public source
+          # fragment named in the fixture. CI fails if any pair produces
+          # no_recover. Missing-pair (fixture without sidecar, or vice versa)
+          # is a non-fatal notice.
+          any_failed=0
+          any_checked=0
+          for fixture in tools/qualitative_fixtures/*.fixture.json; do
+            [ -e "$fixture" ] || continue
+            voice_name=$(python -c "import json,sys; print(json.load(open('$fixture'))['voice_name'])")
+            sidecar="examples/voices/${voice_name}.sidecar.json"
+            if [ ! -f "$sidecar" ]; then
+              echo "::notice::fixture $fixture has no matching sidecar at $sidecar — skipping"
+              continue
+            fi
+            any_checked=$((any_checked + 1))
+            echo "::group::§4.3 harness: $voice_name"
+            if python tools/qualitative_comparison.py --sidecar "$sidecar" --fixture "$fixture"; then
+              echo "::notice::§4.3 recover: $voice_name"
+            else
+              echo "::error::§4.3 no_recover: $voice_name (fixture rules not all satisfied by sidecar)"
+              any_failed=1
+            fi
+            echo "::endgroup::"
+          done
+          if [ "$any_checked" -eq 0 ]; then
+            echo "::notice::no §4.3 fixture/sidecar pairs found — nothing to check"
+          fi
+          exit $any_failed
