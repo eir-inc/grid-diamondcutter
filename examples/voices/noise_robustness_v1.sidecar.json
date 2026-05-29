@@ -1,0 +1,65 @@
+{
+  "voice_name": "noise_robustness_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "stability of cycle_residual under small Gaussian perturbation of line capacities. If the measurement is meaningful, modest noise should not change the unsigned cycle_residual by more than 50% across N=20 trials of 5% multiplicative Gaussian noise on line capacities.",
+    "baseline_unsigned_cycle_residual": 0.0465,
+    "predicted_max_relative_drift": 0.5,
+    "noise_sigma_relative": 0.05,
+    "n_trials": 20
+  },
+  "kill_condition": {
+    "metric": "max_absolute_relative_drift_across_trials",
+    "rule": "fail if any of the 20 trials produces an unsigned cycle_residual more than 50% different from the baseline unsigned cycle_residual (i.e., |observed - baseline| / baseline > 0.50)",
+    "rationale": "A measurement that swings >50% under modest 5% noise on a single parameter is not robust enough to support cross-region claims. Failure indicates the cycle_residual is sensitive in a way that limits the measurement's usefulness, which is itself a registry-worthy finding."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_noise_robustness_v1.py",
+    "source_file": "examples/voices/voice_noise_robustness_v1.py",
+    "input_parameters": {
+      "random_seed": 42,
+      "n_trials": 20,
+      "noise_sigma_relative": 0.05,
+      "station_set": "default rotating-load-profile (5 stations)"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "max_relative_drift_observed": 30.16414938275104,
+    "threshold": 0.5,
+    "trial_residuals": [
+      1.4491329462979234,
+      0.7389072236109727,
+      0.0435,
+      0.042499999999999996,
+      0.7394215355827062,
+      0.042499999999999996,
+      0.048,
+      0.0445,
+      0.048,
+      0.7406558942565609,
+      0.042,
+      0.0455,
+      0.043500000000000004,
+      0.738605011982357,
+      0.7388574002022003,
+      0.0415,
+      0.0485,
+      0.7407731010666555,
+      0.045000000000000005,
+      0.0435
+    ],
+    "mean_relative_drift": 6.018121626881049,
+    "std_relative_drift": 8.713081271704239,
+    "rationale": "Max relative drift across trials = 3016.4%, exceeds predicted threshold 50%. The cycle_residual is not robust to 5% noise at the scope tested. Voice enters the null-voice ledger per \u00a73.4.",
+    "computed_at_utc": "2026-05-28T22:53:06.674300+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "761e36d874d7c07dbd3152cf7e8338e36a4670106c7e725003fe026129f3aa92"
+}
