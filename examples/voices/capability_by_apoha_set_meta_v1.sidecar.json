@@ -1,0 +1,78 @@
+{
+  "voice_name": "capability_by_apoha_set_meta_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_sidecar_set_consumed_apoha_set_definition",
+    "named_residual": "apoha_set_capability_recognized",
+    "predicted_value": "all_not_clauses_pass_and_at_least_one_positive_pass",
+    "capability_claim": "methodology recognizes a structurally-recoverable cascade phenomenon under bounded conditions, defined by negation across registry voices"
+  },
+  "kill_condition": {
+    "metric": "apoha_set_recognition_predicate",
+    "rule": "pass if all NOT-clause sidecars have verdict=='pass' AND at least one POSITIVE-clause sidecar has verdict=='pass'; fail if any NOT-clause fails (bound counter-observation) OR no positive passes (no residual)",
+    "rationale": "Mechanizes Eugene's 2026-05-29 directive: capabilities defined by negation. Each NOT-clause is a registered inverted-kill voice; each POSITIVE-clause is a registered standard voice. The meta-voice computes the apoha-set predicate from sidecar verdicts alone. No new substrate, no new measurements \u2014 just a mechanical predicate over the registry's existing audit-trailed verdicts."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/capability_by_apoha_set_meta_v1.py",
+    "source_file": "examples/voices/capability_by_apoha_set_meta_v1.py",
+    "input_parameters": {
+      "not_clause_sidecars": [
+        "examples/voices/threshold_cascade_v1.sidecar.json",
+        "examples/voices/region_transfer_failure_v1.sidecar.json",
+        "examples/voices/bound_defender_1_allocator_v1.sidecar.json",
+        "examples/voices/bound_defender_2_adapter_stubs_source_inspection_v1.sidecar.json"
+      ],
+      "positive_clause_sidecars": [
+        "examples/voices/threshold_cascade_v2.sidecar.json"
+      ],
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "partial",
+    "outcome_category": "sidecars_not_all_present",
+    "n_not_clauses": 4,
+    "n_not_clauses_available": 0,
+    "n_not_clauses_pass": 0,
+    "n_positive_clauses": 1,
+    "n_positive_clauses_available": 0,
+    "n_positive_clauses_pass": 0,
+    "not_clause_verdicts": [
+      {
+        "voice_name": "threshold_cascade_v1",
+        "verdict": null,
+        "available": false
+      },
+      {
+        "voice_name": "region_transfer_failure_v1",
+        "verdict": null,
+        "available": false
+      },
+      {
+        "voice_name": "bound_defender_1_allocator_v1",
+        "verdict": null,
+        "available": false
+      },
+      {
+        "voice_name": "bound_defender_2_adapter_stubs_source_inspection_v1",
+        "verdict": null,
+        "available": false
+      }
+    ],
+    "positive_clause_verdicts": [
+      {
+        "voice_name": "threshold_cascade_v2",
+        "verdict": null,
+        "available": false
+      }
+    ],
+    "capability_claim": "methodology recognizes a structurally-recoverable cascade phenomenon under bounded conditions, defined by negation across registry voices",
+    "rationale": "Apoha-set incomplete: 0/4 NOT-clause sidecars and 0/1 POSITIVE-clause sidecars available. Voice cannot fully evaluate the capability predicate. Will re-evaluate once all referenced sidecars merge to main.",
+    "computed_at_utc": "2026-05-29T02:26:00.597878+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "7e27356d1bfb607281a1ffc998b89f574aa6ed40d4510f1fb8afa4b80d6c3be4"
+}
