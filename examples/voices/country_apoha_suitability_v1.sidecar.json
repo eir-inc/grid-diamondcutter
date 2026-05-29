@@ -1,0 +1,167 @@
+{
+  "voice_name": "country_apoha_suitability_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "10_candidate_countries_public_data_parameter_values_2022_2023",
+    "named_residual": "n_countries_passing_all_four_not_blocker_apoha_checks",
+    "predicted_value_lower_bound": 3,
+    "apoha_definition": "country well-suited for positive grid-resiliency cascade iff it is NOT-fossil-locked AND NOT-transmission-constrained AND NOT-research-shallow AND NOT-policy-fragmented"
+  },
+  "kill_condition": {
+    "metric": "n_countries_with_full_apoha_set",
+    "rule": "pass if n_countries with full apoha-set \u2265 3 (methodology identifies viable candidate set), fail if n_countries < 3 (criteria as parameterized do not produce enough candidates \u2014 needs criteria revision OR fewer countries qualify than expected)",
+    "rationale": "Apoha-set membership is mechanically testable from the inline public-data fixture against four pre-committed thresholds. The verdict predicate is a count, computable from run output alone. Real cascade dynamics in any named country are NOT claimed; the verdict is about the methodology's identification capability under the named criteria."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/country_apoha_suitability_v1.py",
+    "source_file": "examples/voices/country_apoha_suitability_v1.py",
+    "input_parameters": {
+      "candidate_countries": [
+        "Denmark",
+        "Germany",
+        "Norway",
+        "Iceland",
+        "Portugal",
+        "Spain",
+        "Austria",
+        "Sweden",
+        "Finland",
+        "United Kingdom"
+      ],
+      "blocker_thresholds": {
+        "fossil_locked_renewable_share_max": 0.25,
+        "transmission_constrained_interconnect_ratio_min": 0.1,
+        "research_shallow_rnd_gdp_share_min": 0.0005,
+        "policy_fragmented_named_plan_required": true
+      },
+      "data_vintage": "2022-2023"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "apoha_criteria_identify_viable_candidate_set",
+    "n_countries_with_full_apoha_set": 9,
+    "full_apoha_set_countries": [
+      "Denmark",
+      "Germany",
+      "Norway",
+      "Portugal",
+      "Spain",
+      "Austria",
+      "Sweden",
+      "Finland",
+      "United Kingdom"
+    ],
+    "predicted_lower_bound": 3,
+    "ranked_candidates": [
+      {
+        "country": "Austria",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Denmark",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Finland",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Germany",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Norway",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Portugal",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Spain",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Sweden",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "United Kingdom",
+        "n_not_blockers_satisfied": 4,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": true,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      },
+      {
+        "country": "Iceland",
+        "n_not_blockers_satisfied": 3,
+        "not_blockers": {
+          "NOT_fossil_locked": true,
+          "NOT_transmission_constrained": false,
+          "NOT_research_shallow": true,
+          "NOT_policy_fragmented": true
+        }
+      }
+    ],
+    "data_vintage": "2022-2023",
+    "rationale": "Apoha-set evaluation across 10 candidate countries identifies 9 country/ies satisfying all four NOT-blocker checks: ['Denmark', 'Germany', 'Norway', 'Portugal', 'Spain', 'Austria', 'Sweden', 'Finland', 'United Kingdom']. This meets or exceeds the pre-committed lower bound of 3. The methodology's apoha-criteria, applied to public 2022-2023 parameters, identify a viable candidate set. Per \u00a71 honesty bounds this voice does NOT claim real cascade dynamics in any named country \u2014 it claims the methodology's identification capability under the named criteria.",
+    "computed_at_utc": "2026-05-29T00:55:59.870319+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "3ac4edfcf9e20ff4f9cc3c0a2757dcf65a241d8ae8f2310ebd3a304be5fe89ef"
+}
