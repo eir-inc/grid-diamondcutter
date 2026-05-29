@@ -1,0 +1,142 @@
+{
+  "voice_name": "lead_time_prior_crisis_robustness_defender_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "regulatory_lead_time_v1_leader_fixture",
+    "named_residual": "n_leaders_with_crisis_overlap_in_policy_to_deployment_window",
+    "predicted_value_upper_bound": 0,
+    "verdict_inversion": true,
+    "bound_under_test": "Empirical bound surfaced by cajal PR #48: leader-cohort lead-time prior assumes NO exogenous economic crisis during the policy \u2192 deployment window.",
+    "documented_crisis_periods": [
+      {
+        "name": "Global Financial Crisis",
+        "start": 2008,
+        "end": 2010,
+        "scope": "worldwide"
+      },
+      {
+        "name": "Eurozone Sovereign Debt Crisis",
+        "start": 2010,
+        "end": 2015,
+        "scope": "Eurozone members"
+      },
+      {
+        "name": "Oil Price Collapse",
+        "start": 2014,
+        "end": 2016,
+        "scope": "oil-exporting + petrostates"
+      },
+      {
+        "name": "COVID-19 + Energy Crisis",
+        "start": 2020,
+        "end": 2022,
+        "scope": "worldwide"
+      }
+    ]
+  },
+  "kill_condition": {
+    "metric": "n_leader_pd_windows_overlapping_documented_crisis_period",
+    "rule": "pass if 0 leader policy \u2192 deployment windows overlap any documented crisis period (bound supported by fixture inspection); fail if any leader overlaps (bound counter-observation; prior may be crisis-contaminated)",
+    "rationale": "Crisis-window overlap is detectable from the public fixture data alone \u2014 milestone_year and inflection_year are already in the v1 sidecar; crisis periods are documented in public sources. The inverted kill protects the bound surfaced by cajal #48. A FAIL would require either a v2 prior with crisis-affected leaders removed or an explicit broadening of the bound text."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/lead_time_prior_crisis_robustness_defender_v1.py",
+    "source_file": "examples/voices/lead_time_prior_crisis_robustness_defender_v1.py",
+    "input_parameters": {
+      "leader_prior_sidecar": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "outcome_category": "bound_counter_observation_crisis_contamination",
+    "n_leaders_inspected": 6,
+    "n_leaders_with_crisis_overlap": 5,
+    "predicted_upper_bound": 0,
+    "per_leader_crisis_check": [
+      {
+        "country": "Denmark",
+        "policy_to_deployment_window": [
+          1992,
+          2001
+        ],
+        "overlapping_documented_crises": [],
+        "n_overlapping_crises": 0,
+        "has_crisis_overlap": false
+      },
+      {
+        "country": "Germany",
+        "policy_to_deployment_window": [
+          2000,
+          2009
+        ],
+        "overlapping_documented_crises": [
+          "Global Financial Crisis"
+        ],
+        "n_overlapping_crises": 1,
+        "has_crisis_overlap": true
+      },
+      {
+        "country": "Spain",
+        "policy_to_deployment_window": [
+          2007,
+          2014
+        ],
+        "overlapping_documented_crises": [
+          "Global Financial Crisis",
+          "Eurozone Sovereign Debt Crisis",
+          "Oil Price Collapse"
+        ],
+        "n_overlapping_crises": 3,
+        "has_crisis_overlap": true
+      },
+      {
+        "country": "Portugal",
+        "policy_to_deployment_window": [
+          2001,
+          2010
+        ],
+        "overlapping_documented_crises": [
+          "Global Financial Crisis",
+          "Eurozone Sovereign Debt Crisis"
+        ],
+        "n_overlapping_crises": 2,
+        "has_crisis_overlap": true
+      },
+      {
+        "country": "United_Kingdom",
+        "policy_to_deployment_window": [
+          2002,
+          2014
+        ],
+        "overlapping_documented_crises": [
+          "Global Financial Crisis",
+          "Eurozone Sovereign Debt Crisis",
+          "Oil Price Collapse"
+        ],
+        "n_overlapping_crises": 3,
+        "has_crisis_overlap": true
+      },
+      {
+        "country": "Italy",
+        "policy_to_deployment_window": [
+          2005,
+          2012
+        ],
+        "overlapping_documented_crises": [
+          "Global Financial Crisis",
+          "Eurozone Sovereign Debt Crisis"
+        ],
+        "n_overlapping_crises": 2,
+        "has_crisis_overlap": true
+      }
+    ],
+    "rationale": "5 leader(s) have policy \u2192 deployment windows overlapping documented crisis periods: [('Germany', ['Global Financial Crisis']), ('Spain', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis', 'Oil Price Collapse']), ('Portugal', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis']), ('United_Kingdom', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis', 'Oil Price Collapse']), ('Italy', ['Global Financial Crisis', 'Eurozone Sovereign Debt Crisis'])]. Crosses the pre-committed upper bound of 0. The v1 prior may be crisis-contaminated; a v2 refit excluding these countries would produce a different mean lead-time + different forward predictions. cajal's chain-loop test would validate the v2.",
+    "computed_at_utc": "2026-05-29T02:44:48.220545+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "7500866ecacbc7800bc7db7e3bab09e1e452505a0d8c033f954c0214bb3a6be6"
+}
