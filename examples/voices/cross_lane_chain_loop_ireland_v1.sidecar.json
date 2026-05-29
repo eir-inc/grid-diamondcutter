@@ -1,0 +1,163 @@
+{
+  "voice_name": "cross_lane_chain_loop_ireland_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "ireland_renewable_share_trajectory_2010_2023_synthetic_v1_for_cross_lane_chain_test",
+    "named_residual": "ireland_re_share_inflection_year_falls_within_miles_prior_calibrated_window",
+    "policy_anchor_year": 2009,
+    "miles_prior_chain": {
+      "source_chain": [
+        "PR #30 regulatory_lead_time_v1",
+        "PR #33 leader_cohort_loo_cv_v1",
+        "PR #40 regulatory_lead_time_v2"
+      ],
+      "mean_lead_time_years": 8.83,
+      "loo_mae_years": 1.47,
+      "expanded_cohort_mean_years": 8.92
+    },
+    "predicted_inflection_window": [
+      2016.36,
+      2019.3
+    ],
+    "piecewise_improvement_floor": 0.2,
+    "rationale": "Closes miles lead-time chain (#30 \u2192 #33 \u2192 #40) by applying the calibrated prior to Ireland (non-leader cohort, documented FIT policy anchor 2009). Predicts inflection year \u2208 [2016.36, 2019.3] AND piecewise-linear fit improves on linear by \u2265 20% (same methodology as cajal #7 + #32 polyphony voice geometry). PASS = chain closes at cross-lane consumer level; FAIL = chain breaks at new-country generalization."
+  },
+  "kill_condition": {
+    "metric": "ireland_inflection_year_validity_under_miles_prior",
+    "rule": "fail if recovered_breakpoint_year outside predicted_inflection_window (prior does not generalize to Ireland); fail if piecewise_rss / linear_rss > 0.80 (no inflection detectable regardless of year window)",
+    "rationale": "Composite metric \u2014 inflection-year-within-window AND piecewise-fit-improves-on-linear. First condition tests chain closure; second rejects spurious recoveries on flat substrate."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/cross_lane_chain_loop_ireland_v1.py",
+    "source_file": "examples/voices/cross_lane_chain_loop_ireland_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_publicly_cited_IEA_Eurostat_milestones",
+      "ireland_re_share_milestones": {
+        "2010": 0.14,
+        "2012": 0.19,
+        "2014": 0.24,
+        "2016": 0.26,
+        "2018": 0.33,
+        "2020": 0.42,
+        "2022": 0.38,
+        "2023": 0.41
+      },
+      "policy_anchor_year": 2009,
+      "miles_prior_mean": 8.83,
+      "miles_prior_mae": 1.47,
+      "random_seed": 1821
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "ireland_re_share": [
+      0.14,
+      0.165,
+      0.19,
+      0.215,
+      0.24,
+      0.25,
+      0.26,
+      0.29500000000000004,
+      0.33,
+      0.375,
+      0.42,
+      0.4,
+      0.38,
+      0.41
+    ],
+    "rate_years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "yoy_rates": [
+      0.024999999999999994,
+      0.024999999999999994,
+      0.024999999999999994,
+      0.024999999999999994,
+      0.010000000000000009,
+      0.010000000000000009,
+      0.03500000000000003,
+      0.034999999999999976,
+      0.044999999999999984,
+      0.044999999999999984,
+      -0.019999999999999962,
+      -0.020000000000000018,
+      0.02999999999999997
+    ],
+    "linear_rss": 0.005026373626373626,
+    "piecewise_rss": 0.0038566666666667838,
+    "piecewise_rss_ratio": 0.7672861098965399,
+    "recovered_breakpoint_year": 2020.0,
+    "policy_anchor_year": 2009,
+    "predicted_inflection_window": [
+      2016.36,
+      2019.3
+    ],
+    "miles_prior_chain": {
+      "source_chain": [
+        "PR #30 regulatory_lead_time_v1",
+        "PR #33 leader_cohort_loo_cv_v1",
+        "PR #40 regulatory_lead_time_v2"
+      ],
+      "mean_lead_time_years": 8.83,
+      "loo_mae_years": 1.47,
+      "expanded_cohort_mean_years": 8.92
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "recovered_breakpoint_year": 2020.0,
+    "predicted_inflection_window": [
+      2016.36,
+      2019.3
+    ],
+    "piecewise_rss_ratio": 0.7672861098965399,
+    "miles_prior_used": {
+      "source_chain": [
+        "PR #30 regulatory_lead_time_v1",
+        "PR #33 leader_cohort_loo_cv_v1",
+        "PR #40 regulatory_lead_time_v2"
+      ],
+      "mean_lead_time_years": 8.83,
+      "loo_mae_years": 1.47,
+      "expanded_cohort_mean_years": 8.92
+    },
+    "policy_anchor_year": 2009,
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2020.0 outside miles-prior-calibrated window [2016.36, 2019.3] (chain does not close at Ireland). This is informative cross-lane data on where the methodology chain breaks at new-country generalization.",
+    "computed_at_utc": "2026-05-29T02:38:52.691411+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "9fe724fbd4de8de5d5bdcb30e451f604801d57576fc288544cf2ad6e77db60f5"
+}
