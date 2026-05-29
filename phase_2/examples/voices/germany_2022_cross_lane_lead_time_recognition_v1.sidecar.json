@@ -1,0 +1,145 @@
+{
+  "voice_name": "germany_2022_cross_lane_lead_time_recognition_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "germany_2022_negative_spot_price_hour_count_trajectory_synthetic_v1",
+    "named_residual": "germany_negative_spot_price_hour_count_inflection_year_falls_within_miles_prior_calibrated_window",
+    "policy_anchor_year": 2013,
+    "predicted_inflection_window": [
+      2020.36,
+      2023.3
+    ],
+    "piecewise_improvement_floor": 0.2,
+    "evasion_class_lineage": "cross_lane_prior_generalization_evasion",
+    "rationale": "Tests cross-lane generalization of miles's Phase-A lead-time prior (#30, #40 v2) from the policy \u2192 deployment substrate-class to the monetary-phase substrate-class. Recognition criterion: piecewise-linear inflection in Germany negative-spot-price-hour count YoY with breakpoint year \u2208 [2020.36, 2023.3] AND piecewise/linear RSS ratio \u2264 0.80. PASS = prior generalizes across substrate-class. FAIL = prior is substrate-class-bounded. Either is informative Phase-2 registry data on the evasion spring's geometry."
+  },
+  "kill_condition": {
+    "metric": "germany_2022_inflection_year_validity_under_miles_prior",
+    "rule": "fail if recovered_breakpoint_year outside predicted_inflection_window (miles prior does not generalize to monetary-phase substrate); fail if piecewise_rss / linear_rss > 0.80 (no inflection detectable regardless of year window \u2014 substrate has no monetary-phase signal)",
+    "rationale": "Composite metric \u2014 inflection-year-within-window AND piecewise-fit-improves-on-linear. First condition tests cross-lane generalization. Second rejects spurious recoveries on flat / noise substrate. Same shape as Phase-A cajal #48/#52 chain-loop voices."
+  },
+  "run_protocol": {
+    "entry_point": "python phase_2/examples/voices/germany_2022_cross_lane_lead_time_recognition_v1.py",
+    "source_file": "phase_2/examples/voices/germany_2022_cross_lane_lead_time_recognition_v1.py",
+    "public_signal_source": {
+      "feed_name": "ENTSO-E Transparency Platform day-ahead prices + national operator daily reports",
+      "country_or_region": "Germany",
+      "time_window": "2016-01-01 / 2023-12-31",
+      "citation_anchor": "ENTSO-E TP API spec; BMWi 2022 Annual Energy Report; AGEE-Stat 2023 release"
+    },
+    "cross_phase_consumption": [
+      {
+        "consumed_voice_name": "regulatory_lead_time_v1",
+        "consumed_sidecar_path": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+        "consumed_phase": "phase_1",
+        "consumption_kind": "prior_anchor"
+      }
+    ],
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_from_publicly_cited_BMWi_AGEE_Stat_ENTSO_E_summaries",
+      "germany_negative_spot_price_hour_count_milestones": {
+        "2016": 18,
+        "2017": 25,
+        "2018": 22,
+        "2019": 28,
+        "2020": 25,
+        "2021": 30,
+        "2022": 115,
+        "2023": 290
+      },
+      "policy_anchor_year": 2013,
+      "miles_prior_mean": 8.83,
+      "miles_prior_mae": 1.47,
+      "random_seed": 2022
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    },
+    "computational_budget": {
+      "max_runtime_seconds": 60,
+      "max_external_api_calls": 0
+    }
+  },
+  "run_output": {
+    "years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "germany_neg_spot_price_hour_count": [
+      18.0,
+      25.0,
+      22.0,
+      28.0,
+      25.0,
+      30.0,
+      115.0,
+      290.0
+    ],
+    "rate_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "yoy_changes": [
+      7.0,
+      -3.0,
+      6.0,
+      -3.0,
+      5.0,
+      85.0,
+      175.0
+    ],
+    "linear_rss": 10943.107142857143,
+    "piecewise_rss": 114.26666666656843,
+    "piecewise_rss_ratio": 0.010441885030903066,
+    "recovered_breakpoint_year": 2020.0,
+    "policy_anchor_year": 2013,
+    "predicted_inflection_window": [
+      2020.36,
+      2023.3
+    ],
+    "miles_prior_consumed": {
+      "consumed_voice_name": "regulatory_lead_time_v1",
+      "consumed_sidecar_path": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+      "consumed_phase": "phase_1",
+      "consumption_kind": "prior_anchor",
+      "mean_lead_time_years": 8.83,
+      "loo_mae_years": 1.47
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "recovered_breakpoint_year": 2020.0,
+    "predicted_inflection_window": [
+      2020.36,
+      2023.3
+    ],
+    "piecewise_rss_ratio": 0.010441885030903066,
+    "policy_anchor_year": 2013,
+    "miles_prior_consumed": {
+      "consumed_voice_name": "regulatory_lead_time_v1",
+      "consumed_sidecar_path": "examples/voices/regulatory_lead_time_v1.sidecar.json",
+      "consumed_phase": "phase_1",
+      "consumption_kind": "prior_anchor",
+      "mean_lead_time_years": 8.83,
+      "loo_mae_years": 1.47
+    },
+    "evasion_class_lineage": "cross_lane_prior_generalization_evasion",
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: recovered breakpoint year 2020.0 outside miles-prior window [2020.36, 2023.3] (cross-lane prior does NOT generalize to monetary-phase substrate; cross_lane_prior_generalization_evasion spring observed). This FAIL is informative Phase-2 registry data on the cross_lane_prior_generalization_evasion spring's geometry per \u00a73.6 lineage declaration.",
+    "computed_at_utc": "2026-05-29T04:11:54.681235+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "95704a3f4ff58dd42cfe1155241afe9129a345e32cfaa8eff0e75e2341e3a52e"
+}
