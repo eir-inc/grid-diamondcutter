@@ -1,0 +1,22 @@
+{
+  "honesty_bound_defended": "\u00a71 bound #4: cascade results from the methodology are NOT predictions of what the real economy or real grid will do. They are conditional findings under stated modeling assumptions.",
+  "kill_condition_rule": "fail if n_matches > 0 across the scan-target file set (after excluding this voice's own files)",
+  "observed": {
+    "files_scanned": [
+      "examples/voices/_voice_template.py",
+      "examples/voices/bound_defender_3_pac_tracks_wiring_strength_v1.py",
+      "examples/voices/example_coupling_voice.py",
+      "examples/voices/example_polyphony_voice.py",
+      "examples/voices/bound_defender_3_pac_tracks_wiring_strength_v1.sidecar.json",
+      "examples/voices/demand_response_polyphony_v1.sidecar.json",
+      "examples/voices/regulatory_grid_coupling_v1.sidecar.json"
+    ],
+    "matches": [],
+    "n_files_scanned": 7,
+    "n_matches": 0
+  },
+  "run_sha256": "673105f3e9c1243fdbf166dba151707b9cc90769954d1b2762f7766370e9015c",
+  "run_timestamp_utc": "2026-05-29T02:42:18.466976+00:00",
+  "verdict": "pass",
+  "voice_name": "bound_defender_4_no_forecast_language_v1"
+}
