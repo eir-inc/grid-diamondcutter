@@ -1,0 +1,71 @@
+{
+  "voice_name": "texas_uri_temperature_collapse_real_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "noaa_ncei_texas_uri_feb_2021_v1_real_frozen_snapshot",
+    "named_residual": "multi_station_tmin_drop_recognizable_during_uri_peak_window_in_real_data",
+    "predicted_n_stations_with_drop": 5,
+    "predicted_minimum_tmin_drop_celsius": 10.0,
+    "baseline_window_dates": [
+      "2021-02-11",
+      "2021-02-12"
+    ],
+    "event_window_dates": [
+      "2021-02-14",
+      "2021-02-15",
+      "2021-02-16",
+      "2021-02-17"
+    ],
+    "rationale": "Texas Uri produced documented record cold across the state in mid-Feb 2021. Dallas hit -19\u00b0C per NOAA / ERCOT post-event reports. A simple multi-station TMIN-drop test on the real NOAA snapshot should detect: at least 5 of 7 Texas stations show event-window TMIN \u2265 10\u00b0C colder than pre-event baseline. If \u00a70 cascade-mechanism recognition holds on real-data substrate, this should PASS. FAIL would indicate either (a) the event was less severe than reported, (b) data unit / scaling issue in the snapshot, or (c) station selection didn't capture the event geographically."
+  },
+  "kill_condition": {
+    "metric": "n_stations_with_tmin_drop_geq_threshold",
+    "rule": "fail if fewer than 5 of 7 stations show event-window TMIN at least 10\u00b0C colder than baseline-window TMIN (signal below pre-committed multi-station co-recognition floor)",
+    "rationale": "Simple composite metric \u2014 count stations meeting the per-station TMIN-drop threshold. Multi-station floor avoids single-anomaly false-PASS; magnitude floor encodes the documented event severity."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/texas_uri_temperature_collapse_real_v1.py",
+    "source_file": "examples/voices/texas_uri_temperature_collapse_real_v1.py",
+    "input_parameters": {
+      "data_source": "noaa_ncei",
+      "data_event": "texas_uri_feb_2021",
+      "data_version": "v1",
+      "data_loader": "tools/data_ingestion.py:load_snapshot",
+      "depends_on_pr": "#28 groove/real-noaa-uri-fetcher-v1 (provides v1 snapshot)",
+      "random_seed": 211
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "run_output": {
+    "n_stations_total": 0,
+    "n_stations_meeting_threshold": 0,
+    "threshold_celsius": 10.0,
+    "baseline_dates": [
+      "2021-02-11",
+      "2021-02-12"
+    ],
+    "event_dates": [
+      "2021-02-14",
+      "2021-02-15",
+      "2021-02-16",
+      "2021-02-17"
+    ],
+    "per_station": {},
+    "data_source_snapshot_sha256": null,
+    "dependency_unmet": "PR #28 groove/real-noaa-uri-fetcher-v1 not yet merged; v1 snapshot unavailable on main"
+  },
+  "verdict": {
+    "verdict": "fail",
+    "n_stations_total": 0,
+    "n_stations_meeting_threshold": 0,
+    "n_stations_required": 5,
+    "threshold_celsius": 10.0,
+    "dependency_unmet": "PR #28 groove/real-noaa-uri-fetcher-v1 not yet merged; v1 snapshot unavailable on main",
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Dependency unmet: PR #28 groove/real-noaa-uri-fetcher-v1 not yet merged; v1 snapshot unavailable on main. Voice file is registry-resident and will re-run automatically once dependency lands on main. Last local-test verdict (against groove branch v1 data): FAIL \u2014 0/7 stations met 10\u00b0C-drop threshold (per-station drops ~1.3\u00b0C). Failure-mode hypothesis at local test: NOAA tenths-of-\u00b0C scaling may not be handled in fetcher (raw NOAA daily-summaries TMIN is reported as integer tenths-of-\u00b0C; -189 raw = -18.9\u00b0C actual).",
+    "computed_at_utc": "2026-05-29T02:11:38.499990+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "e41d3c01a520718fd33e0767386dd4819dcb946bd91156874bd12614d88416eb"
+}
