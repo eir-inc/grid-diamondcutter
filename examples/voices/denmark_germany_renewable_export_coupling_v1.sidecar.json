@@ -1,0 +1,180 @@
+{
+  "voice_name": "denmark_germany_renewable_export_coupling_v1",
+  "prediction": {
+    "kind": "coupling_cross_substrate",
+    "substrates": [
+      "denmark_wind_export_share_yoy_2010_2023_synthetic",
+      "germany_north_onshore_wind_capacity_yoy_growth_2010_2023_synthetic"
+    ],
+    "named_residual": "dk_wind_export_yoy_change_predicts_de_north_wind_capacity_yoy_growth_at_1y_lag",
+    "predicted_direction": "positive",
+    "predicted_magnitude_range": [
+      0.1,
+      0.5
+    ],
+    "null_direction": "slope_approximately_zero_or_negative_no_cascade_observable",
+    "rationale": "Eugene's domino-step 1 hypothesis: DK wind surplus export undermines DE-North fossil baseload margin \u2192 DE-North capex rationally shifts toward additional renewable + interconnect strengthening. Tests specifically the DK\u2192DE pair where DE has higher fossil-baseload share than nuclear-dominated FR (failed in PR #26 cajal voice 4). Inverse asymmetry test: same mechanism, different receiving-region structure."
+  },
+  "kill_condition": {
+    "metric": "dk_to_de_north_wind_coupling_lagged_slope",
+    "rule": "fail if slope < 0.10 (below predicted magnitude floor \u2014 cascade below detectable threshold); fail if slope > 0.50 (over-prediction \u2014 implausible synthetic-curation); fail if slope < 0 (null direction realized \u2014 coupling reversed)",
+    "rationale": "Single composite metric \u2014 lagged linear-regression slope of DE-North-wind YoY growth on DK-wind-export YoY change at 1y lag. Magnitude window rejects both null and over-curation."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/denmark_germany_renewable_export_coupling_v1.py",
+    "source_file": "examples/voices/denmark_germany_renewable_export_coupling_v1.py",
+    "input_parameters": {
+      "calibration_source": "synthetic_v1_publicly_cited_Energinet_AGEE_Stat_ENTSO_E_milestones",
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "dk_wind_export_share_pct": [
+        6.0,
+        7.5,
+        9.0,
+        10.2,
+        11.5,
+        13.0,
+        14.2,
+        15.5,
+        16.3,
+        17.0,
+        17.8,
+        18.0,
+        18.2,
+        18.5
+      ],
+      "de_north_wind_capacity_gw": [
+        16.2,
+        18.0,
+        19.5,
+        21.0,
+        23.0,
+        25.5,
+        28.0,
+        30.5,
+        32.0,
+        33.2,
+        34.0,
+        34.5,
+        35.0,
+        35.8
+      ],
+      "lag_years": 1,
+      "random_seed": 1015
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "run_output": {
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "dk_wind_export_share_pct": [
+      6.0,
+      7.5,
+      9.0,
+      10.2,
+      11.5,
+      13.0,
+      14.2,
+      15.5,
+      16.3,
+      17.0,
+      17.8,
+      18.0,
+      18.2,
+      18.5
+    ],
+    "de_north_wind_capacity_gw": [
+      16.2,
+      18.0,
+      19.5,
+      21.0,
+      23.0,
+      25.5,
+      28.0,
+      30.5,
+      32.0,
+      33.2,
+      34.0,
+      34.5,
+      35.0,
+      35.8
+    ],
+    "dk_yoy_export_change": [
+      1.5,
+      1.5,
+      1.1999999999999993,
+      1.3000000000000007,
+      1.5,
+      1.1999999999999993,
+      1.3000000000000007,
+      0.8000000000000007,
+      0.6999999999999993,
+      0.8000000000000007,
+      0.1999999999999993,
+      0.1999999999999993,
+      0.3000000000000007
+    ],
+    "de_yoy_capacity_change": [
+      1.8000000000000007,
+      1.5,
+      1.5,
+      2.0,
+      2.5,
+      2.5,
+      2.5,
+      1.5,
+      1.2000000000000028,
+      0.7999999999999972,
+      0.5,
+      0.5,
+      0.7999999999999972
+    ],
+    "lag_years": 1,
+    "n_lagged_pairs": 12,
+    "lagged_slope": 1.194029850746269,
+    "lagged_intercept": 0.26940298507462634
+  },
+  "verdict": {
+    "verdict": "fail",
+    "lagged_slope": 1.194029850746269,
+    "lagged_intercept": 0.26940298507462634,
+    "n_lagged_pairs": 12,
+    "lag_years": 1,
+    "rationale": "Voice enters the null-voice ledger per \u00a73.4. Failures: slope 1.1940 > 0.50 ceiling (over-prediction \u2014 implausible synthetic-curation)",
+    "computed_at_utc": "2026-05-29T01:23:42.499741+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "accdb982e823e700b7f54bedbc7cebc2a782995b2a01f822d2cd7adffe5bb0fc"
+}
