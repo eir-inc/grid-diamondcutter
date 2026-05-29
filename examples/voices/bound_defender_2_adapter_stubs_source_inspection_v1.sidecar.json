@@ -1,0 +1,71 @@
+{
+  "voice_name": "bound_defender_2_adapter_stubs_source_inspection_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "adapter_stub_function_source_bodies",
+    "named_residual": "n_adapter_stubs_with_real_delegation_token_in_body",
+    "predicted_value_upper_bound": 0,
+    "verdict_inversion": true,
+    "real_delegation_tokens": [
+      "runpf",
+      "runpp",
+      "pypower.api.runpf",
+      "pandapower.runpp"
+    ],
+    "complementary_to": "bound_defender_2_adapter_stubs_v1 (groove, PR #19) \u2014 runtime-behavior test on the same bound. This voice is the source-inspection counterpart.",
+    "bound_under_test": "PREREGISTRATION \u00a71 row #2 \u2014 adapter stubs do not silently delegate to real solvers without documented commit-hash."
+  },
+  "kill_condition": {
+    "metric": "n_adapter_stubs_with_real_delegation_token_in_body",
+    "rule": "pass if 0 stubs contain a real-delegation token in their function body (bound supported by source inspection), fail if any stub contains a real-delegation token (bound counter-observation requiring flagging-record entry per \u00a71 bound-crossing protocol)",
+    "rationale": "Source-code inspection complements groove's runtime-behavior test (PR #19) of the same bound. Two independent verifications widen the audit posture for \u00a71 #2: a stub that started silently delegating would have to either change runtime shape (caught by groove's voice) or carry a delegation token in its body (caught by this voice). Verdict inversion is consistent with the bound-defender pattern."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/bound_defender_2_adapter_stubs_source_inspection_v1.py",
+    "source_file": "examples/voices/bound_defender_2_adapter_stubs_source_inspection_v1.py",
+    "input_parameters": {
+      "target_module": "grid_diamondcutter_oss",
+      "adapter_stub_names": [
+        "pypower_adapter_stub",
+        "pandapower_adapter_stub"
+      ],
+      "real_delegation_tokens": [
+        "runpf",
+        "runpp"
+      ]
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "bound_supported_no_delegation_tokens_in_stub_source",
+    "n_stubs_inspected": 2,
+    "n_total_delegation_tokens": 0,
+    "predicted_upper_bound": 0,
+    "stub_inspections": [
+      {
+        "stub_name": "pypower_adapter_stub",
+        "source_found": true,
+        "source_line_count": 20,
+        "tokens_found": [],
+        "n_tokens_found": 0
+      },
+      {
+        "stub_name": "pandapower_adapter_stub",
+        "source_found": true,
+        "source_line_count": 17,
+        "tokens_found": [],
+        "n_tokens_found": 0
+      }
+    ],
+    "bound_under_test": "PREREGISTRATION \u00a71 row #2 \u2014 adapter stubs do not silently delegate to real solvers without documented commit-hash.",
+    "rationale": "Inspected 2 adapter stubs. Total real-delegation tokens in stub source bodies (excluding docstrings): 0. The bound's pre-committed upper bound is 0. \u00a71 bound #2 supported by direct source inspection. Voice PASSes its inverted kill condition. Complementary to groove's PR #19 runtime-behavior test.",
+    "computed_at_utc": "2026-05-29T00:19:02.643606+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "1cca7f94704450000c1ddda9de0aa9d96806478e29d60bef33f5284cd09247b1"
+}
