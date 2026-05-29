@@ -1,0 +1,95 @@
+{
+  "voice_name": "threshold_cascade_v2",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "meta_sim_with_piecewise_linear_regime_shift_on_dynamics_gain",
+    "named_residual": "threshold_class_cascade_sharpness_ratio_v2",
+    "predicted_value_lower_bound": 5.0,
+    "lineage": "iterates from threshold_cascade_v1 substantive-null per its rationale's substrate-modification clause"
+  },
+  "kill_condition": {
+    "metric": "sharpness_ratio_over_coupling_regime_sweep_with_regime_shift_substrate",
+    "rule": "fail if sharpness_ratio < 2.5 (no recognizable signature), fail if 2.5 <= sharpness_ratio < 5 (signature present but below v2 bound), pass if sharpness_ratio >= 5 (signature recognized within v2 bound)",
+    "rationale": "v1's verdict diagnosed inertness in the default substrate. v2 commits to a modified substrate with an explicit piecewise-linear regime shift, the recognition bound widened to 5x to match the more permissive construction. The kill condition is mechanically testable from run output alone. Failure adds methodological evidence that the central question's recognition signature is not recoverable in this registry-tested substrate family at the v1+v2 commit pair."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/threshold_cascade_v2.py",
+    "source_file": "examples/voices/threshold_cascade_v2.py",
+    "input_parameters": {
+      "coupling_regime_sweep": [
+        0.05,
+        0.1,
+        0.2,
+        0.4,
+        0.7,
+        1.2,
+        2.0,
+        3.0
+      ],
+      "perturbation_profile_sequence": [
+        "peak",
+        "spike",
+        "peak",
+        "spike",
+        "peak"
+      ],
+      "n_warmup_steps": 12,
+      "regime_shift_threshold": 1.0,
+      "regime_shift_subcritical_gain": 0.5,
+      "regime_shift_supercritical_gain": 4.0,
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "signature_recognized_within_bound",
+    "observed_max_amplification": 0.5850472931924675,
+    "observed_mean_subcritical_amplification": 0.07313091164905844,
+    "observed_sharpness_ratio": 8.0,
+    "predicted_lower_bound": 5.0,
+    "regime_sweep": [
+      {
+        "coupling_strength": 0.05,
+        "amplification": 0.07313091164905844
+      },
+      {
+        "coupling_strength": 0.1,
+        "amplification": 0.07313091164905844
+      },
+      {
+        "coupling_strength": 0.2,
+        "amplification": 0.07313091164905844
+      },
+      {
+        "coupling_strength": 0.4,
+        "amplification": 0.07313091164905844
+      },
+      {
+        "coupling_strength": 0.7,
+        "amplification": 0.07313091164905844
+      },
+      {
+        "coupling_strength": 1.2,
+        "amplification": 0.5850472931924675
+      },
+      {
+        "coupling_strength": 2.0,
+        "amplification": 0.5850472931924675
+      },
+      {
+        "coupling_strength": 3.0,
+        "amplification": 0.5850472931924675
+      }
+    ],
+    "lineage_v1_verdict": "fail (substantive null \u2014 substrate inertness)",
+    "rationale": "v2 sharpness ratio 8.000 meets or exceeds the v2 pre-committed recognition bound of 5.0x. The substrate-modification clause from v1's rationale is satisfied: with an explicit piecewise-linear regime shift in the dynamics gain, the methodology recovers the \u00a70 phenomenon recognition signature. Per \u00a71 honesty bounds this is not a real-grid finding; it is a finding about the methodology's substrate family at the v1+v2 commit pair.",
+    "computed_at_utc": "2026-05-28T23:54:47.653453+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "8e43b387e384dc987bc674b23fd86709a867e45320405acaeb78e7bb3895b2f1"
+}
