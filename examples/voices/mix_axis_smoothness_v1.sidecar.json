@@ -1,0 +1,103 @@
+{
+  "voice_name": "mix_axis_smoothness_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "8node_dc_grid",
+    "named_residual": "smoothness of unsigned cycle_residual under continuous variation of the mix interpolation parameter. Predict: across 21 mix values uniformly spaced in [0, 1], no consecutive-step difference exceeds 5\u00d7 the median consecutive-step difference.",
+    "n_mix_samples": 21,
+    "predicted_max_jump_ratio": 5.0
+  },
+  "kill_condition": {
+    "metric": "max_step_to_median_step_ratio",
+    "rule": "fail if max(|diff|) / median(|diff|) > 5.0 across the 20 consecutive diffs in the 21-sample mix sweep, where diff[i] = cycle_residual(mix[i+1]) - cycle_residual(mix[i])",
+    "rationale": "A continuous parameter sweep on a continuous substrate should produce diffs of roughly comparable magnitude. A single diff that is 5\u00d7 larger than the typical diff indicates the measurement is dominated by fingerprint-discretization boundaries rather than substrate dynamics. Such jumps mean interpretation across mix-parameter ranges must account for the discretization, not just the substrate."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_mix_axis_smoothness_v1.py",
+    "source_file": "examples/voices/voice_mix_axis_smoothness_v1.py",
+    "input_parameters": {
+      "mix_samples": "linspace(0, 1, 21)",
+      "profile_transitions": [
+        [
+          "peak",
+          "off_peak"
+        ],
+        [
+          "off_peak",
+          "mixed"
+        ],
+        [
+          "mixed",
+          "spike"
+        ],
+        [
+          "spike",
+          "peak"
+        ]
+      ],
+      "random_seed": 42
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ]
+    }
+  },
+  "verdict": {
+    "verdict": "fail",
+    "max_to_median_ratio_observed": 2813.8892343528255,
+    "median_abs_diff": 0.0020000000000000018,
+    "max_abs_diff": 5.627778468705656,
+    "threshold": 5.0,
+    "mixes": [
+      0.0,
+      0.05,
+      0.1,
+      0.15000000000000002,
+      0.2,
+      0.25,
+      0.30000000000000004,
+      0.35000000000000003,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6000000000000001,
+      0.65,
+      0.7000000000000001,
+      0.75,
+      0.8,
+      0.8500000000000001,
+      0.9,
+      0.9500000000000001,
+      1.0
+    ],
+    "residuals": [
+      5.685278468705656,
+      0.0575,
+      0.053,
+      0.051500000000000004,
+      0.05,
+      0.0485,
+      0.0465,
+      0.0455,
+      0.044000000000000004,
+      0.042,
+      0.0405,
+      0.039,
+      0.037500000000000006,
+      0.038500000000000006,
+      0.0415,
+      0.045500000000000006,
+      0.049,
+      0.052000000000000005,
+      0.05600000000000001,
+      0.059000000000000004,
+      5.685278468705656
+    ],
+    "rationale": "max/median jump ratio = 2813.89, exceeds threshold 5.0. cycle_residual jumps discontinuously at fingerprint-quantization boundaries; interpretation across mix ranges must account for the discretization. Voice enters the null-voice ledger per \u00a73.4.",
+    "computed_at_utc": "2026-05-28T23:39:16.647656+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "6aca5df2abff870cc8b7421bd4fb9301f7b7bb79e6ed3bc20abe2d2993b4eda6"
+}
