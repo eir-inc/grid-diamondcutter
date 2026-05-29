@@ -1,0 +1,68 @@
+{
+  "voice_name": "bound_defender_3_coupling_coefficient_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "registry_meta",
+    "named_residual": "PREREGISTRATION \u00a71 bound #3 defense \u2014 the +0.832 control\u2194dynamics coupling coefficient must (a) reproduce from the committed code with documented seed, AND (b) remain documented as a between-simulated-voices measurement (not a real-grid claim). If either drifts silently, the bound is no longer mechanically defended at every commit.",
+    "expected_control_dynamics_coupling": 0.832,
+    "reproducibility_tolerance": 0.05,
+    "documentation_guard_phrases_any_of": [
+      "simulated",
+      "demonstration",
+      "not a measurement of physical grid coupling",
+      "does not measure coupling in any real grid",
+      "between two simulated voices",
+      "generalizes to no real grid",
+      "DOES NOT generalize"
+    ],
+    "documentation_anchor_phrase": "0.832",
+    "alarm_semantics": "PASS = \u00a71 bound #3 mechanically defended (figure reproduces AND guard-language still names the figure as between simulated voices); FAIL = alarm (figure drifted OR guard-language vanished from documentation)."
+  },
+  "kill_condition": {
+    "metric": "reproducibility_and_doc_guard_both_hold",
+    "rule": "FAIL if |measured_value \u2212 0.832| > 0.05 (substrate-drift alarm) OR if zero documentation-guard phrases appear within 200 chars of the 0.832 mention in meta_sim/meta.py (documentation-drift alarm). PASS iff BOTH the measurement reproduces AND \u22651 guard phrase is present near the anchor.",
+    "rationale": "\u00a71 bound #3 is a two-pronged commitment: the figure must be reproducible, AND the figure must continue to be documented honestly. A failure in either prong means the bound is no longer mechanically defended at the surface of the artifact. Reviewers checking the registry at any commit get an immediate alarm if a future edit drifts the meta-sim measurement or strips the guard-language. Defends the registry against silent erosion of an existing honesty bound."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/voice_bound_defender_3_coupling_coefficient_v1.py",
+    "source_file": "examples/voices/voice_bound_defender_3_coupling_coefficient_v1.py",
+    "input_parameters": {
+      "random_seed": 42,
+      "n_steps": 30,
+      "documentation_anchor_path": "meta_sim/meta.py",
+      "guard_phrase_search_radius_chars": 200
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": [
+        "numpy>=1.24"
+      ],
+      "module_dependency": "meta_sim (vendored in this repository)"
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "reproducibility": {
+      "measured_value": 0.832,
+      "expected_value": 0.832,
+      "drift": 0.0,
+      "tolerance": 0.05,
+      "within_tolerance": true
+    },
+    "documentation_guard": {
+      "doc_path": "/Users/eugenestuckless/grid-diamondcutter-pub/meta_sim/meta.py",
+      "doc_exists": true,
+      "anchor_present": true,
+      "anchor_occurrence_count": 5,
+      "guard_phrases_found_near_anchor": [
+        "between two simulated voices",
+        "not a measurement of physical grid coupling",
+        "simulated"
+      ],
+      "guard_present": true
+    },
+    "rationale": "\u00a71 bound #3 defended at this commit: measured 0.8320 (within \u00b10.05 of 0.832); guard phrases found near anchor: ['between two simulated voices', 'not a measurement of physical grid coupling', 'simulated'].",
+    "computed_at_utc": "2026-05-29T02:32:21.085878+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "4144d7b0c713239bda37bacf5c642d0a1b9f78a7d6cff3d4678eda114b1c98db"
+}
