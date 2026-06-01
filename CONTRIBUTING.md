@@ -37,9 +37,35 @@ If you can write a function that takes a `(regime_a, regime_b, depth, beta)` and
 
 Adapter contributions for sims that are common in the field are especially welcome. The whole point of the voices pattern is that every grid simulator becomes a voice in the chorus.
 
-## How to add a voice
+For a step-by-step walkthrough of authoring a registry voice (5-field unit + sidecar + Phase-2 extensions), see [`docs/voice_authoring_guide.md`](docs/voice_authoring_guide.md). This document is the reference; that one is the how-to.
 
-A voice is a function that takes a `BridgeParams` and returns a tuple `(activated_vector, cost)`. The activated vector is the substrate's response across the control / analyzer / mode axis; the cost is what it costs to run that response.
+## Registry voice contract (Phase-A + Phase-2)
+
+Every registry voice exports a 5-field unit per `PREREGISTRATION.md` §3.1: `VOICE_NAME`, `PREDICTION`, `KILL_CONDITION`, `RUN_PROTOCOL`, plus a `compute_verdict(run_output)` function. It runs end-to-end via `python path/to/voice.py` and emits a `<voice_name>.sidecar.json` with a `sha256_pre_verdict` anchor over the canonical pre-verdict form.
+
+Five voice kinds are recognized in §3.2 + emergent practice:
+
+- **polyphony** (`kind: "polyphony_within_substrate"`) — predict a residual within one substrate.
+- **coupling** (`kind: "coupling_cross_substrate"`) — predict a directional link across two substrates. Must declare `predicted_direction`, `predicted_magnitude_range`, `null_direction`.
+- **bound-defender** (inverted-kill) — defend a §1 honesty-bound row via mechanical source-scan or measurement.
+- **historical-event** — recover documented qualitative trajectory from a §4 fixture.
+- **cross-lane chain-loop** (Phase-2) — consume a Phase-1 deliverable via §3.5 `cross_phase_consumption`.
+
+Phase-2 voices (those in `phase_2/examples/voices/`) add three additional fields to `RUN_PROTOCOL` per `phase_2/PREREGISTRATION_PHASE_2.md`:
+
+- **§3.5 `public_signal_source`** — `feed_name` / `country_or_region` / `time_window` / `citation_anchor`
+- **§3.5 `cross_phase_consumption`** (optional) — list of consumed Phase-1 sidecars with `consumed_voice_name` / `consumed_sidecar_path` / `consumed_phase` / `consumption_kind`
+- **§3.7 `computational_budget`** — `max_runtime_seconds` / `max_external_api_calls`
+
+Plus an optional **§3.6 `evasion_class_lineage`** in `PREDICTION` declaring inheritance from one of the five evasion classes documented in `examples/voices/evasion_spring_classifier_meta_v1.py`: `substrate_class_evasion` / `substrate_shape_evasion` / `data_availability_evasion` / `network_magnitude_evasion` / `cross_lane_prior_generalization_evasion`.
+
+All voices respect the §6 boundary: no `eirmath` import. The §1.11 (Phase-2) and §1.13 (Phase-2) defender voices catch silent eirmath / coltrane commingling mechanically on every PR.
+
+Run `python -m pytest tests/test_voice_registry_contract.py -k <voice_name>` to verify your voice's shape before committing.
+
+## How to add a power-grid sim voice
+
+A power-grid sim voice (distinct from the registry voice above) is a function that takes a `BridgeParams` and returns a tuple `(activated_vector, cost)`. The activated vector is the substrate's response across the control / analyzer / mode axis; the cost is what it costs to run that response.
 
 ```python
 def my_new_voice(p: BridgeParams) -> tuple:
