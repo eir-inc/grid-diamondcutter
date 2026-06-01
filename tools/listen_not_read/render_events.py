@@ -72,8 +72,13 @@ def extract_texas_uri():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "texas_feb_2021_uri_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": f"deepest cold-anomaly scenario: {coldest}°C",
-        "substrate_kind": "phase_a_coupling_substrate_trajectory",
+        "what_was_modeled": (
+            f"The most extreme cold snap in the February 2021 Texas storm — a "
+            f"{int(-coldest)}°C temperature drop. The model traces natural-gas "
+            "pipeline throughput collapsing, then electricity generation "
+            "collapsing behind it."
+        ),
+        "model_kind": "two-coupled-system simulation",
     }
 
 
@@ -96,9 +101,16 @@ def extract_eu_repowereu():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "eu_may_2022_repowereu_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": f"strongest regulatory-signal scenario: {strongest}",
-        "substrate_kind": "phase_a_coupling_substrate_trajectory",
-        "polarity_note": "positive-direction event; audio inverted so growth → louder",
+        "what_was_modeled": (
+            "The European Commission's May 2022 plan to wean off Russian gas "
+            "(REPowerEU). The model traces the regulatory push, then capital "
+            "flowing into alternative-energy projects in response."
+        ),
+        "model_kind": "two-coupled-system simulation",
+        "direction_note": (
+            "This event is growth, not collapse. The audio is inverted so the "
+            "same listening shape applies — louder = more change underway."
+        ),
     }
 
 
@@ -118,8 +130,13 @@ def extract_japan_fukushima():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "japan_march_2011_fukushima_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": f"largest nuclear-capacity-loss scenario: {largest}",
-        "substrate_kind": "phase_a_coupling_substrate_trajectory",
+        "what_was_modeled": (
+            "Japan after the March 2011 Fukushima accident, with most of the "
+            f"nuclear fleet ({int(largest * 100)}%) taken offline. The model "
+            "traces nuclear capacity dropping, then fossil-fuel imports "
+            "rising to fill the gap."
+        ),
+        "model_kind": "two-coupled-system simulation",
     }
 
 
@@ -156,9 +173,17 @@ def extract_germany_2022():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "germany_2022_recognition_criterion_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": "BNetzA Monitoring 2022 §2.4.3 monthly negative-spot-hours fixture",
-        "substrate_kind": "phase_2_recognition_public_fixture",
-        "polarity_note": "excess-direction event; bass grows as negative-spot-hours grow",
+        "what_was_modeled": (
+            "Germany 2022 — hours of negative wholesale electricity prices, "
+            "month by month. Renewables generated so much power that the grid "
+            "paid customers to take it. Source: Germany's federal regulator "
+            "(BNetzA) annual monitoring report."
+        ),
+        "model_kind": "publicly-reported monthly counts",
+        "direction_note": (
+            "This event is excess, not shortage. The audio is calibrated so "
+            "louder = more hours of negative prices."
+        ),
     }
 
 
@@ -174,9 +199,17 @@ def extract_california_2000_01():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "california_2000_2001_recognition_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": "synthetic v1 from FERC Final Report 2003 monthly wholesale spot (36 months)",
-        "substrate_kind": "phase_2_recognition_public_fixture",
-        "polarity_note": "spike-direction event; bass grows as affordability collapses",
+        "what_was_modeled": (
+            "The California electricity crisis of 2000-2001 — three years of "
+            "monthly wholesale prices, from the pre-crisis baseline through "
+            "the peak (over $370/MWh, more than 12× normal) and back. Source: "
+            "FERC's 2003 Final Report on the crisis."
+        ),
+        "model_kind": "publicly-reported monthly prices",
+        "direction_note": (
+            "Louder = prices further from normal. The spike that hits in "
+            "mid-2000 is audible."
+        ),
     }
 
 
@@ -192,9 +225,18 @@ def extract_texas_feb_2021_monetary():
     return primary, response, divergence, regime_shift, len(primary), {
         "voice_id": "texas_feb_2021_recognition_v1",
         "voice_path": str(p.relative_to(REPO_ROOT)),
-        "scenario_descriptor": "synthetic v1 from ERCOT post-event report + FERC/NERC Nov 2021 Inquiry (4 monthly points)",
-        "substrate_kind": "phase_2_recognition_public_fixture",
-        "polarity_note": "spike-direction event; bass grows as affordability collapses",
+        "what_was_modeled": (
+            "Texas February 2021, viewed through the price lens — four months "
+            "of average wholesale electricity prices that bracket the Uri "
+            "storm. February's price was roughly 66× the surrounding months "
+            "after prices hit the $9000/MWh cap. Source: ERCOT post-event "
+            "report + the FERC/NERC inquiry."
+        ),
+        "model_kind": "publicly-reported monthly prices",
+        "direction_note": (
+            "Louder = prices further from normal. The February spike "
+            "dominates the 30 seconds."
+        ),
     }
 
 
@@ -203,17 +245,29 @@ def extract_texas_feb_2021_monetary():
 # ---------------------------------------------------------------------------
 
 EVENTS = [
-    ("texas_uri_feb_2021", "Texas Uri (Feb 2021) — gas-throughput → generation-dispatch collapse",
+    ("texas_uri_feb_2021",
+     "Texas, February 2021 — winter storm Uri. Natural gas froze, then "
+     "electricity generation collapsed.",
      extract_texas_uri),
-    ("eu_repowereu_may_2022", "EU REPowerEU (May 2022) — regulatory-signal → capital-reallocation lift",
+    ("eu_repowereu_may_2022",
+     "European Union, May 2022 — REPowerEU. The bloc's plan to wean off "
+     "Russian gas, pushing capital into alternative energy.",
      extract_eu_repowereu),
-    ("japan_fukushima_mar_2011", "Japan Fukushima (Mar 2011) — nuclear-capacity loss → fossil-import substitution",
+    ("japan_fukushima_mar_2011",
+     "Japan, March 2011 — Fukushima accident. Nuclear plants went offline; "
+     "fossil-fuel imports filled the gap.",
      extract_japan_fukushima),
-    ("germany_2022_negative_spot", "Germany 2022 — negative-spot-price hours (excess-supply recognition)",
+    ("germany_2022_negative_spot",
+     "Germany, 2022 — hours of negative wholesale electricity prices. "
+     "Renewables overshot demand, so the grid paid customers to consume.",
      extract_germany_2022),
-    ("california_2000_2001", "California 2000-01 — wholesale-spot price instability (crisis-spike recognition)",
+    ("california_2000_2001",
+     "California, 2000-2001 — the electricity crisis. Wholesale prices "
+     "spiked over twelve times above their pre-crisis level.",
      extract_california_2000_01),
-    ("texas_feb_2021_monetary", "Texas Feb 2021 monetary — ERCOT spot-price spike (crisis-spike recognition)",
+    ("texas_feb_2021_monetary",
+     "Texas, February 2021 — the price view of winter storm Uri. Monthly "
+     "wholesale electricity prices spiked sixty-six times normal.",
      extract_texas_feb_2021_monetary),
 ]
 
@@ -236,22 +290,26 @@ def render_all(output_dir: Path) -> dict:
             "audio_file": f"{event_key}.ogg",
             "audio_bytes": out_path.stat().st_size,
             "audio_sha256": sha256_of_file(out_path),
-            "voice_id": attribution["voice_id"],
-            "voice_path": attribution["voice_path"],
-            "voice_sha256": sha256_of_file(voice_path),
-            "sidecar_path": str(sidecar_path.relative_to(REPO_ROOT)) if sidecar_path.exists() else None,
-            "sidecar_sha256": sha256_of_file(sidecar_path) if sidecar_path.exists() else None,
-            "scenario_descriptor": attribution["scenario_descriptor"],
-            "substrate_kind": attribution["substrate_kind"],
-            "polarity_note": attribution.get("polarity_note"),
-            "regime_shift_step": regime_shift,
-            "n_steps": int(n_primary),
-            "honesty_note": (
-                "This audio sonifies the substrate-calibrated model's trajectory, "
-                "not a measurement of the real-grid event. The substrate's "
-                "parameters are calibrated from cited public reports; the "
-                "substrate is not the grid. Per §1 honesty bounds."
+            "what_was_modeled": attribution["what_was_modeled"],
+            "model_kind": attribution["model_kind"],
+            "direction_note": attribution.get("direction_note"),
+            "caveat": (
+                "This is the sound of a computer model, not a recording of "
+                "the actual event. The model uses numbers taken from public "
+                "reports about each event. It is not a measurement of any "
+                "real power grid."
             ),
+            "source_code": {
+                "voice_id": attribution["voice_id"],
+                "voice_path": attribution["voice_path"],
+                "voice_sha256": sha256_of_file(voice_path),
+                "sidecar_path": str(sidecar_path.relative_to(REPO_ROOT)) if sidecar_path.exists() else None,
+                "sidecar_sha256": sha256_of_file(sidecar_path) if sidecar_path.exists() else None,
+            },
+            "audio_render_internals": {
+                "regime_shift_step": regime_shift,
+                "n_steps": int(n_primary),
+            },
         }
         manifest_entries.append(entry)
         print(f"  → {out_path.name} ({entry['audio_bytes']} bytes)", flush=True)
