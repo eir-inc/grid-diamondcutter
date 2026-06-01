@@ -1,0 +1,443 @@
+{
+  "voice_name": "bound_defender_13_no_coltrane_silent_commingling_v1",
+  "prediction": {
+    "kind": "polyphony_within_substrate",
+    "substrate": "examples_voices_plus_phase_2_voices_plus_meta_sim_source_tree",
+    "named_residual": "n_files_with_unguarded_coltrane_dependency_or_token",
+    "predicted_value_upper_bound": 0,
+    "verdict_inversion": true,
+    "bound_under_test": "PREREGISTRATION \u00a71 bound #13 (committed in docs/coltrane_substrate_acknowledgement.md) \u2014 grid-diamondcutter is not silently coupled to coltrane-oss internals; cross-phase consumption requires explicit \u00a73.5 declaration"
+  },
+  "kill_condition": {
+    "metric": "n_voice_or_library_files_with_unguarded_coltrane_token_in_source_body_or_import",
+    "rule": "pass if 0 source files contain 'import coltrane' (any form) AND 0 source bodies contain an unguarded 'coltrane' token outside docstrings/guarded windows (bound supported); fail if any violation (bound counter-observation requiring \u00a71 flagging-record)",
+    "rationale": "Cross-phase consumption declarations per phase-2 \u00a73.5 require explicit upstream sidecar references; silently embedding coltrane-oss internals would bypass the \u00a73.5 contract. The defender catches that bypass via source-scan at PR-merge time. Guard window allows legitimate mentions in \u00a71 bound text, this voice's own bound description, and explicit \u00a73.5 declarations."
+  },
+  "run_protocol": {
+    "entry_point": "python examples/voices/bound_defender_13_no_coltrane_silent_commingling_v1.py",
+    "source_file": "examples/voices/bound_defender_13_no_coltrane_silent_commingling_v1.py",
+    "input_parameters": {
+      "scan_roots": [
+        "examples/voices",
+        "phase_2/examples/voices",
+        "meta_sim"
+      ],
+      "scan_extensions": [
+        ".py"
+      ],
+      "exclude_directories": [
+        "__pycache__",
+        ".pytest_cache"
+      ],
+      "import_patterns": [
+        "^\\s*import\\s+coltrane\\b",
+        "^\\s*from\\s+coltrane(\\.|\\s)"
+      ],
+      "token_pattern": "\\bcoltrane\\b",
+      "guard_window_chars": 400,
+      "guard_phrases": [
+        "bound #13",
+        "bound_13",
+        "row 13",
+        "coltrane_substrate_acknowledgement",
+        "\u00a71 bound #13",
+        "\u00a73.5 cross_phase_consumption",
+        "cross_phase_consumption",
+        "NOT silently coupled",
+        "is NOT a hard dependency",
+        "is not a hard dependency"
+      ],
+      "self_voice_exclusion": "bound_defender_13_no_coltrane_silent_commingling_v1"
+    },
+    "environment": {
+      "python": "3.10+",
+      "dependencies": []
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "outcome_category": "bound_supported_no_silent_coltrane_coupling",
+    "n_files_scanned": 62,
+    "n_total_violations": 0,
+    "n_offending_files": 0,
+    "predicted_upper_bound": 0,
+    "per_file_results": [
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/country_apoha_suitability_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/japan_march_2011_fukushima_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/regulatory_lead_time_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/capability_by_apoha_set_meta_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/regulatory_lead_time_v2_expanded_cohort.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/network_amplification_adoption_cascade_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/regulatory_shape_apoha_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/leader_cohort_loo_cv_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/renewable_mix_threshold_polyphony_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/texas_uri_temperature_collapse_real_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/_voice_template.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/japan_post_fukushima_acceleration_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_station_set_dependence_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/receiver_geometry_substrate_class_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_bound_defender_8_eirmath_not_required_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_smooth_receiver_coupling_alarm_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_mix_axis_smoothness_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/cross_lane_chain_loop_greece_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/flow_allocator_is_not_power_flow_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/network_amplification_coupling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/lead_time_prior_crisis_robustness_defender_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_capacity_scaling_monotonicity_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_finer_fingerprint_resolves_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/spain_morocco_renewable_export_coupling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/germany_neighbor_renewable_coupling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/follower_country_prediction_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/threshold_cascade_v2.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/evasion_spring_classifier_meta_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/smooth_s_curve_emergent_bound_fresh_pairs_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/bound_defender_1_allocator_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/follower_country_prediction_v2.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/threshold_cascade_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/bound_defender_13_no_coltrane_silent_commingling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/cross_lane_chain_loop_ireland_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/country_blocker_diagnostics_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/eu_may_2022_repowereu_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/global_follower_prediction_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/bound_defender_2_adapter_stubs_source_inspection_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_bound_defender_4_cascade_not_prediction_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_noise_robustness_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/capacity_utilization_load_coupling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_bound_defender_6_funding_gap_proxy_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_bound_defender_3_coupling_coefficient_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/example_coupling_voice.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/example_polyphony_voice.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_low_failure_rate_alarm_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/bound_defender_4_no_forecast_language_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/texas_feb_2021_uri_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/voice_receiver_shape_distinguishability_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/region_transfer_failure_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/examples/voices/denmark_germany_renewable_export_coupling_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/texas_feb_2021_recognition_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/germany_2022_recognition_criterion_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/germany_2022_cross_lane_lead_time_recognition_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/california_2000_2001_recognition_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/california_2000_2001_recognition_criterion_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/bound_defender_10_no_investment_advice_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/texas_feb_2021_recognition_criterion_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/phase_2/examples/voices/bound_defender_11_no_eirmath_in_phase_2_v1.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/meta_sim/__init__.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/meta_sim/core.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      },
+      {
+        "path": "/Users/eugenestuckless/grid-diamondcutter-c3/meta_sim/meta.py",
+        "read_error": null,
+        "violations": [],
+        "n_violations": 0
+      }
+    ],
+    "bound_under_test": "PREREGISTRATION \u00a71 bound #13 (committed in docs/coltrane_substrate_acknowledgement.md) \u2014 grid-diamondcutter is not silently coupled to coltrane-oss internals; cross-phase consumption requires explicit \u00a73.5 declaration",
+    "rationale": "Inspected 62 voice + library .py file(s). Total unguarded coltrane-import-or-token violations: 0. Pre-committed upper bound: 0. \u00a71 bound #13 supported by direct source inspection. Voice PASSes its inverted kill condition.",
+    "computed_at_utc": "2026-06-01T06:25:55.503704+00:00"
+  },
+  "sidecar_sha256_pre_verdict": "af43c102bc14dcf3cfec898f34696216d34b03a2ece1d66aa766130f0054e901"
+}
